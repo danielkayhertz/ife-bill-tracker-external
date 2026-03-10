@@ -1,0 +1,1988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IFE Internal Bill Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Gotham', 'Montserrat', sans-serif;
+      background-color: #f8f9fa;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #005a8c 0%, #007bb8 100%);
+      color: white;
+      padding: 36px 24px;
+      text-align: center;
+    }
+
+    .header-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .internal-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+
+    .header h1 {
+      font-size: 38px;
+      font-weight: 700;
+      margin: 0 0 10px 0;
+      letter-spacing: -0.5px;
+    }
+
+    .header p {
+      font-size: 16px;
+      opacity: 0.85;
+      margin: 0 auto;
+      max-width: 560px;
+      line-height: 1.6;
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      background: white;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 20px 24px;
+    }
+
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    .stat-number.blue    { color: #005a8c; }
+    .stat-number.orange  { color: #e98300; }
+    .stat-number.red     { color: #c62828; }
+    .stat-number.gray    { color: #6b7280; }
+    .stat-number.indigo  { color: #5c6bc0; }
+
+    .stat-label {
+      font-size: 13px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Filters */
+    .filters {
+      background: white;
+      padding: 20px 24px;
+      border-bottom: 1px solid #e0e0e0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .filters-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .filters-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filter-label {
+      font-weight: 600;
+      color: #333;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .filter-select {
+      padding: 9px 14px;
+      border-radius: 8px;
+      border: 2px solid #e0e0e0;
+      font-size: 14px;
+      background-color: white;
+      cursor: pointer;
+      min-width: 150px;
+      color: #333;
+      font-family: inherit;
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: #005a8c;
+    }
+
+    .clear-filters-btn {
+      padding: 9px 14px;
+      border-radius: 8px;
+      border: none;
+      background-color: #ffebee;
+      color: #c62828;
+      font-size: 14px;
+      cursor: pointer;
+      font-weight: 500;
+      font-family: inherit;
+      display: none;
+      white-space: nowrap;
+    }
+
+    .clear-filters-btn.visible {
+      display: inline-block;
+    }
+
+    .filter-count {
+      margin-left: auto;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .last-updated {
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    .filter-toggle {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 14px;
+      color: #333;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .filter-toggle input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      cursor: pointer;
+    }
+
+    .add-bill-btn {
+      padding: 9px 16px;
+      background-color: #005a8c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      white-space: nowrap;
+      margin-left: auto;
+    }
+
+    .add-bill-btn:hover {
+      background-color: #004a7a;
+    }
+
+    .refresh-all-btn {
+      margin-top: 12px;
+      padding: 7px 16px;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: inherit;
+    }
+    .refresh-all-btn:hover { background: rgba(255,255,255,0.25); }
+    .header-last-refreshed {
+      display: block;
+      margin-top: 6px;
+      color: rgba(255,255,255,0.55);
+      font-size: 12px;
+    }
+
+    /* Main Grid */
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    .legislation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    /* Bill Card */
+    .bill-card {
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid #e8e8e8;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bill-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    .card-header-bar {
+      height: 8px;
+    }
+
+    .card-header-bar.endorsed  { background: linear-gradient(90deg, #005a8c, #007bb8); }
+    .card-header-bar.sponsored { background: linear-gradient(90deg, #e98300, #f5a623); }
+    .card-header-bar.opposed   { background: linear-gradient(90deg, #c62828, #e53935); }
+    .card-header-bar.watching  { background: linear-gradient(90deg, #5c6bc0, #7986cb); }
+
+    .card-body {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-tags {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tag.endorsed  { background-color: #e3f2fd; color: #0d47a1; }
+    .tag.sponsored { background-color: #fff3e0; color: #e65100; }
+    .tag.opposed   { background-color: #ffebee; color: #c62828; }
+    .tag.watching  { background-color: #ede7f6; color: #4527a0; }
+
+    .tag.category {
+      background-color: #f5f5f5;
+      color: #666;
+      font-weight: 600;
+    }
+
+    .tag.shell-bill {
+      background-color: #fff8e1;
+      color: #e65100;
+      font-weight: 700;
+    }
+
+    .bill-number {
+      font-size: 22px;
+      font-weight: 700;
+      color: #005a8c;
+      margin: 0 0 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .note-dot {
+      width: 8px;
+      height: 8px;
+      background: #e98300;
+      border-radius: 50%;
+      flex-shrink: 0;
+      title: "Has IFE note";
+    }
+
+    .bill-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      margin: 0 0 12px 0;
+      line-height: 1.4;
+    }
+
+    .bill-description {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.6;
+      margin: 0 0 16px 0;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid #eee;
+    }
+
+    .status-badge {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .session-year {
+      font-size: 13px;
+      color: #999;
+      font-weight: 500;
+    }
+
+    .card-ilga-link {
+      font-size: 13px;
+      color: #005a8c;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .card-ilga-link:hover {
+      text-decoration: underline;
+    }
+
+    .last-updated-inline {
+      font-size: 12px;
+      color: #aaa;
+      margin-left: 4px;
+    }
+
+    .modal-last-action {
+      background: #f8f9fa;
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .modal-last-action p { margin: 0; }
+
+    .modal-last-action .last-action-date {
+      margin-top: 4px;
+      font-size: 12px;
+      color: #888;
+    }
+
+    .card-sponsor {
+      font-size: 12px;
+      color: #888;
+      margin: -4px 0 10px 0;
+    }
+
+    .card-amendment-disclaimer {
+      font-size: 12px;
+      color: #888;
+      margin: 0 0 8px 0;
+      line-height: 1.4;
+    }
+    .card-amendment-disclaimer a {
+      color: inherit;
+    }
+    .card-last-action {
+      font-size: 12px;
+      color: #888;
+      margin: 0 0 12px 0;
+      line-height: 1.4;
+    }
+    .card-last-action-date {
+      font-weight: 600;
+      color: #666;
+    }
+    .card-next-action {
+      font-size: 12px;
+      color: #1a7340;
+      margin: 4px 0 0;
+    }
+    .card-next-action-label { font-weight: 600; margin-right: 2px; }
+    .card-next-action-date  { font-weight: 600; }
+    .card-last-amendment { font-size: 12px; color: #888; margin: 0 0 4px 0; line-height: 1.4; }
+    .card-last-amendment-label { font-weight: 600; color: #666; }
+    .card-last-amendment-date  { font-weight: 600; color: #666; }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 64px 24px;
+      color: #666;
+    }
+
+    .empty-state-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .empty-state h3 {
+      margin: 0 0 8px 0;
+      color: #333;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      z-index: 100;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.visible {
+      display: flex;
+    }
+
+    .modal {
+      background-color: white;
+      border-radius: 16px;
+      max-width: 640px;
+      width: 100%;
+      max-height: 90vh;
+      overflow: auto;
+      box-shadow: 0 24px 48px rgba(0,0,0,0.2);
+    }
+
+    .modal-header {
+      color: white;
+      padding: 32px;
+      position: relative;
+    }
+
+    .modal-header.endorsed  { background: linear-gradient(135deg, #005a8c 0%, #007bb8 100%); }
+    .modal-header.sponsored { background: linear-gradient(135deg, #e98300 0%, #f5a623 100%); }
+    .modal-header.opposed   { background: linear-gradient(135deg, #c62828 0%, #e53935 100%); }
+    .modal-header.watching  { background: linear-gradient(135deg, #5c6bc0 0%, #7986cb 100%); }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      color: white;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-tags {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .modal-tag {
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      background-color: rgba(255,255,255,0.2);
+      letter-spacing: 0.5px;
+    }
+
+    .modal-bill-number {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0 0 8px 0;
+    }
+
+    .modal-bill-title {
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0;
+      opacity: 0.95;
+    }
+
+    .modal-body {
+      padding: 32px;
+    }
+
+    .modal-info-boxes {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .info-box {
+      padding: 12px 16px;
+      border-radius: 8px;
+    }
+
+    .info-box-label {
+      font-size: 11px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .info-box-value {
+      font-weight: 600;
+    }
+
+    .info-box.session {
+      background-color: #f8f9fa;
+      border: 1px solid #e8e8e8;
+    }
+
+    .info-box.session .info-box-value { color: #333; }
+
+    .info-box.next-action {
+      background-color: #e8f4fd;
+      border: 1px solid #90caf9;
+    }
+
+    .info-box.next-action .info-box-value { color: #0d47a1; }
+
+    .modal-summary-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #666;
+      margin: 0 0 10px 0;
+    }
+
+    .modal-summary {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #444;
+      margin: 0;
+    }
+
+    /* IFE Notes section */
+    .modal-notes-section {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .notes-textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      resize: vertical;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .notes-textarea:focus {
+      outline: none;
+      border-color: #005a8c;
+    }
+
+    .notes-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+    .notes-status {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .modal-actions {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 20px;
+      background-color: #005a8c;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-primary:hover { background-color: #004a7a; }
+    .btn-primary:disabled { background-color: #90a4ae; cursor: not-allowed; }
+
+    .btn-secondary {
+      padding: 11px 20px;
+      background-color: #f5f5f5;
+      color: #333;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-danger {
+      background: #dc2626;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-danger:hover { background: #b91c1c; }
+
+    /* Add Bill Modal form styles */
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #555;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      color: #333;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #005a8c;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 16px;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .lookup-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .lookup-row .form-input {
+      flex: 1;
+    }
+
+    .lookup-status {
+      font-size: 13px;
+      margin-top: 6px;
+      min-height: 18px;
+    }
+
+    .lookup-status.error   { color: #c62828; }
+    .lookup-status.success { color: #2e7d32; }
+    .lookup-status.loading { color: #888; }
+
+    .ilga-preview {
+      background: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+
+    .preview-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 4px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .preview-row:last-child { margin-bottom: 0; }
+
+    .preview-label {
+      font-weight: 600;
+      color: #666;
+      min-width: 120px;
+      flex-shrink: 0;
+    }
+
+    .required { color: #c62828; }
+
+    .add-bill-error {
+      font-size: 13px;
+      color: #c62828;
+      margin-bottom: 8px;
+      padding: 8px 12px;
+      background: #ffebee;
+      border-radius: 6px;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #005a8c;
+      color: white;
+      padding: 40px 24px;
+      margin-top: 48px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-tagline {
+      margin: 0;
+      opacity: 0.8;
+      font-size: 14px;
+    }
+
+    .footer-address {
+      text-align: right;
+    }
+
+    .footer-address p {
+      margin: 0 0 4px 0;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    .footer-address p:last-child { margin: 0; }
+
+    /* Program area tabs */
+    .program-tabs {
+      background: white;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 0 24px;
+    }
+
+    .program-tabs-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+    }
+
+    .tab-btn {
+      padding: 12px 24px;
+      border: none;
+      background: none;
+      font-size: 14px;
+      font-weight: 600;
+      color: #666;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      font-family: inherit;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .tab-btn.active {
+      color: #005a8c;
+      border-bottom-color: #005a8c;
+    }
+
+    .tab-btn:hover {
+      color: #005a8c;
+      background: #f0f7ff;
+    }
+
+    /* Info icon + IFE status popover */
+    .info-icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      color: #005a8c;
+      padding: 0 2px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    .info-icon-btn:hover { color: #003f6b; }
+
+    .filter-label-group {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    #ife-status-popover {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      z-index: 200;
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.14);
+      padding: 18px 20px;
+      min-width: 320px;
+      max-width: 400px;
+    }
+
+    #ife-status-popover.visible { display: block; }
+
+    #ife-status-popover h4 {
+      font-size: 12px;
+      font-weight: 700;
+      color: #333;
+      margin: 0 0 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .popover-def {
+      margin-bottom: 10px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #444;
+    }
+
+    .popover-def:last-child { margin-bottom: 0; }
+    .popover-def strong { color: #005a8c; }
+
+    /* Amendment disclaimer */
+    .amendment-disclaimer {
+      font-size: 12px;
+      color: #7a5200;
+      background: #fff8e1;
+      border: 1px solid #ffe082;
+      border-radius: 6px;
+      padding: 6px 10px;
+      margin: 4px 0 8px;
+      line-height: 1.5;
+    }
+
+    .amendment-disclaimer a { color: #005a8c; font-weight: 600; }
+
+    .modal-amendment-disclaimer {
+      font-size: 13px;
+      color: #7a5200;
+      background: #fff8e1;
+      border: 1px solid #ffe082;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 16px;
+      line-height: 1.55;
+    }
+
+    .modal-amendment-disclaimer a { color: #005a8c; font-weight: 600; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header h1 { font-size: 26px; }
+      .stats-container { gap: 20px; }
+      .stat-number { font-size: 24px; }
+      .filters-row { flex-direction: column; align-items: stretch; }
+      .filter-select { width: 100%; }
+      .filter-count { margin-left: 0; text-align: center; }
+      .legislation-grid { grid-template-columns: 1fr; }
+      .footer-content { flex-direction: column; text-align: center; }
+      .footer-address { text-align: center; }
+      .form-row { flex-direction: column; }
+      .add-bill-btn { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <h1>Impact for Equity State Bill Tracker</h1>
+      <button class="refresh-all-btn" onclick="refreshAllFromILGA()">↻ Refresh from ILGA</button>
+      <small id="header-last-refreshed" class="header-last-refreshed"></small>
+    </div>
+  </header>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stats-container">
+      <div class="stat-item">
+        <div class="stat-number blue" id="total-bills">0</div>
+        <div class="stat-label">Bills Tracked</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number blue" id="endorsed-bills">0</div>
+        <div class="stat-label">Endorsed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number orange" id="sponsored-bills">0</div>
+        <div class="stat-label">Sponsored</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number red" id="opposed-bills">0</div>
+        <div class="stat-label">Opposed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number indigo" id="watching-bills">0</div>
+        <div class="stat-label">Watching</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Program Area Tabs -->
+  <div class="program-tabs">
+    <div class="program-tabs-inner" role="group" aria-label="Program area">
+      <button class="tab-btn active" aria-pressed="true" data-area="Housing">Housing</button>
+      <button class="tab-btn" aria-pressed="false" data-area="CLS">Criminal Legal System</button>
+    </div>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <div class="filters-container">
+      <!-- Row 1 -->
+      <div class="filters-row">
+        <span class="filter-label">Filter:</span>
+
+        <select class="filter-select" id="status-filter">
+          <option value="All">All Stages</option>
+        </select>
+
+        <div class="filter-label-group">
+          <select class="filter-select" id="type-filter">
+            <option value="All">All Types</option>
+            <option value="Endorsed">Endorsed</option>
+            <option value="Sponsored">Sponsored</option>
+            <option value="Watching">Watching</option>
+            <option value="Opposed">Opposed</option>
+          </select>
+          <button class="info-icon-btn" id="ife-status-info-btn" aria-expanded="false" aria-controls="ife-status-popover" title="IFE status definitions">ⓘ</button>
+          <div id="ife-status-popover" role="dialog" aria-label="IFE Status Definitions">
+            <h4>IFE Status Definitions</h4>
+            <div class="popover-def"><strong>Endorsed:</strong> Impact for Equity supports passage of the bill.</div>
+            <div class="popover-def"><strong>Sponsored:</strong> Impact for Equity has worked to draft and/or introduce the bill, alongside partners, as part of its core housing priorities.</div>
+            <div class="popover-def"><strong>Watching:</strong> IFE is monitoring but has not taken a position.</div>
+            <div class="popover-def"><strong>Opposed:</strong> IFE opposes passage of the bill.</div>
+          </div>
+        </div>
+
+        <select class="filter-select" id="category-filter">
+          <option value="All">All Categories</option>
+        </select>
+
+        <input type="text" id="search-filter" class="filter-select"
+               placeholder="Search bills…" style="min-width:200px;">
+        <button class="clear-filters-btn" id="clear-filters">Clear Filters</button>
+
+        <span class="filter-count" id="filter-count">Showing 0 of 0 bills</span>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="filters-row">
+        <span class="filter-label">Last action since:</span>
+        <input type="date" id="changed-since-filter" class="filter-select" style="min-width:150px;">
+
+        <label class="filter-toggle">
+          <input type="checkbox" id="hearings-filter">
+          <span>Upcoming hearing</span>
+        </label>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="legislation-grid" id="legislation-grid">
+      <!-- Cards injected here -->
+    </div>
+
+    <div class="empty-state" id="empty-state" style="display: none;">
+      <div class="empty-state-icon">📭</div>
+      <h3>No bills match your filters</h3>
+      <p>Try adjusting your filter criteria</p>
+    </div>
+  </main>
+
+  <!-- Bill Detail Modal -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <div class="modal-header" id="modal-header">
+        <button class="modal-close-btn" id="modal-close">&#215;</button>
+        <div class="modal-tags" id="modal-tags"></div>
+        <h2 class="modal-bill-number" id="modal-bill-number"></h2>
+        <h3 class="modal-bill-title" id="modal-bill-title"></h3>
+      </div>
+      <div class="modal-body">
+        <div class="modal-info-boxes">
+          <div class="info-box" id="modal-stage-box">
+            <div class="info-box-label">Legislative Stage</div>
+            <div class="info-box-value" id="modal-stage"></div>
+          </div>
+          <div class="info-box next-action" id="modal-next-action-box" style="display:none;">
+            <div class="info-box-label">Next Action</div>
+            <div class="info-box-value" id="modal-next-action"></div>
+          </div>
+          <div class="info-box session" id="modal-amendment-box" style="display:none;">
+            <div class="info-box-label">Last Amendment</div>
+            <div class="info-box-value" id="modal-amendment"></div>
+          </div>
+        </div>
+        <div class="modal-last-action" id="modal-last-action-section" style="display:none;">
+          <p><strong>Last Action:</strong> <span id="modal-last-action"></span></p>
+          <p class="last-action-date" id="modal-last-action-date"></p>
+        </div>
+        <div class="modal-sponsor-row">
+          <span class="modal-summary-label">Primary Sponsor</span>
+          <span id="modal-primary-sponsor"></span>
+        </div>
+        <h4 class="modal-summary-label">Summary</h4>
+        <div id="modal-amendment-disclaimer" class="modal-amendment-disclaimer" style="display:none;"></div>
+        <p class="modal-summary" id="modal-summary"></p>
+
+        <div class="modal-actions">
+          <a class="btn-primary" id="modal-link" href="#" target="_blank" rel="noopener noreferrer">View on ILGA.gov &#8594;</a>
+          <button class="btn-secondary" id="modal-refresh-btn" style="display:none;" onclick="refreshBillILGA()">Refresh from ILGA</button>
+          <button class="btn-danger" id="modal-delete-btn" style="display:none;" onclick="confirmDeleteBill()">Delete Bill</button>
+          <button class="btn-secondary" id="modal-close-btn">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Refresh All Progress Overlay -->
+  <div class="modal-overlay" id="refresh-overlay">
+    <div class="modal" style="max-width:420px;text-align:center;padding:40px 32px;">
+      <h3 id="refresh-overlay-title" style="margin:0 0 16px;">Refreshing from ILGA.gov…</h3>
+      <p id="refresh-progress-text" style="color:#555;margin-bottom:12px;">Starting…</p>
+      <div style="background:#e0e0e0;border-radius:6px;height:10px;margin-bottom:16px;">
+        <div id="refresh-progress-bar"
+             style="background:#1976d2;height:10px;border-radius:6px;width:0%;transition:width 0.2s;"></div>
+      </div>
+      <p id="refresh-status-text" style="color:#666;font-size:14px;min-height:20px;"></p>
+      <button id="refresh-close-btn" class="btn-secondary"
+              style="display:none;margin-top:16px;" onclick="document.getElementById('refresh-overlay').classList.remove('visible')">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // ── GitHub API config ─────────────────────────────────────────────────────
+    const WORKER_URL = 'https://ifeinternaltracker.dhertz.workers.dev'; // set after deploying Cloudflare Worker
+    const GITHUB_REPO  = 'danielkayhertz/ife-bill-tracker-internal';
+
+    // ── Fallback data (used when bills.json unreachable) ─────────────────────
+    const FALLBACK_DATA = [
+      {id:1,billNumber:"HB3466",title:"Affordable Housing Special Assessment Program (AHSAP)",description:"Amends property tax code. Clarifies needed property improvements to remain in special assessment program, allows property to remain in program even if county opts out. Details IHDA's responsibility in calculating/sharing minimum per sq. ft. expenditure requirements for rehabilitation to qualify. Extends AHSAP to 2037.",year:[2025,2026],status:"Not passed into law",type:"Endorsed",category:"Property Taxes",url:"https://www.ilga.gov/Legislation/BillStatus?GAID=18&DocNum=3466&DocTypeID=HB&LegId=162109&SessionID=114",programArea:"Housing"},
+      {id:2,billNumber:"SB1911",title:"Affordable Housing Special Assessment Program (Senate)",description:"Senate companion to HB3466. Amends property tax code. Clarifies needed property improvements to remain in special assessment program, allows property to remain in program even if county opts out. Extends AHSAP to 2037. Governor approved 12/12/25.",year:[2025],status:"Passed into law",type:"Endorsed",category:"Property Taxes",url:"https://www.ilga.gov/Legislation/BillStatus?GAID=18&DocNum=1911&DocTypeID=SB&LegId=161199&SessionID=114",programArea:"Housing"},
+      {id:3,billNumber:"SB0062",title:"Build Illinois Homes Tax Credit Act",description:"Creates the Build Illinois Homes Tax Credit Act. Qualified developments are low-income housing projects. Upon construction or rehabilitation, IHDA or DOH issues state credit eligibility statements. Allows qualified taxpayers to be awarded tax credits for their development if necessary for financial feasibility. Would create a state match to the federal Low Income Housing Tax Credit.",year:[2025,2026],status:"Not passed into law",type:"Endorsed",category:"Affordable Housing Development",url:"https://www.ilga.gov/Legislation/BillStatus?GAID=18&DocNum=62&DocTypeID=SB&LegId=157167&SessionID=114",programArea:"Housing"},
+      {id:4,billNumber:"HB2545",title:"AHPAA Supportive Housing Amendment",description:"Amends Affordable Housing Planning and Appeals Act. Allows for a broader range of parties to appeal decisions and clarifies timeline for appeals and responses, consequences of failing to respond, and the municipality's burden in responding. Shifts burden of proof onto municipality to demonstrate that a proposed supportive housing project would be detrimental.",year:[2025,2026],status:"Not passed into law",type:"Endorsed",category:"AHPAA",url:"https://www.ilga.gov/Legislation/BillStatus?GAID=18&DocNum=2545&DocTypeID=HB&LegId=160392&SessionID=114",programArea:"Housing"},
+      {id:5,billNumber:"HB1814",title:"Missing Middle Housing Act",description:"Amends zoning division of IL Municipal Code. Requires large cities to allow middle housing development on large lots zoned residential. Requires smaller cities to allow development of at least duplexes on lots allowing detached single family dwellings. Prohibits applicable municipalities from discouraging development or regulating development in an inconsistent manner.",year:[2025,2026],status:"Not passed into law",type:"Endorsed",category:"Zoning",url:"https://www.ilga.gov/Legislation/BillStatus?GAID=18&DocNum=1814&DocTypeID=HB&LegId=159270&SessionID=114",programArea:"Housing"},
+      {id:6,billNumber:"HB1813",title:"ADU Authorization Act",description:"Amends the Control Over Building and Construction Article of the IL Municipal Code. Defines accessory dwelling unit and efficiency unit. Prohibits municipalities from prohibiting the building or use of ADUs and prohibits home rule units from acting inconsistently with the Act.",year:[2025,2026],status:"Not passed into law",type:"Endorsed",category:"Zoning",url:"https://www.ilga.gov/Legislation/BillStatus?GAID=18&DocNum=1813&DocTypeID=HB&LegId=159269&SessionID=114",programArea:"Housing"},
+      {id:7,billNumber:"HB3552",title:"Local Accessory Dwelling Unit Act",description:"Creates Local Accessory Dwelling Unit Act. Defines accessory dwelling unit, types of units, and discretionary review. Prohibits local governments from prohibiting the building or use of ADUs and sets requirements for ADU application review, timelines, delays, and processing. Prohibits home rule units from acting inconsistently with the Act.",year:[2025,2026],status:"Not passed into law",type:"Endorsed",category:"Zoning",url:"https://www.ilga.gov/Legislation/BillStatus?GAID=18&DocNum=3552&DocTypeID=HB&LegId=162242&SessionID=114",programArea:"Housing"},
+      {id:8,billNumber:"HB1843",title:"Family Status Housing Protection Act",description:"Amends the Zoning Division of the IL Municipal Code. Disallows classification, regulation, and restriction on use of property based on family relationship. Prohibits municipalities from adopting zoning regulations that prohibit 2 or more unrelated people from living together, and regulations that prohibit community-integrated living arrangements.",year:[2025,2026],status:"Not passed into law",type:"Endorsed",category:"Zoning",url:"https://www.ilga.gov/Legislation/BillStatus?GAID=18&DocNum=1843&DocTypeID=HB&LegId=159333&SessionID=114",programArea:"Housing"},
+      {id:9,billNumber:"HB3288",title:"Affordable Communities Act",description:"Creates the Affordable Communities Act. Clarifies and defines middle housing types. Applies to zoning units with populations over 100,000 and prohibits regulations from preventing middle housing development. Requires these zoning units to adopt land use ordinances and amend zoning maps/ordinances to implement middle housing requirements. Allows IHDA to adopt emergency rules for implementing the Act's requirements.",year:[2025,2026],status:"Not passed into law",type:"Endorsed",category:"Zoning",url:"https://www.ilga.gov/Legislation/BillStatus?GAID=18&DocNum=3288&DocTypeID=HB&LegId=161778&SessionID=114",programArea:"Housing"},
+      {id:10,billNumber:"HB1429",title:"Bill of Rights for the Homeless Act Amendment",description:"Amends the Bill of Rights for the Homeless Act. Prohibits state and local government from passing rules that fine or criminally penalize people experiencing unsheltered homelessness for engaging in life-sustaining activities (like eating, keeping belongings, and sleeping) on public property. Requires written and oral notice to be given prior to removal at a site. Makes unsheltered homelessness an affirmative defense to charges of violating rules that criminalize occupying or engaging in life-sustaining activities.",year:[2025,2026],status:"Not passed into law",type:"Endorsed",category:"Housing",url:"https://www.ilga.gov/Legislation/BillStatus?GAID=18&DocNum=1429&DocTypeID=HB&LegId=157430&SessionID=114",programArea:"Housing"},
+      {id:11,billNumber:"SB2264",title:"Crime-Free and Nuisance Housing Ordinances Regulation",description:"Amends the Counties Code, IL Municipal Code, and Housing Authorities Act. Prohibits counties, municipalities, and housing authorities from adopting, enforcing, or implementing regulations affecting a tenancy because of contact with law enforcement or emergency services. Eliminates unfair penalties and evictions of tenants based on alleged criminal or nuisance activity.",year:[2025,2026],status:"Not passed into law",type:"Endorsed",category:"Tenant Protections",url:"https://www.ilga.gov/Legislation/BillStatus?GAID=18&DocNum=2264&DocTypeID=SB&LegId=162041&SessionID=114",programArea:"Housing"},
+      {id:12,billNumber:"HB3256",title:"People Over Parking Act",description:"Creates the People Over Parking Act. Defines various development projects and parking requirements. Prohibits minimum automobile parking requirements if a project is within 1/2 mile of a public transportation hub. Allows local governments to impose requirements for parking spaces if a project provides parking voluntarily. Prohibits home rule units from acting inconsistently.",year:[2025,2026],status:"Not passed into law",type:"Endorsed",category:"Zoning",url:"https://www.ilga.gov/Legislation/BillStatus?GAID=18&DocNum=3256&DocTypeID=HB&LegId=161742&SessionID=114",programArea:"Housing"},
+      {id:13,billNumber:"SB2352",title:"People Over Parking Act (Senate)",description:"Senate companion to HB3256. Creates the People Over Parking Act. Prohibits minimum automobile parking requirements if a project is within 1/2 mile of a public transportation hub.",year:[2025,2026],status:"Not passed into law",type:"Endorsed",category:"Zoning",url:"https://www.ilga.gov/Legislation/BillStatus?GAID=18&DocNum=2352&DocTypeID=SB&LegId=162316&SessionID=114",programArea:"Housing"},
+      {id:14,billNumber:"SB2111",title:"Vehicle Code - Bicycles Exemptions",description:"Amends the IL Vehicle Code. People riding a bike on the road are not prohibited from side-by-side riding, riding contraflow on one-way streets, and rolling through stop signs at clear intersections. Governor approved 12/16/25.",year:[2025],status:"Passed into law",type:"Endorsed",category:"Transportation",url:"https://www.ilga.gov/Legislation/BillStatus?GAID=18&DocNum=2111&DocTypeID=SB&LegId=161644&SessionID=114",programArea:"Housing"},
+      {id:15,billNumber:"HB3438",title:"Transportation Reform Bill",description:"Amends DOT Law of the Civil Admin Code of IL. Amends the Regional Transportation Authority Act, creates the Northern IL Transit Authority, generally acts as the transit reform bill with funding. Includes the People Over Parking Act provisions.",year:[2025,2026],status:"Not passed into law",type:"Endorsed",category:"Transportation",url:"https://www.ilga.gov/Legislation/BillStatus?GAID=18&DocNum=3438&DocTypeID=HB&LegId=162067&SessionID=114",programArea:"Housing"},
+      {id:16,billNumber:"HB4377",title:"PHA - No Work Requirements",description:"Amends Housing Authorities Act. Unless otherwise required by federal law or regulation, prohibits housing authorities from establishing time limits and work requirements as conditions of eligibility for rent subsidy or assistance. Housing authorities may encourage participation in voluntary employment or job training if it does not impact eligibility.",year:[2026],status:"Not passed into law",type:"Sponsored",category:"Public Housing",url:"https://www.ilga.gov/Legislation/BillStatus?DocNum=4377&GAID=18&DocTypeID=HB&LegId=164950&SessionID=114",programArea:"Housing"},
+      {id:17,billNumber:"SB3084",title:"PHA - No Work Requirements (Senate)",description:"Senate companion to HB4377. Amends Housing Authorities Act. Unless otherwise required by federal law or regulation, prohibits housing authorities from establishing time limits and work requirements as conditions of eligibility for rent subsidy or assistance.",year:[2026],status:"Not passed into law",type:"Sponsored",category:"Public Housing",url:"https://www.ilga.gov/Legislation/BillStatus?DocNum=3084&GAID=18&DocTypeID=SB&LegId=165665&SessionID=114",programArea:"Housing"},
+      {id:18,billNumber:"HB4413",title:"Revenue - Affordable Housing",description:"Amends IL Housing Dev. Act and IL Income Tax Act. Credits awarded under affordable housing tax donation program is limited in 2027 and will increase by 10% each year after. Affordable housing donation income tax credit applies through taxable year ending 2036.",year:[2026],status:"Not passed into law",type:"Endorsed",category:"Affordable Housing Development",url:"https://www.ilga.gov/Legislation/BillStatus?DocNum=4413&GAID=18&DocTypeID=HB&LegId=165058&SessionID=114",programArea:"Housing"},
+      {id:19,billNumber:"SB3169",title:"Revenue - Affordable Housing (CLT)",description:"Amends Hotel Operators' Occupation Tax Act. Imposes a tax upon hosting platforms that facilitate renting, leasing, or letting of short-term rentals. Proceeds shall be deposited in the Community Land Trust Fund. Property owned by a nonprofit community land trust used exclusively for creation and maintenance of permanently affordable residences is exempt from property tax.",year:[2026],status:"Not passed into law",type:"Endorsed",category:"Affordable Housing Development",url:"https://www.ilga.gov/Legislation/BillStatus?DocNum=3169&GAID=18&DocTypeID=SB&LegId=165814&SessionID=114",programArea:"Housing"},
+      {id:20,billNumber:"HB4510",title:"Missing Middle Housing Affordability Act",description:"Creates the Missing Middle Housing Affordability Act.",year:[2026],status:"Not passed into law",type:"Endorsed",category:"Zoning",url:"https://www.ilga.gov/Legislation/BillStatus?DocNum=4510&GAID=18&DocTypeID=HB&LegId=165295&SessionID=114",programArea:"Housing"},
+      {id:21,billNumber:"HB4568",title:"Home Illinois Program ($352M)",description:"Appropriates $352,200,000 from the General Revenue Fund to DHS for grants and administrative expenses of the Home Illinois Program, including pilot programs to prevent and end homelessness, including homelessness prevention, emergency and transitional housing, rapid rehousing, outreach, and related services and supports.",year:[2026],status:"Not passed into law",type:"Endorsed",category:"Housing",url:"https://www.ilga.gov/Legislation/BillStatus?DocNum=4568&GAID=18&DocTypeID=HB&LegId=165428&SessionID=114",programArea:"Housing"},
+      {id:22,billNumber:"SB2969",title:"Home Illinois Program (Senate)",description:"Senate companion to HB4568. Appropriates $352,200,000 from the General Revenue Fund to DHS for grants and administrative expenses of the Home Illinois Program to prevent and end homelessness.",year:[2026],status:"Not passed into law",type:"Endorsed",category:"Housing",url:"https://www.ilga.gov/Legislation/BillStatus?DocNum=2969&GAID=18&DocTypeID=SB&LegId=165401&SessionID=114",programArea:"Housing"},
+      {id:23,billNumber:"SB3165",title:"Housing is Recovery Program ($10M)",description:"Appropriates $10,000,000 from the General Revenue Fund to DHS for the Housing is Recovery Program to support rental assistance for individuals with mental health and substance use challenges who are experiencing homelessness.",year:[2026],status:"Not passed into law",type:"Endorsed",category:"Housing",url:"https://www.ilga.gov/Legislation/BillStatus?DocNum=3165&GAID=18&DocTypeID=SB&LegId=165810&SessionID=114",programArea:"Housing"},
+      {id:24,billNumber:"HB4588",title:"Parking - High Population Cities",description:"Amends the People Over Parking Act. Provides that the Act applies to municipalities with a population of more than 2 million, rather than all units of local government. Would weaken the People Over Parking Act by limiting its scope.",year:[2026],status:"Not passed into law",type:"Opposed",category:"Zoning",url:"https://www.ilga.gov/Legislation/BillStatus?DocNum=4588&GAID=18&DocTypeID=HB&LegId=165448&SessionID=114",programArea:"Housing"},
+      {id:25,billNumber:"SB3009",title:"Neighborhood Housing ($5M)",description:"Appropriates $5,000,000 from the General Revenue Fund to the Department of Commerce and Economic Opportunity for a grant to Neighborhood Housing Services of Chicago for costs associated with funding equitable mortgage lending and homebuyer subsidies, foreclosure prevention services, and other support.",year:[2026],status:"Not passed into law",type:"Endorsed",category:"Housing",url:"https://www.ilga.gov/Legislation/BillStatus?DocNum=3009&GAID=18&DocTypeID=SB&LegId=165513&SessionID=114",programArea:"Housing"}
+    ];
+
+    // ── Stage / status styling ────────────────────────────────────────────────
+    const stageConfig = {
+      "Signed into Law":             { bg: "#e8f5e9", text: "#1b5e20", border: "#81c784" },
+      "Awaiting Governor Signature": { bg: "#e3f2fd", text: "#0d47a1", border: "#90caf9" },
+      "Enrolled":                    { bg: "#c8e6c9", text: "#2e7d32", border: "#66bb6a" },
+      "Passed House":                { bg: "#f0f7f0", text: "#2e7d32", border: "#a5d6a7" },
+      "Passed Senate":               { bg: "#f0f7f0", text: "#2e7d32", border: "#a5d6a7" },
+      "Passed House Committee":      { bg: "#e3f2fd", text: "#1565c0", border: "#90caf9" },
+      "Passed Senate Committee":     { bg: "#e3f2fd", text: "#1565c0", border: "#90caf9" },
+      "In House Committee":          { bg: "#f5f5f5", text: "#616161", border: "#bdbdbd" },
+      "In Senate Committee":         { bg: "#efefef", text: "#616161", border: "#bdbdbd" },
+      "Failed":                      { bg: "#fce4ec", text: "#b71c1c", border: "#ef9a9a" },
+      "Unknown":                     { bg: "#f5f5f5", text: "#9e9e9e", border: "#e0e0e0" }
+    };
+
+    const statusConfig = {
+      "Passed into law":     { bg: "#e8f5e9", text: "#1b5e20", border: "#81c784" },
+      "Not passed into law": { bg: "#f5f5f5", text: "#616161", border: "#bdbdbd" }
+    };
+
+    const STAGE_ORDER = ["In House Committee","In Senate Committee","Passed House Committee","Passed Senate Committee","Passed House","Passed Senate","Enrolled","Awaiting Governor Signature","Signed into Law","Failed","Unknown"];
+
+    // ── State ─────────────────────────────────────────────────────────────────
+    let legislationData = [];
+    let notesData       = {};
+    let currentBill     = null;
+    let addBillIlgaData = null;
+    let currentProgramArea = "Housing";
+    let currentFilters  = { stage: "All", type: "All", category: "All", changedSince: "", upcomingOnly: false, search: "" };
+
+    // ── DOM refs ──────────────────────────────────────────────────────────────
+    const grid            = document.getElementById('legislation-grid');
+    const emptyState      = document.getElementById('empty-state');
+    const modalOverlay    = document.getElementById('modal-overlay');
+    const statusFilter    = document.getElementById('status-filter');
+    const typeFilter      = document.getElementById('type-filter');
+    const categoryFilter  = document.getElementById('category-filter');
+    const infoBtn         = document.getElementById('ife-status-info-btn');
+    const infoPopover     = document.getElementById('ife-status-popover');
+    const changedSinceEl  = document.getElementById('changed-since-filter');
+    const hearingsEl      = document.getElementById('hearings-filter');
+    const clearFiltersBtn = document.getElementById('clear-filters');
+    const searchEl        = document.getElementById('search-filter');
+    const filterCount     = document.getElementById('filter-count');
+
+    // ── GitHub API helpers ────────────────────────────────────────────────────
+    async function readGitHubFile(path) {
+      const r = await fetch(`${WORKER_URL}/github/repos/${GITHUB_REPO}/contents/${path}`, {
+        headers: { Accept: 'application/vnd.github.v3+json' }
+      });
+      if (r.status === 404) return { content: null, sha: null };
+      if (!r.ok) throw new Error(`GitHub API ${r.status}`);
+      const d = await r.json();
+      return { content: JSON.parse(atob(d.content.replace(/\n/g, ''))), sha: d.sha };
+    }
+
+    async function writeGitHubFile(path, content, sha, message) {
+      const body = {
+        message,
+        content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2))))
+      };
+      if (sha) body.sha = sha;
+      const r = await fetch(`${WORKER_URL}/github/repos/${GITHUB_REPO}/contents/${path}`, {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
+      });
+      if (r.status === 409) throw new Error('conflict');
+      if (!r.ok) throw new Error(`GitHub API ${r.status}`);
+      return r.json();
+    }
+
+    // ── Init ──────────────────────────────────────────────────────────────────
+    async function init() {
+      // bills.json is public — load it independently of the GitHub token
+      try {
+        const billsResp = await fetch('data/bills.json');
+        if (!billsResp.ok) throw new Error(`HTTP ${billsResp.status}`);
+        legislationData = await billsResp.json();
+      } catch (e) {
+        console.warn('Could not load bills.json, using fallback:', e);
+        legislationData = FALLBACK_DATA;
+      }
+
+      // GitHub API files require the token — fail gracefully without breaking bills
+      try {
+        const [userBillsResp, notesResp] = await Promise.all([
+          readGitHubFile('data/user-bills.json'),
+          readGitHubFile('data/notes.json')
+        ]);
+        const userBills = userBillsResp.content || [];
+        notesData = notesResp.content || {};
+        if (userBills.length > 0) {
+          legislationData = [...legislationData, ...userBills];
+        }
+      } catch (e) {
+        console.warn('GitHub API unavailable (check Worker URL/secret):', e);
+        notesData = {};
+      }
+
+      updateStats();
+      populateStageFilter();
+      populateCategoryFilter();
+      renderCards();
+      setupEventListeners();
+      updateLastFetched();
+    }
+
+    function updateLastFetched() {
+      const date = legislationData[0]?.ilgaFetchedAt;
+      if (!date) return;
+      const d = new Date(date);
+      const headerEl = document.getElementById('header-last-refreshed');
+      if (headerEl) {
+        headerEl.textContent = 'Last refreshed ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+          + ' at ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      }
+    }
+
+    function updateStats() {
+      document.getElementById('total-bills').textContent    = legislationData.length;
+      document.getElementById('endorsed-bills').textContent = legislationData.filter(b => b.type === 'Endorsed').length;
+      document.getElementById('sponsored-bills').textContent= legislationData.filter(b => b.type === 'Sponsored').length;
+      document.getElementById('opposed-bills').textContent  = legislationData.filter(b => b.type === 'Opposed').length;
+      document.getElementById('watching-bills').textContent = legislationData.filter(b => b.type === 'Watching').length;
+    }
+
+    function getFilteredData() {
+      const today = new Date().toISOString().split('T')[0];
+      return legislationData.filter(bill => {
+        if ((bill.programArea ?? "Housing") !== currentProgramArea) return false;
+        if (currentFilters.stage    !== "All" && (bill.stage || bill.status) !== currentFilters.stage) return false;
+        if (currentFilters.type     !== "All" && bill.type     !== currentFilters.type)     return false;
+        if (currentFilters.category !== "All" && bill.category !== currentFilters.category) return false;
+        // Last-action filter
+        if (currentFilters.changedSince) {
+          if (!bill.lastActionDate) return false;
+          const [m, d, y] = bill.lastActionDate.split('/');
+          const isoDate = `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`;
+          if (isoDate < currentFilters.changedSince) return false;
+        }
+        // Upcoming actions filter
+        if (currentFilters.upcomingOnly) {
+          if (!bill.nextActionDate) return false;
+          const [m, d, y] = bill.nextActionDate.split('/');
+          const isoDate = `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`;
+          if (isoDate < today) return false;
+        }
+        // Search filter
+        if (currentFilters.search) {
+          const q = currentFilters.search.toLowerCase();
+          const haystack = [bill.billNumber, bill.title, bill.description,
+                            bill.primarySponsor, bill.category]
+                            .map(f => (f || '').toLowerCase()).join(' ');
+          if (!haystack.includes(q)) return false;
+        }
+        return true;
+      });
+    }
+
+    function populateStageFilter() {
+      const programBills = legislationData.filter(b => (b.programArea ?? "Housing") === currentProgramArea);
+      const stages = [...new Set(programBills.map(b => b.stage || b.status).filter(Boolean))];
+      stages.sort((a, b) => {
+        const ai = STAGE_ORDER.indexOf(a), bi = STAGE_ORDER.indexOf(b);
+        if (ai === -1 && bi === -1) return a.localeCompare(b);
+        if (ai === -1) return 1;
+        if (bi === -1) return -1;
+        return ai - bi;
+      });
+      statusFilter.innerHTML = '<option value="All">All Stages</option>'
+        + stages.map(s => `<option value="${s}">${s}</option>`).join('');
+    }
+
+    function populateCategoryFilter() {
+      const programBills = legislationData.filter(b => (b.programArea ?? "Housing") === currentProgramArea);
+      const cats = [...new Set(programBills.map(b => b.category).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'en'));
+      categoryFilter.innerHTML = '<option value="All">All Categories</option>'
+        + cats.map(c => `<option value="${c}">${c}</option>`).join('');
+    }
+
+    function toIsoDate(mmddyyyy) {
+      if (!mmddyyyy) return null;
+      const [m, d, y] = mmddyyyy.split('/');
+      return `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`;
+    }
+
+    function renderCards() {
+      const filtered = getFilteredData();
+      const today = new Date().toISOString().split('T')[0];
+
+      filtered.sort((a, b) => {
+        const aNext = toIsoDate(a.nextActionDate);
+        const bNext = toIsoDate(b.nextActionDate);
+        const aHasHearing = aNext && aNext >= today;
+        const bHasHearing = bNext && bNext >= today;
+
+        if (aHasHearing && !bHasHearing) return -1;
+        if (!aHasHearing && bHasHearing) return 1;
+
+        const aLast = toIsoDate(a.lastActionDate) || '';
+        const bLast = toIsoDate(b.lastActionDate) || '';
+        return bLast.localeCompare(aLast);
+      });
+
+      grid.innerHTML = '';
+
+      if (filtered.length === 0) {
+        emptyState.style.display = 'block';
+        grid.style.display = 'none';
+        if (currentProgramArea !== "Housing") {
+          emptyState.innerHTML = '<div class="empty-state-icon">📭</div><h3>No Criminal Legal System bills have been added yet.</h3>';
+        } else {
+          emptyState.innerHTML = '<div class="empty-state-icon">📭</div><h3>No bills match your filters</h3><p>Try adjusting your filter criteria</p>';
+        }
+      } else {
+        emptyState.style.display = 'none';
+        grid.style.display = 'grid';
+        filtered.forEach(bill => grid.appendChild(createCard(bill)));
+      }
+
+      const programAreaTotal = legislationData.filter(b => (b.programArea ?? "Housing") === currentProgramArea).length;
+      filterCount.textContent = `Showing ${filtered.length} of ${programAreaTotal} bills`;
+
+      const isFiltered = currentFilters.stage    !== "All"
+        || currentFilters.type     !== "All"
+        || currentFilters.category !== "All"
+        || currentFilters.changedSince !== ""
+        || currentFilters.upcomingOnly
+        || currentFilters.search !== "";
+      clearFiltersBtn.classList.toggle('visible', isFiltered);
+    }
+
+    function createCard(bill) {
+      const card = document.createElement('article');
+      card.className = 'bill-card';
+      card.onclick = () => openModal(bill);
+
+      const stage = bill.stage || bill.status;
+      const stageStyle = stageConfig[stage] || stageConfig[bill.status] || { bg: '#f5f5f5', text: '#666', border: '#ddd' };
+      const typeClass = (bill.type || 'endorsed').toLowerCase();
+      const hasNote = !!(notesData[bill.billNumber]?.text);
+
+      card.innerHTML = `
+        <div class="card-header-bar ${typeClass}"></div>
+        <div class="card-body">
+          <div class="card-tags">
+            <span class="tag ${typeClass}">${bill.type}</span>
+            <span class="tag category">${bill.category}</span>
+            ${bill.isShellBill ? '<span class="tag shell-bill">Shell Bill</span>' : ''}
+          </div>
+          <div class="bill-number">
+            ${bill.billNumber}
+            ${hasNote ? '<span class="note-dot" title="Has IFE note"></span>' : ''}
+          </div>
+          ${bill.primarySponsor ? `<p class="card-sponsor">${bill.primarySponsor}</p>` : ''}
+          <h4 class="bill-title">${bill.title}</h4>
+          <p class="bill-description">${bill.description || ''}</p>
+          ${bill.lastAmendmentName != null ? `
+          <p class="card-amendment-disclaimer">⚠️ This bill has been amended. The description may not reflect the latest content. <a href="${bill.url}" target="_blank" rel="noopener noreferrer">View latest</a></p>` : ''}
+          ${bill.lastActionDate ? `
+          <p class="card-last-action">
+            <span class="card-last-action-date">${bill.lastActionDate}</span>
+            ${bill.lastAction ? ` — ${bill.lastAction}` : ''}
+          </p>` : ''}
+          ${bill.nextActionDate && toIsoDate(bill.nextActionDate) >= new Date().toISOString().split('T')[0] ? `
+          <p class="card-next-action">
+            <span class="card-next-action-label">Next:</span>
+            <span class="card-next-action-date">${bill.nextActionDate}</span>
+            ${bill.nextActionType ? ` — ${bill.nextActionType}` : ''}
+          </p>` : ''}
+          ${bill.lastAmendmentName ? `
+          <p class="card-last-amendment">
+            <span class="card-last-amendment-label">Amdt:</span>
+            ${bill.lastAmendmentDate ? `<span class="card-last-amendment-date"> ${bill.lastAmendmentDate}</span> —` : ''}
+            ${bill.lastAmendmentName}
+          </p>` : ''}
+          <div class="card-footer">
+            <span class="status-badge" style="background-color:${stageStyle.bg};color:${stageStyle.text};border:1px solid ${stageStyle.border};">${stage}</span>
+          </div>
+        </div>
+      `;
+
+      return card;
+    }
+
+    function openModal(bill) {
+      currentBill = bill;
+      const typeClass  = (bill.type || 'endorsed').toLowerCase();
+      const stage      = bill.stage || bill.status;
+      const stageStyle = stageConfig[stage] || stageConfig[bill.status] || { bg: '#f5f5f5', text: '#666', border: '#ddd' };
+
+      document.getElementById('modal-header').className = `modal-header ${typeClass}`;
+      document.getElementById('modal-tags').innerHTML = `
+        <span class="modal-tag">${bill.type}</span>
+        <span class="modal-tag">${bill.category}</span>
+        ${bill.isShellBill ? '<span class="modal-tag" style="background:rgba(230,81,0,0.25);">Shell Bill</span>' : ''}
+      `;
+      document.getElementById('modal-bill-number').textContent = bill.billNumber;
+      document.getElementById('modal-bill-title').textContent  = bill.title;
+
+      // Stage box
+      const stageBox = document.getElementById('modal-stage-box');
+      stageBox.style.backgroundColor = stageStyle.bg;
+      stageBox.style.border = `1px solid ${stageStyle.border}`;
+      document.getElementById('modal-stage').textContent  = stage;
+      document.getElementById('modal-stage').style.color  = stageStyle.text;
+
+      // Next action box
+      const nextActionBox = document.getElementById('modal-next-action-box');
+      const nextIso = toIsoDate(bill.nextActionDate);
+      if (nextIso && nextIso >= new Date().toISOString().split('T')[0]) {
+        nextActionBox.style.display = 'block';
+        const naText = bill.nextActionDate + (bill.nextActionType ? ` — ${bill.nextActionType}` : '');
+        document.getElementById('modal-next-action').textContent = naText;
+      } else {
+        nextActionBox.style.display = 'none';
+      }
+
+      // Amendment info box
+      const amendBox = document.getElementById('modal-amendment-box');
+      if (bill.lastAmendmentName) {
+        const txt = (bill.lastAmendmentDate ? bill.lastAmendmentDate + ' — ' : '') + bill.lastAmendmentName;
+        document.getElementById('modal-amendment').textContent = txt;
+        amendBox.style.display = 'block';
+      } else {
+        amendBox.style.display = 'none';
+      }
+
+      // Last action
+      const lastActionSection = document.getElementById('modal-last-action-section');
+      if (bill.lastAction) {
+        lastActionSection.style.display = 'block';
+        document.getElementById('modal-last-action').textContent     = bill.lastAction;
+        document.getElementById('modal-last-action-date').textContent = bill.lastActionDate || '';
+      } else {
+        lastActionSection.style.display = 'none';
+      }
+
+      document.getElementById('modal-summary').textContent = bill.description || '';
+      document.getElementById('modal-primary-sponsor').textContent = bill.primarySponsor || 'Not listed';
+
+      const disclaimerEl = document.getElementById('modal-amendment-disclaimer');
+      if (bill.lastAmendmentName != null) {
+        disclaimerEl.innerHTML = `⚠️ This bill has been amended. The description may not reflect the latest content. <a href="${bill.url}" target="_blank" rel="noopener noreferrer">View latest</a>`;
+        disclaimerEl.style.display = 'block';
+      } else {
+        disclaimerEl.style.display = 'none';
+      }
+
+      document.getElementById('modal-link').href           = bill.url;
+
+      document.getElementById('modal-refresh-btn').style.display =
+        bill.userAdded ? 'inline-block' : 'none';
+      document.getElementById('modal-delete-btn').style.display =
+        bill.userAdded ? 'inline-block' : 'none';
+
+      modalOverlay.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove('visible');
+      document.body.style.overflow = '';
+      currentBill = null;
+    }
+
+    function confirmDeleteBill() {
+      if (!currentBill) return;
+      const ok = confirm(`Delete ${currentBill.billNumber} — "${currentBill.title}"?\n\nThis cannot be undone.`);
+      if (ok) deleteBill(currentBill);
+    }
+
+    async function deleteBill(bill) {
+      const deleteBtn = document.getElementById('modal-delete-btn');
+      deleteBtn.disabled = true;
+      deleteBtn.textContent = 'Deleting…';
+      try {
+        const { content, sha } = await readGitHubFile('data/user-bills.json');
+        const updated = (content || []).filter(b => b.billNumber !== bill.billNumber);
+        await writeGitHubFile('data/user-bills.json', updated, sha, `Delete bill: ${bill.billNumber}`);
+        legislationData = legislationData.filter(b => b.billNumber !== bill.billNumber);
+        closeModal();
+        updateStats();
+        renderCards();
+      } catch (e) {
+        alert(`Delete failed: ${e.message}`);
+        deleteBtn.disabled = false;
+        deleteBtn.textContent = 'Delete Bill';
+      }
+    }
+
+    async function refreshBillILGA() {
+      if (!currentBill) return;
+      const refreshBtn = document.getElementById('modal-refresh-btn');
+      refreshBtn.disabled = true;
+      refreshBtn.textContent = 'Refreshing…';
+      try {
+        const data = await fetchBillFromILGA(currentBill.billNumber);
+        const updates = {
+          primarySponsor:    data.primarySponsor,
+          stage:             data.stage,
+          lastAction:        data.lastAction,
+          lastActionDate:    data.lastActionDate,
+          nextActionDate:    data.nextActionDate,
+          nextActionType:    data.nextActionType,
+          lastAmendmentName: data.lastAmendmentName,
+          lastAmendmentDate: data.lastAmendmentDate,
+          isShellBill:       data.isShellBill,
+          ilgaFetchedAt:     new Date().toISOString(),
+        };
+        const { content, sha } = await readGitHubFile('data/user-bills.json');
+        const userBills = (content || []).map(b =>
+          b.billNumber === currentBill.billNumber ? { ...b, ...updates } : b
+        );
+        await writeGitHubFile('data/user-bills.json', userBills, sha, `Refresh bill: ${currentBill.billNumber}`);
+        Object.assign(currentBill, updates);
+        legislationData = legislationData.map(b =>
+          b.billNumber === currentBill.billNumber ? { ...b, ...updates } : b
+        );
+        renderCards();
+        openModal(currentBill);
+      } catch (e) {
+        alert(`Refresh failed: ${e.message}`);
+        refreshBtn.disabled = false;
+        refreshBtn.textContent = 'Refresh from ILGA';
+      }
+    }
+
+    async function refreshAllFromILGA() {
+      const overlay      = document.getElementById('refresh-overlay');
+      const titleEl      = document.getElementById('refresh-overlay-title');
+      const progressText = document.getElementById('refresh-progress-text');
+      const progressBar  = document.getElementById('refresh-progress-bar');
+      const statusText   = document.getElementById('refresh-status-text');
+      const closeBtn     = document.getElementById('refresh-close-btn');
+
+      // Reset overlay
+      titleEl.textContent      = 'Refreshing from ILGA.gov…';
+      progressText.textContent = 'Starting…';
+      progressBar.style.width  = '0%';
+      statusText.textContent   = '';
+      closeBtn.style.display   = 'none';
+      overlay.classList.add('visible');
+
+      const baseBills = legislationData.filter(b => !b.userAdded);
+      const userBills = legislationData.filter(b =>  b.userAdded);
+      const allBills  = [...baseBills, ...userBills];
+      const total     = allBills.length;
+
+      const ilgaFields = [
+        'stage', 'primarySponsor', 'lastAction', 'lastActionDate',
+        'nextActionDate', 'nextActionType', 'lastAmendmentName',
+        'lastAmendmentDate', 'isShellBill'
+      ];
+
+      const updatedBase = [...baseBills];
+      const updatedUser = [...userBills];
+
+      for (let i = 0; i < allBills.length; i++) {
+        const bill = allBills[i];
+        progressText.textContent = `${i + 1} / ${total} — ${bill.billNumber}`;
+        progressBar.style.width  = `${Math.round(((i + 1) / total) * 100)}%`;
+
+        try {
+          const data = await fetchBillFromILGA(bill.billNumber);
+          const fetchedAt = new Date().toISOString();
+          const stageChanged = data.stage !== bill.stage;
+          const updates = {};
+          for (const f of ilgaFields) updates[f] = data[f];
+          updates.ilgaFetchedAt  = fetchedAt;
+          updates.stageChangedAt = stageChanged ? fetchedAt : (bill.stageChangedAt || fetchedAt);
+
+          if (bill.userAdded) {
+            const idx = updatedUser.findIndex(b => b.billNumber === bill.billNumber);
+            if (idx !== -1) updatedUser[idx] = { ...updatedUser[idx], ...updates };
+          } else {
+            const idx = updatedBase.findIndex(b => b.billNumber === bill.billNumber);
+            if (idx !== -1) updatedBase[idx] = { ...updatedBase[idx], ...updates };
+          }
+        } catch (e) {
+          statusText.textContent = `Warning: ${bill.billNumber} failed — ${e.message}`;
+        }
+      }
+
+      // Update in-memory data
+      legislationData = [...updatedBase, ...updatedUser];
+      updateStats();
+      renderCards();
+      updateLastFetched();
+
+      // Write to GitHub
+      try {
+        progressText.textContent = 'Writing bills.json to GitHub…';
+        const { sha: baseSha } = await readGitHubFile('data/bills.json');
+        await writeGitHubFile('data/bills.json', updatedBase, baseSha, 'Refresh all: update bills.json from ILGA');
+
+        if (updatedUser.length > 0) {
+          progressText.textContent = 'Writing user-bills.json to GitHub…';
+          const { sha: userSha } = await readGitHubFile('data/user-bills.json');
+          await writeGitHubFile('data/user-bills.json', updatedUser, userSha, 'Refresh all: update user-bills.json from ILGA');
+        }
+
+        titleEl.textContent      = 'Refresh complete';
+        progressText.textContent = `Updated ${total} bills`;
+        progressBar.style.width  = '100%';
+        statusText.textContent   = 'Data saved to GitHub ✓';
+      } catch (e) {
+        titleEl.textContent    = 'Refresh complete (write error)';
+        statusText.textContent = `In-memory data updated, but GitHub write failed: ${e.message}`;
+      }
+
+      closeBtn.style.display = 'inline-block';
+    }
+
+    // ── ILGA fetch (browser-side, for refresh) ───────────────────────────────
+    async function fetchBillFromILGA(rawBillNumber) {
+      const m = rawBillNumber.trim().toUpperCase().match(/^([A-Z]+)(\d+)$/);
+      if (!m) throw new Error('Invalid format — use e.g. HB1234 or SB567.');
+      const docType = m[1], docNum = m[2].padStart(4, '0');
+      const xmlUrl  = `https://www.ilga.gov/ftp/legislation/104/BillStatus/XML/10400${docType}${docNum}.xml`;
+
+      let text;
+      // Try direct fetch; fall back to CORS proxy if blocked
+      try {
+        const resp = await fetch(xmlUrl);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        text = await resp.text();
+      } catch (directErr) {
+        try {
+          const proxy = `https://corsproxy.io/?url=${encodeURIComponent(xmlUrl)}`;
+          const resp  = await fetch(proxy);
+          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+          text = await resp.text();
+        } catch (proxyErr) {
+          throw new Error('Could not reach ILGA.gov. Fill in details manually — the daily update will populate ILGA fields automatically.');
+        }
+      }
+
+      const xml = new DOMParser().parseFromString(text, 'text/xml');
+      if (xml.querySelector('parsererror')) throw new Error('Bill not found or XML parse error.');
+
+      // Primary sponsor
+      const sponsorsEl = xml.querySelector('sponsor > sponsors');
+      const primarySponsor = sponsorsEl?.textContent?.trim().split(/[-,]|\s+and\s+/)[0]?.trim() || '';
+
+      // Last action (with freshness fallback from <actions> history)
+      const lastActionEl   = xml.querySelector('lastaction > action');
+      const lastDateEl     = xml.querySelector('lastaction > statusdate');
+      const lastChamberEl  = xml.querySelector('lastaction > chamber');
+      let lastAction       = lastActionEl?.textContent?.trim() || '';
+      let lastActionDate   = lastDateEl?.textContent?.trim()   || '';
+      let lastActionChamber= (lastChamberEl?.textContent?.trim() || '').toLowerCase();
+
+      // Walk <actions> to find the most recent substantive action; substitute if newer
+      {
+        const SKIP = ['added as ', 'removed as ', 'alternate'];
+        function _parseActDate(s) {
+          if (!s) return null;
+          const p = s.split('/');
+          if (p.length !== 3) return null;
+          return [parseInt(p[2]), parseInt(p[0]), parseInt(p[1])]; // [y,m,d]
+        }
+        function _cmpDate(a, b) {
+          if (!a || !b) return 0;
+          for (let i = 0; i < 3; i++) { if (a[i] !== b[i]) return a[i] - b[i]; }
+          return 0;
+        }
+        const actionsEl = xml.querySelector('actions');
+        if (actionsEl) {
+          let curDate = '', curChamber = '', bestAction = '', bestDate = '', bestChamber = '', bestParsed = null;
+          for (const child of actionsEl.children) {
+            if (child.tagName === 'statusdate') { curDate = child.textContent.trim(); }
+            else if (child.tagName === 'chamber') { curChamber = child.textContent.trim(); }
+            else if (child.tagName === 'action') {
+              const t = child.textContent.trim();
+              if (!t || SKIP.some(p => t.toLowerCase().startsWith(p))) continue;
+              const parsed = _parseActDate(curDate);
+              if (parsed && (bestParsed === null || _cmpDate(parsed, bestParsed) >= 0)) {
+                bestAction = t; bestDate = curDate; bestChamber = curChamber; bestParsed = parsed;
+              }
+            }
+          }
+          if (bestDate && _cmpDate(_parseActDate(bestDate), _parseActDate(lastActionDate)) > 0) {
+            lastAction        = bestAction;
+            lastActionDate    = bestDate;
+            lastActionChamber = bestChamber.toLowerCase();
+          }
+        }
+      }
+
+      // Next scheduled action — may be in <nextaction> or <committeehearing>
+      const nextActionEl_  = xml.querySelector('nextaction > action');
+      const nextDateEl_    = xml.querySelector('nextaction > statusdate');
+      let nextActionDate   = nextDateEl_?.textContent?.trim()  || null;
+      let nextActionType   = nextActionEl_?.textContent?.trim()|| null;
+      if (!nextActionDate) {
+        const chEl = xml.querySelector('committeehearing');
+        if (chEl) {
+          const raw = chEl.textContent.trim();
+          const dm  = raw.match(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})\s+(\d{4})\b/);
+          if (dm) {
+            const mo = {Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12};
+            nextActionDate = `${mo[dm[1]]}/${parseInt(dm[2])}/${dm[3]}`;
+            nextActionType = raw.slice(0, dm.index).trim() || null;
+          }
+        }
+      }
+
+      // Amendments
+      const synopsisEl = xml.querySelector('synopsis');
+      let lastAmendmentName = null, isShellBill = false;
+      if (synopsisEl) {
+        let currentTitle = null;
+        for (const child of synopsisEl.children) {
+          if (child.tagName === 'synopsistitle') {
+            const t = child.textContent.trim();
+            if (t) currentTitle = t;
+          } else if (child.tagName === 'SynopsisText' && currentTitle) {
+            lastAmendmentName = currentTitle;
+            if (child.textContent.trim().startsWith('Replaces everything after the enacting clause'))
+              isShellBill = true;
+            currentTitle = null;
+          }
+        }
+      }
+      let lastAmendmentDate = null;
+      if (lastAmendmentName) {
+        const actionsEl = xml.querySelector('actions');
+        if (actionsEl) {
+          let cur = null;
+          for (const child of actionsEl.children) {
+            if (child.tagName === 'statusdate') cur = child.textContent.trim();
+            else if (child.tagName === 'action' && child.textContent.includes(lastAmendmentName.trim())) {
+              lastAmendmentDate = cur; break;
+            }
+          }
+        }
+      }
+
+      // Stage (mirrors Python map_stage logic)
+      const la = lastAction.toLowerCase();
+      let stage;
+      if      (la.includes('approved by governor') || la.includes('public act')) stage = 'Signed into Law';
+      else if (la.includes('to the governor'))                                   stage = 'Awaiting Governor Signature';
+      else if (la.includes('enrolled'))                                          stage = 'Enrolled';
+      else if (la.includes('passed senate'))                                     stage = 'Passed Senate';
+      else if (la.includes('passed house'))                                      stage = 'Passed House';
+      else if (/passed\s+\d{3}-\d{3}-\d{3}/.test(la)) {
+        // ILGA vote-count format: "Third Reading - Short Debate - Passed 081-022-000"
+        stage = lastActionChamber === 'house' ? 'Passed House' : 'Passed Senate';
+      } else if (la.includes('vetoed') || la.includes('failed') || la.includes('tabled') || la.includes('withdrawn')) {
+        stage = 'Failed';
+      } else if (['placed on calendar order of 2nd reading',
+                  'placed on calendar order of 3rd reading',
+                  'second reading', 'third reading',
+                  'do pass', 'approved for consideration',
+                  'recalled from committee'].some(s => la.includes(s))) {
+        stage = lastActionChamber === 'house' ? 'Passed House Committee' : 'Passed Senate Committee';
+      } else if (lastActionChamber === 'senate' && docType === 'HB') {
+        stage = 'In Senate Committee';
+      } else if (lastActionChamber === 'house' && docType === 'SB') {
+        stage = 'In House Committee';
+      } else {
+        // History fallback: walk <actions> siblings
+        const actionsElS = xml.querySelector('actions');
+        let histText = '';
+        if (actionsElS) {
+          for (const child of actionsElS.children) {
+            if (child.tagName === 'action') histText += ' ' + child.textContent.toLowerCase();
+          }
+        }
+        if (histText.includes('arrive in senate') || histText.includes('passed house')) {
+          stage = 'In Senate Committee';
+        } else if (histText.includes('arrive in house') || histText.includes('passed senate')) {
+          stage = 'In House Committee';
+        } else {
+          stage = docType === 'HB' ? 'In House Committee' : 'In Senate Committee';
+        }
+      }
+
+      const ilgaUrl = `https://www.ilga.gov/Legislation/BillStatus?DocNum=${m[2]}&GAID=18&DocTypeID=${docType}&SessionID=114`;
+      return {
+        billNumber: rawBillNumber.trim().toUpperCase(),
+        primarySponsor, stage, lastAction, lastActionDate,
+        nextActionDate, nextActionType, ilgaUrl,
+        lastAmendmentName, lastAmendmentDate, isShellBill
+      };
+    }
+
+
+    async function lookupBillILGA() {
+      const rawNum   = document.getElementById('add-bill-number-input').value.trim();
+      const statusEl = document.getElementById('lookup-status');
+      const previewEl= document.getElementById('ilga-preview');
+
+      if (!rawNum) {
+        statusEl.textContent = 'Please enter a bill number first.';
+        statusEl.className   = 'lookup-status error';
+        return;
+      }
+
+      statusEl.textContent = 'Looking up…';
+      statusEl.className   = 'lookup-status loading';
+      previewEl.style.display = 'none';
+      document.getElementById('preview-next-action-row').style.display = 'none';
+      addBillIlgaData = null;
+
+      try {
+        const data = await fetchBillFromILGA(rawNum);
+        addBillIlgaData = data;
+        document.getElementById('preview-sponsor').textContent    = data.primarySponsor || '(not found)';
+        document.getElementById('preview-stage').textContent      = data.stage;
+        document.getElementById('preview-last-action').textContent= data.lastAction
+          + (data.lastActionDate ? ` (${data.lastActionDate})` : '');
+        const nextActionRowEl = document.getElementById('preview-next-action-row');
+        if (data.nextActionDate) {
+          document.getElementById('preview-next-action').textContent =
+            data.nextActionDate + (data.nextActionType ? ` — ${data.nextActionType}` : '');
+          nextActionRowEl.style.display = 'flex';
+        } else {
+          nextActionRowEl.style.display = 'none';
+        }
+        previewEl.style.display  = 'block';
+        statusEl.textContent     = 'Found on ILGA ✓';
+        statusEl.className       = 'lookup-status success';
+        document.getElementById('add-bill-number-input').value = data.billNumber;
+      } catch (e) {
+        statusEl.textContent = e.message;
+        statusEl.className   = 'lookup-status error';
+      }
+    }
+
+    async function addBill(billData) {
+      const { content, sha } = await readGitHubFile('data/user-bills.json');
+      const userBills = content || [];
+      userBills.push(billData);
+      await writeGitHubFile('data/user-bills.json', userBills, sha, `Add bill: ${billData.billNumber}`);
+      legislationData.push(billData);
+      updateStats();
+      renderCards();
+    }
+
+    // ── Event listeners ───────────────────────────────────────────────────────
+    function setupEventListeners() {
+      statusFilter.addEventListener('change', (e) => { currentFilters.stage    = e.target.value; renderCards(); });
+      typeFilter.addEventListener('change',   (e) => { currentFilters.type     = e.target.value; renderCards(); });
+      categoryFilter.addEventListener('change',(e) => { currentFilters.category = e.target.value; renderCards(); });
+      changedSinceEl.addEventListener('change',(e) => { currentFilters.changedSince = e.target.value; renderCards(); });
+      hearingsEl.addEventListener('change',   (e) => { currentFilters.upcomingOnly  = e.target.checked; renderCards(); });
+
+      clearFiltersBtn.addEventListener('click', () => {
+        currentFilters = { stage: "All", type: "All", category: "All", changedSince: "", upcomingOnly: false, search: "" };
+        statusFilter.value    = "All";
+        typeFilter.value      = "All";
+        categoryFilter.value  = "All";
+        changedSinceEl.value  = "";
+        hearingsEl.checked    = false;
+        searchEl.value        = "";
+        populateStageFilter();
+        populateCategoryFilter();
+        renderCards();
+      });
+
+      searchEl.addEventListener('input', (e) => {
+        currentFilters.search = e.target.value.trim();
+        renderCards();
+      });
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
+          btn.classList.add('active');
+          btn.setAttribute('aria-pressed', 'true');
+          currentProgramArea = btn.dataset.area;
+          currentFilters.stage    = "All";
+          currentFilters.category = "All";
+          statusFilter.value   = "All";
+          categoryFilter.value = "All";
+          populateStageFilter();
+          populateCategoryFilter();
+          renderCards();
+        });
+      });
+
+      infoBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = infoBtn.getAttribute('aria-expanded') === 'true';
+        infoBtn.setAttribute('aria-expanded', String(!isOpen));
+        infoPopover.classList.toggle('visible', !isOpen);
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!infoPopover.contains(e.target) && e.target !== infoBtn) {
+          infoBtn.setAttribute('aria-expanded', 'false');
+          infoPopover.classList.remove('visible');
+        }
+      });
+
+      document.getElementById('modal-close').addEventListener('click', closeModal);
+      document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+      modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeModal();
+          infoBtn.setAttribute('aria-expanded', 'false');
+          infoPopover.classList.remove('visible');
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
