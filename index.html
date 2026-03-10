@@ -549,6 +549,13 @@
       opacity: 0.95;
     }
 
+    .modal-header-sponsor {
+      font-size: 13px;
+      font-weight: 400;
+      margin: 5px 0 0 0;
+      opacity: 0.8;
+    }
+
     .modal-body {
       padding: 32px;
     }
@@ -1081,6 +1088,7 @@
         <div class="modal-tags" id="modal-tags"></div>
         <h2 class="modal-bill-number" id="modal-bill-number"></h2>
         <h3 class="modal-bill-title" id="modal-bill-title"></h3>
+        <p class="modal-header-sponsor" id="modal-primary-sponsor"></p>
       </div>
       <div class="modal-body">
         <div class="modal-info-boxes">
@@ -1092,18 +1100,14 @@
             <div class="info-box-label">Next Action</div>
             <div class="info-box-value" id="modal-next-action"></div>
           </div>
-          <div class="info-box session" id="modal-amendment-box" style="display:none;">
-            <div class="info-box-label">Last Amendment</div>
-            <div class="info-box-value" id="modal-amendment"></div>
-          </div>
         </div>
         <div class="modal-last-action" id="modal-last-action-section" style="display:none;">
           <p><strong>Last Action:</strong> <span id="modal-last-action"></span></p>
           <p class="last-action-date" id="modal-last-action-date"></p>
         </div>
-        <div class="modal-sponsor-row">
-          <span class="modal-summary-label">Primary Sponsor</span>
-          <span id="modal-primary-sponsor"></span>
+        <div class="modal-last-action" id="modal-amendment-section" style="display:none;">
+          <p><strong>Last Amendment:</strong> <span id="modal-amendment-name"></span></p>
+          <p class="last-action-date" id="modal-amendment-date"></p>
         </div>
         <h4 class="modal-summary-label">Summary</h4>
         <div id="modal-amendment-disclaimer" class="modal-amendment-disclaimer" style="display:none;"></div>
@@ -1490,14 +1494,14 @@
         nextActionBox.style.display = 'none';
       }
 
-      // Amendment info box
-      const amendBox = document.getElementById('modal-amendment-box');
+      // Amendment section
+      const amendSection = document.getElementById('modal-amendment-section');
       if (bill.lastAmendmentName) {
-        const txt = (bill.lastAmendmentDate ? bill.lastAmendmentDate + ' — ' : '') + bill.lastAmendmentName;
-        document.getElementById('modal-amendment').textContent = txt;
-        amendBox.style.display = 'block';
+        document.getElementById('modal-amendment-name').textContent = bill.lastAmendmentName;
+        document.getElementById('modal-amendment-date').textContent = bill.lastAmendmentDate || '';
+        amendSection.style.display = 'block';
       } else {
-        amendBox.style.display = 'none';
+        amendSection.style.display = 'none';
       }
 
       // Last action
