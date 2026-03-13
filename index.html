@@ -1445,29 +1445,21 @@
 
     // ── Init ──────────────────────────────────────────────────────────────────
     async function init() {
-      // bills.json is public — load it independently of the GitHub token
       try {
-        const billsResp = await fetch('data/bills.json');
-        if (!billsResp.ok) throw new Error(`HTTP ${billsResp.status}`);
-        legislationData = await billsResp.json();
-      } catch (e) {
-        console.warn('Could not load bills.json, using fallback:', e);
-        legislationData = FALLBACK_DATA;
-      }
-
-      // GitHub API files require the token — fail gracefully without breaking bills
-      try {
-        const [userBillsResp, notesResp] = await Promise.all([
+        const [billsResp, userBillsResp, notesResp] = await Promise.all([
+          readGitHubFile('data/bills.json'),
           readGitHubFile('data/user-bills.json'),
           readGitHubFile('data/notes.json')
         ]);
+        legislationData = billsResp.content || FALLBACK_DATA;
         const userBills = userBillsResp.content || [];
         notesData = notesResp.content || {};
         if (userBills.length > 0) {
           legislationData = [...legislationData, ...userBills];
         }
       } catch (e) {
-        console.warn('GitHub API unavailable (check Worker URL/secret):', e);
+        console.warn('GitHub API unavailable, using fallback:', e);
+        legislationData = FALLBACK_DATA;
         notesData = {};
       }
 
