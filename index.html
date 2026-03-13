@@ -1866,8 +1866,6 @@
         } catch (e) {
           statusText.textContent = `Warning: ${bill.billNumber} failed — ${e.message}`;
         }
-
-        await new Promise(r => setTimeout(r, 300));
       }
 
       // Update in-memory data
