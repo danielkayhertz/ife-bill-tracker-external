@@ -1866,6 +1866,8 @@
         } catch (e) {
           statusText.textContent = `Warning: ${bill.billNumber} failed — ${e.message}`;
         }
+
+        await new Promise(r => setTimeout(r, 300));
       }
 
       // Update in-memory data
@@ -1899,28 +1901,38 @@
     }
 
     // ── ILGA fetch (browser-side, for refresh) ───────────────────────────────
+    const CORS_PROXIES = [
+      url => `https://proxy.cors.sh/${url}`,
+      url => `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
+    ];
+
+    async function fetchWithProxy(xmlUrl) {
+      // Try direct first
+      try {
+        const ctrl = new AbortController();
+        setTimeout(() => ctrl.abort(), 6000);
+        const resp = await fetch(xmlUrl, { signal: ctrl.signal });
+        if (resp.ok) return await resp.text();
+      } catch {}
+      // Try each proxy
+      for (const makeProxy of CORS_PROXIES) {
+        try {
+          const ctrl = new AbortController();
+          setTimeout(() => ctrl.abort(), 6000);
+          const resp = await fetch(makeProxy(xmlUrl), { signal: ctrl.signal });
+          if (resp.ok) return await resp.text();
+        } catch {}
+      }
+      throw new Error('Could not reach ILGA.gov. Check your connection or try again later.');
+    }
+
     async function fetchBillFromILGA(rawBillNumber) {
       const m = rawBillNumber.trim().toUpperCase().match(/^([A-Z]+)(\d+)$/);
       if (!m) throw new Error('Invalid format — use e.g. HB1234 or SB567.');
       const docType = m[1], docNum = m[2].padStart(4, '0');
       const xmlUrl  = `https://www.ilga.gov/ftp/legislation/104/BillStatus/XML/10400${docType}${docNum}.xml`;
 
-      let text;
-      // Try direct fetch; fall back to CORS proxy if blocked
-      try {
-        const resp = await fetch(xmlUrl);
-        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-        text = await resp.text();
-      } catch (directErr) {
-        try {
-          const proxy = `https://corsproxy.io/?url=${encodeURIComponent(xmlUrl)}`;
-          const resp  = await fetch(proxy);
-          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-          text = await resp.text();
-        } catch (proxyErr) {
-          throw new Error('Could not reach ILGA.gov. Fill in details manually — the daily update will populate ILGA fields automatically.');
-        }
-      }
+      const text = await fetchWithProxy(xmlUrl);
 
       const xml = new DOMParser().parseFromString(text, 'text/xml');
       if (xml.querySelector('parsererror')) throw new Error('Bill not found or XML parse error.');
