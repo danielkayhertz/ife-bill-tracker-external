@@ -1901,28 +1901,12 @@
     }
 
     // ── ILGA fetch (browser-side, for refresh) ───────────────────────────────
-    const CORS_PROXIES = [
-      url => `https://proxy.cors.sh/${url}`,
-      url => `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
-    ];
-
     async function fetchWithProxy(xmlUrl) {
-      // Try direct first
-      try {
-        const ctrl = new AbortController();
-        setTimeout(() => ctrl.abort(), 6000);
-        const resp = await fetch(xmlUrl, { signal: ctrl.signal });
-        if (resp.ok) return await resp.text();
-      } catch {}
-      // Try each proxy
-      for (const makeProxy of CORS_PROXIES) {
-        try {
-          const ctrl = new AbortController();
-          setTimeout(() => ctrl.abort(), 6000);
-          const resp = await fetch(makeProxy(xmlUrl), { signal: ctrl.signal });
-          if (resp.ok) return await resp.text();
-        } catch {}
-      }
+      const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(xmlUrl)}`;
+      const ctrl = new AbortController();
+      setTimeout(() => ctrl.abort(), 10000);
+      const resp = await fetch(proxyUrl, { signal: ctrl.signal });
+      if (resp.ok) return await resp.text();
       throw new Error('Could not reach ILGA.gov. Check your connection or try again later.');
     }
 
