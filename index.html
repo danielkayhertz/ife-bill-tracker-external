@@ -1902,10 +1902,10 @@
 
     // ── ILGA fetch (browser-side, for refresh) ───────────────────────────────
     async function fetchWithProxy(xmlUrl) {
-      const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(xmlUrl)}`;
+      const workerUrl = xmlUrl.replace('https://www.ilga.gov', `${WORKER_URL}/ilga`);
       const ctrl = new AbortController();
       setTimeout(() => ctrl.abort(), 10000);
-      const resp = await fetch(proxyUrl, { signal: ctrl.signal });
+      const resp = await fetch(workerUrl, { signal: ctrl.signal });
       if (resp.ok) return await resp.text();
       throw new Error('Could not reach ILGA.gov. Check your connection or try again later.');
     }
