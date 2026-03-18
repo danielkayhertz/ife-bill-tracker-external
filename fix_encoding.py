@@ -5,23 +5,21 @@ files = [
     pathlib.Path(r"C:\Users\bpi\Documents\Claude Code\ife-bill-tracker-external\index.html"),
 ]
 
+# Replace smart quotes / en-dashes with plain ASCII equivalents
+# so GitHub Pages never garbles them regardless of encoding headers.
 replacements = [
-    ("person\ufffds prison",                  "person\u2019s prison"),
-    ("Illinois\ufffd felony",                 "Illinois\u2019 felony"),
-    ("8\ufffd40",                             "8\u201340"),
-    ("16\ufffd80",                            "16\u201380"),
-    ("person\ufffds actual",                  "person\u2019s actual"),
-    ("Illinois\ufffd criminal code.\ufffd",   "Illinois\u2019 criminal code."),
-    ("proportionately.\ufffd",                "proportionately."),
-    ("aren\ufffdt",                           "aren\u2019t"),
-    ("law\ufffds",                            "law\u2019s"),
+    ("\u2019", "'"),   # right single quote -> ASCII apostrophe
+    ("\u2013", "-"),   # en-dash -> ASCII hyphen
 ]
 
 for path in files:
     text = path.read_text(encoding="utf-8")
+    count = 0
     for old, new in replacements:
+        n = text.count(old)
+        count += n
         text = text.replace(old, new)
     path.write_text(text, encoding="utf-8")
-    print(f"Patched: {path.name}")
+    print(f"Patched: {path.name} ({count} replacements)")
 
 print("Done.")
