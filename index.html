@@ -2204,5 +2204,13 @@
 
     document.addEventListener('DOMContentLoaded', init);
   </script>
+<script>
+/* Notify parent frame of content height for seamless iframe embedding */
+if (window.parent !== window) {
+  new ResizeObserver(function() {
+    window.parent.postMessage({type:'bill-tracker-resize', height: document.documentElement.scrollHeight}, '*');
+  }).observe(document.documentElement);
+}
+</script>
 </body>
 </html>
