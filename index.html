@@ -116,6 +116,11 @@
       text-decoration: underline;
     }
 
+    .highlights-bill-title {
+      font-size: 12px;
+      color: #666;
+    }
+
     .highlights-stage-badge {
       padding: 2px 8px;
       border-radius: 10px;
@@ -1642,6 +1647,7 @@
           const sc = stageConfig[bill.stage] || { bg: '#f5f5f5', text: '#666', border: '#ddd' };
           return '<div class="highlights-sponsored-row">'
             + '<a class="highlights-bill-link" href="' + bill.url + '" target="_blank" rel="noopener noreferrer">' + bill.billNumber + '</a>'
+            + (bill.title ? '<span class="highlights-bill-title">' + bill.title + '</span>' : '')
             + '<span class="highlights-stage-badge" style="background:' + sc.bg + ';color:' + sc.text + ';border:1px solid ' + sc.border + ';">' + bill.stage + '</span>'
             + '</div>';
         }).join('');
@@ -1667,6 +1673,7 @@
           const dateStr = (d.getMonth() + 1) + '/' + d.getDate();
           return '<div class="highlights-activity-row">'
             + '<a class="highlights-bill-link" href="' + bill.url + '" target="_blank" rel="noopener noreferrer">' + bill.billNumber + '</a>'
+            + (bill.title ? ' <span class="highlights-bill-title">' + bill.title + '</span>' : '')
             + ' <span class="arrow">&rarr; ' + bill.stage + '</span>'
             + ' <span class="date">' + dateStr + '</span>'
             + '</div>';
@@ -1684,6 +1691,7 @@
         const dateStr = (d.getMonth() + 1) + '/' + d.getDate();
         return '<div class="highlights-popup-row">'
           + '<a class="highlights-bill-link" href="' + bill.url + '" target="_blank" rel="noopener noreferrer" style="min-width:54px;">' + bill.billNumber + '</a>'
+          + (bill.title ? ' <span class="highlights-bill-title">' + bill.title + '</span>' : '')
           + ' <span class="arrow">&rarr; ' + bill.stage + '</span>'
           + ' <span class="date">' + dateStr + '</span>'
           + '</div>';
