@@ -1673,7 +1673,7 @@
         }).join('');
 
         if (extra > 0) {
-          activityList.innerHTML += '<button class="highlights-show-more" onclick="openHighlightsPopup()">Show ' + extra + ' more change' + (extra === 1 ? '' : 's') + ' &#8595;</button>';
+          activityList.innerHTML += '<button class="highlights-show-more" onclick="openHighlightsPopup()">Show ' + extra + ' more change' + (extra === 1 ? '' : 's') + ' &darr;</button>';
         }
       }
 
@@ -2420,6 +2420,7 @@
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           closeModal();
+          closeHighlightsPopup();
           infoBtn.setAttribute('aria-expanded', 'false');
           infoPopover.classList.remove('visible');
         }
