@@ -63,26 +63,35 @@
 
     /* Highlights Bar */
     .highlights-bar {
-      background: #F5F7FA;
-      border-top: 3px solid #005198;
+      background: #eceef1;
+      padding: 20px 24px;
       border-bottom: 1px solid #e0e0e0;
-      padding: 16px 24px 20px;
+    }
+
+    .highlights-card {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #fff;
+      border-top: 5px solid #003F70;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      padding: 20px 24px;
     }
 
     .highlights-heading {
       font-family: "Gotham", "Calibri", "Segoe UI", sans-serif;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
       color: #003F70;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin: 0 auto 14px;
-      max-width: 1200px;
+      letter-spacing: 2px;
+      display: inline-block;
+      padding-bottom: 6px;
+      border-bottom: 3px solid #F37021;
+      margin-bottom: 14px;
     }
 
     .highlights-container {
-      max-width: 1200px;
-      margin: 0 auto;
       display: flex;
       gap: 28px;
     }
@@ -1206,15 +1215,17 @@
 
   <!-- Highlights Bar -->
   <div class="highlights-bar">
-    <div class="highlights-heading">Highlights</div>
-    <div class="highlights-container">
-      <div class="highlights-panel" id="highlights-sponsored">
-        <div class="highlights-panel-title">IFE-Sponsored Bills</div>
-        <div class="highlights-sponsored-list" id="highlights-sponsored-list"></div>
-      </div>
-      <div class="highlights-panel" id="highlights-activity">
-        <div class="highlights-panel-title">Recent Endorsed Bill Activity</div>
-        <div class="highlights-activity-list" id="highlights-activity-list"></div>
+    <div class="highlights-card">
+      <div class="highlights-heading">Highlights</div>
+      <div class="highlights-container">
+        <div class="highlights-panel" id="highlights-sponsored">
+          <div class="highlights-panel-title">IFE-Sponsored Bills</div>
+          <div class="highlights-sponsored-list" id="highlights-sponsored-list"></div>
+        </div>
+        <div class="highlights-panel" id="highlights-activity">
+          <div class="highlights-panel-title">Recent Endorsed Bill Activity</div>
+          <div class="highlights-activity-list" id="highlights-activity-list"></div>
+        </div>
       </div>
     </div>
   </div>

@@ -86,7 +86,15 @@ def get_latest_action_from_history(root):
     if actions_el is None:
         return "", "", ""
 
-    SKIP_PREFIXES = ("added as ", "removed as ", "alternate")
+    SKIP_PREFIXES = (
+        "added as ", "removed as ", "alternate",
+        "added co-sponsor", "removed co-sponsor",
+        "added chief co-sponsor", "removed chief co-sponsor",
+        "added alternate", "removed alternate",
+        "rule 19(a)",
+        "fiscal note", "home rule note", "state mandates note",
+        "pension note", "balanced budget note", "judicial note",
+    )
 
     current_date    = ""
     current_chamber = ""
@@ -130,14 +138,18 @@ def get_primary_sponsor(root):
 
 
 def get_action_texts(root):
-    """Collect all <action> texts from the flat children of <actions>."""
-    texts = []
+    """Collect all (action_text, chamber) tuples from the flat children of <actions>."""
+    entries = []
     actions_el = root.find("actions")
     if actions_el is not None:
+        current_chamber = ""
         for child in actions_el:
-            if child.tag.lower() == "action" and child.text:
-                texts.append(child.text.strip().lower())
-    return texts
+            tag = child.tag.lower()
+            if tag == "chamber":
+                current_chamber = (child.text or "").strip().lower()
+            elif tag == "action" and child.text:
+                entries.append((child.text.strip().lower(), current_chamber))
+    return entries
 
 
 MONTH_MAP = {'Jan':'1','Feb':'2','Mar':'3','Apr':'4','May':'5','Jun':'6',
@@ -203,10 +215,10 @@ def _find_amendment_date(root, amendment_name):
     return None
 
 
-def map_stage(last_action, action_history, doc_type, last_action_chamber=""):
-    """Map last action + action history to a stage label."""
-    la      = last_action.lower()
-    chamber = last_action_chamber.lower()
+def classify_action(action_text, chamber="", doc_type=""):
+    """Return stage string if action_text is stage-relevant, else None."""
+    la = action_text.lower()
+    chamber = chamber.lower()
 
     if "approved by governor" in la or "public act" in la:
         return "Signed into Law"
@@ -230,6 +242,8 @@ def map_stage(last_action, action_history, doc_type, last_action_chamber=""):
     FLOOR_SIGNALS = (
         "placed on calendar order of 2nd reading",
         "placed on calendar order of 3rd reading",
+        "placed on calendar 2nd reading",
+        "placed on calendar 3rd reading",
         "second reading",
         "third reading",
         "do pass",
@@ -247,13 +261,32 @@ def map_stage(last_action, action_history, doc_type, last_action_chamber=""):
     if chamber == "house" and doc_type == "SB":
         return "In House Committee"
 
-    history = " ".join(action_history)
-    if "passed house" in history or "arrive in senate" in history:
+    if "arrive in senate" in la:
         return "In Senate Committee"
-    elif "passed senate" in history or "arrive in house" in history:
+    if "arrive in house" in la:
         return "In House Committee"
-    else:
-        return "In House Committee" if doc_type == "HB" else "In Senate Committee"
+
+    return None
+
+
+def map_stage(last_action, action_history, doc_type, last_action_chamber=""):
+    """Map last action + action history to a stage label.
+
+    action_history is a list of (text, chamber) tuples from get_action_texts().
+    """
+    # Try lastAction first
+    stage = classify_action(last_action, last_action_chamber, doc_type)
+    if stage is not None:
+        return stage
+
+    # Walk action history in reverse to find most recent stage-relevant action
+    for action_text, action_chamber in reversed(action_history):
+        stage = classify_action(action_text, action_chamber, doc_type)
+        if stage is not None:
+            return stage
+
+    # Ultimate fallback
+    return "In House Committee" if doc_type == "HB" else "In Senate Committee"
 
 
 def _ilga_fields_from_xml(xml_bytes, bill_number, prev_stage, prev_stage_changed_at, fetched_at):
@@ -270,9 +303,11 @@ def _ilga_fields_from_xml(xml_bytes, bill_number, prev_stage, prev_stage_changed
     hist_action, hist_date, hist_chamber = get_latest_action_from_history(root)
     if hist_date and last_action_date:
         if _parse_action_date(hist_date) > _parse_action_date(last_action_date):
-            last_action         = hist_action
-            last_action_date    = hist_date
-            last_action_chamber = hist_chamber
+            # Only substitute if the history action maps to a real stage
+            if classify_action(hist_action, hist_chamber, doc_type) is not None:
+                last_action         = hist_action
+                last_action_date    = hist_date
+                last_action_chamber = hist_chamber
 
     action_history  = get_action_texts(root)
     primary_sponsor = get_primary_sponsor(root)
