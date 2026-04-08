@@ -217,6 +217,8 @@
       width: 90%;
       max-height: 70vh;
       overflow-y: auto;
+      position: relative;
+      z-index: 1;
     }
 
     .highlights-popup-header {
@@ -627,7 +629,7 @@
       margin-left: 4px;
     }
 
-    .modal-last-action {
+    .bill-modal-last-action {
       background: #f8f9fa;
       border: 1px solid #e8e8e8;
       border-radius: 8px;
@@ -638,9 +640,9 @@
       line-height: 1.5;
     }
 
-    .modal-last-action p { margin: 0; }
+    .bill-modal-last-action p { margin: 0; }
 
-    .modal-last-action .last-action-date {
+    .bill-modal-last-action .last-action-date {
       margin-top: 4px;
       font-size: 12px;
       color: #888;
@@ -700,7 +702,7 @@
     }
 
     /* Modal */
-    .modal-overlay {
+    .bill-modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
@@ -715,11 +717,11 @@
       backdrop-filter: blur(4px);
     }
 
-    .modal-overlay.visible {
+    .bill-modal-overlay.visible {
       display: flex;
     }
 
-    .modal {
+    .bill-modal {
       background-color: white;
       border-radius: 16px;
       max-width: 640px;
@@ -727,20 +729,22 @@
       max-height: 90vh;
       overflow: auto;
       box-shadow: 0 24px 48px rgba(0,0,0,0.2);
+      position: relative;
+      z-index: 1;
     }
 
-    .modal-header {
+    .bill-modal-header {
       color: white;
       padding: 32px;
       position: relative;
     }
 
-    .modal-header.endorsed  { background: linear-gradient(135deg, #005a8c 0%, #007bb8 100%); }
-    .modal-header.sponsored { background: linear-gradient(135deg, #e98300 0%, #f5a623 100%); }
-    .modal-header.opposed   { background: linear-gradient(135deg, #c62828 0%, #e53935 100%); }
-    .modal-header.watching  { background: linear-gradient(135deg, #5c6bc0 0%, #7986cb 100%); }
+    .bill-modal-header.endorsed  { background: linear-gradient(135deg, #005a8c 0%, #007bb8 100%); }
+    .bill-modal-header.sponsored { background: linear-gradient(135deg, #e98300 0%, #f5a623 100%); }
+    .bill-modal-header.opposed   { background: linear-gradient(135deg, #c62828 0%, #e53935 100%); }
+    .bill-modal-header.watching  { background: linear-gradient(135deg, #5c6bc0 0%, #7986cb 100%); }
 
-    .modal-close-btn {
+    .bill-modal-close-btn {
       position: absolute;
       top: 16px;
       right: 16px;
@@ -757,14 +761,14 @@
       justify-content: center;
     }
 
-    .modal-tags {
+    .bill-modal-tags {
       display: flex;
       gap: 8px;
       margin-bottom: 12px;
       flex-wrap: wrap;
     }
 
-    .modal-tag {
+    .bill-modal-tag {
       padding: 4px 10px;
       border-radius: 4px;
       font-size: 11px;
@@ -774,31 +778,31 @@
       letter-spacing: 0.5px;
     }
 
-    .modal-bill-number {
+    .bill-modal-bill-number {
       font-size: 32px;
       font-weight: 700;
       margin: 0 0 8px 0;
     }
 
-    .modal-bill-title {
+    .bill-modal-bill-title {
       font-size: 18px;
       font-weight: 500;
       margin: 0;
       opacity: 0.95;
     }
 
-    .modal-header-sponsor {
+    .bill-modal-header-sponsor {
       font-size: 13px;
       font-weight: 400;
       margin: 5px 0 0 0;
       opacity: 0.8;
     }
 
-    .modal-body {
+    .bill-modal-body {
       padding: 32px;
     }
 
-    .modal-info-boxes {
+    .bill-modal-info-boxes {
       display: flex;
       gap: 16px;
       margin-bottom: 24px;
@@ -836,7 +840,7 @@
 
     .info-box.next-action .info-box-value { color: #0d47a1; }
 
-    .modal-summary-label {
+    .bill-modal-summary-label {
       font-size: 13px;
       text-transform: uppercase;
       letter-spacing: 1px;
@@ -844,7 +848,7 @@
       margin: 0 0 10px 0;
     }
 
-    .modal-summary {
+    .bill-modal-summary {
       font-size: 15px;
       line-height: 1.8;
       color: #444;
@@ -852,7 +856,7 @@
     }
 
     /* IFE Notes section */
-    .modal-notes-section {
+    .bill-modal-notes-section {
       margin-top: 24px;
       padding-top: 20px;
       border-top: 1px solid #f0f0f0;
@@ -887,7 +891,7 @@
       color: #888;
     }
 
-    .modal-actions {
+    .bill-modal-actions {
       margin-top: 28px;
       padding-top: 20px;
       border-top: 1px solid #eee;
@@ -1178,7 +1182,7 @@
 
     .amendment-disclaimer a { color: #005a8c; font-weight: 600; }
 
-    .modal-amendment-disclaimer {
+    .bill-modal-amendment-disclaimer {
       font-size: 13px;
       color: #7a5200;
       background: #fff8e1;
@@ -1189,7 +1193,7 @@
       line-height: 1.55;
     }
 
-    .modal-amendment-disclaimer a { color: #005a8c; font-weight: 600; }
+    .bill-modal-amendment-disclaimer a { color: #005a8c; font-weight: 600; }
 
     /* Responsive */
     @media (max-width: 768px) {
@@ -1322,51 +1326,51 @@
   </main>
 
   <!-- Bill Detail Modal -->
-  <div class="modal-overlay" id="modal-overlay">
-    <div class="modal">
-      <div class="modal-header" id="modal-header">
-        <button class="modal-close-btn" id="modal-close">&#215;</button>
-        <div class="modal-tags" id="modal-tags"></div>
-        <h2 class="modal-bill-number" id="modal-bill-number"></h2>
-        <h3 class="modal-bill-title" id="modal-bill-title"></h3>
-        <p class="modal-header-sponsor" id="modal-primary-sponsor"></p>
+  <div class="bill-modal-overlay" id="bill-modal-overlay">
+    <div class="bill-modal">
+      <div class="bill-modal-header" id="bill-modal-header">
+        <button class="bill-modal-close-btn" id="bill-modal-close">&#215;</button>
+        <div class="bill-modal-tags" id="bill-modal-tags"></div>
+        <h2 class="bill-modal-bill-number" id="bill-modal-bill-number"></h2>
+        <h3 class="bill-modal-bill-title" id="bill-modal-bill-title"></h3>
+        <p class="bill-modal-header-sponsor" id="bill-modal-primary-sponsor"></p>
       </div>
-      <div class="modal-body">
-        <div class="modal-info-boxes">
-          <div class="info-box" id="modal-stage-box">
+      <div class="bill-modal-body">
+        <div class="bill-modal-info-boxes">
+          <div class="info-box" id="bill-modal-stage-box">
             <div class="info-box-label">Legislative Stage</div>
-            <div class="info-box-value" id="modal-stage"></div>
+            <div class="info-box-value" id="bill-modal-stage"></div>
           </div>
-          <div class="info-box next-action" id="modal-next-action-box" style="display:none;">
+          <div class="info-box next-action" id="bill-modal-next-action-box" style="display:none;">
             <div class="info-box-label">Next Action</div>
-            <div class="info-box-value" id="modal-next-action"></div>
+            <div class="info-box-value" id="bill-modal-next-action"></div>
           </div>
         </div>
-        <div class="modal-last-action" id="modal-last-action-section" style="display:none;">
-          <p><strong>Last Action:</strong> <span id="modal-last-action"></span></p>
-          <p class="last-action-date" id="modal-last-action-date"></p>
+        <div class="bill-modal-last-action" id="bill-modal-last-action-section" style="display:none;">
+          <p><strong>Last Action:</strong> <span id="bill-modal-last-action"></span></p>
+          <p class="last-action-date" id="bill-modal-last-action-date"></p>
         </div>
-        <div class="modal-last-action" id="modal-amendment-section" style="display:none;">
-          <p><strong>Last Amendment:</strong> <span id="modal-amendment-name"></span></p>
-          <p class="last-action-date" id="modal-amendment-date"></p>
+        <div class="bill-modal-last-action" id="bill-modal-amendment-section" style="display:none;">
+          <p><strong>Last Amendment:</strong> <span id="bill-modal-amendment-name"></span></p>
+          <p class="last-action-date" id="bill-modal-amendment-date"></p>
         </div>
-        <h4 class="modal-summary-label">Summary</h4>
-        <div id="modal-amendment-disclaimer" class="modal-amendment-disclaimer" style="display:none;"></div>
-        <p class="modal-summary" id="modal-summary"></p>
+        <h4 class="bill-modal-summary-label">Summary</h4>
+        <div id="bill-modal-amendment-disclaimer" class="bill-modal-amendment-disclaimer" style="display:none;"></div>
+        <p class="bill-modal-summary" id="bill-modal-summary"></p>
 
-        <div class="modal-actions">
-          <a class="btn-primary" id="modal-link" href="#" target="_blank" rel="noopener noreferrer">View on ILGA.gov &#8594;</a>
-          <button class="btn-secondary" id="modal-refresh-btn" style="display:none;" onclick="refreshBillILGA()">Refresh from ILGA</button>
-          <button class="btn-danger" id="modal-delete-btn" style="display:none;" onclick="confirmDeleteBill()">Delete Bill</button>
-          <button class="btn-secondary" id="modal-close-btn">Close</button>
+        <div class="bill-modal-actions">
+          <a class="btn-primary" id="bill-modal-link" href="#" target="_blank" rel="noopener noreferrer">View on ILGA.gov &#8594;</a>
+          <button class="btn-secondary" id="bill-modal-refresh-btn" style="display:none;" onclick="refreshBillILGA()">Refresh from ILGA</button>
+          <button class="btn-danger" id="bill-modal-delete-btn" style="display:none;" onclick="confirmDeleteBill()">Delete Bill</button>
+          <button class="btn-secondary" id="bill-modal-close-btn">Close</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Refresh All Progress Overlay -->
-  <div class="modal-overlay" id="refresh-overlay">
-    <div class="modal" style="max-width:420px;text-align:center;padding:40px 32px;">
+  <div class="bill-modal-overlay" id="refresh-overlay">
+    <div class="bill-modal" style="max-width:420px;text-align:center;padding:40px 32px;">
       <h3 id="refresh-overlay-title" style="margin:0 0 16px;">Refreshing from ILGA.gov…</h3>
       <p id="refresh-progress-text" style="color:#555;margin-bottom:12px;">Starting…</p>
       <div style="background:#e0e0e0;border-radius:6px;height:10px;margin-bottom:16px;">
@@ -1569,7 +1573,7 @@
     // ── DOM refs ──────────────────────────────────────────────────────────────
     const grid            = document.getElementById('legislation-grid');
     const emptyState      = document.getElementById('empty-state');
-    const modalOverlay    = document.getElementById('modal-overlay');
+    const modalOverlay    = document.getElementById('bill-modal-overlay');
     const statusFilter          = document.getElementById('status-filter');
     const typeFilter            = document.getElementById('type-filter');
     const categoryFilter        = document.getElementById('category-filter');
@@ -1902,57 +1906,57 @@
       const stage      = bill.stage || bill.status;
       const stageStyle = stageConfig[stage] || stageConfig[bill.status] || { bg: '#f5f5f5', text: '#666', border: '#ddd' };
 
-      document.getElementById('modal-header').className = `modal-header ${typeClass}`;
-      document.getElementById('modal-tags').innerHTML = `
-        <span class="modal-tag">${bill.type}</span>
-        ${(Array.isArray(bill.category) ? bill.category : []).map(c => `<span class="modal-tag">${escapeHtml(c)}</span>`).join('')}
-        ${bill.isShellBill ? '<span class="modal-tag" style="background:rgba(230,81,0,0.25);">Shell Bill</span>' : ''}
+      document.getElementById('bill-modal-header').className = `bill-modal-header ${typeClass}`;
+      document.getElementById('bill-modal-tags').innerHTML = `
+        <span class="bill-modal-tag">${bill.type}</span>
+        ${(Array.isArray(bill.category) ? bill.category : []).map(c => `<span class="bill-modal-tag">${escapeHtml(c)}</span>`).join('')}
+        ${bill.isShellBill ? '<span class="bill-modal-tag" style="background:rgba(230,81,0,0.25);">Shell Bill</span>' : ''}
       `;
-      document.getElementById('modal-bill-number').textContent = bill.billNumber;
-      document.getElementById('modal-bill-title').textContent  = bill.title;
+      document.getElementById('bill-modal-bill-number').textContent = bill.billNumber;
+      document.getElementById('bill-modal-bill-title').textContent  = bill.title;
 
       // Stage box
-      const stageBox = document.getElementById('modal-stage-box');
+      const stageBox = document.getElementById('bill-modal-stage-box');
       stageBox.style.backgroundColor = stageStyle.bg;
       stageBox.style.border = `1px solid ${stageStyle.border}`;
-      document.getElementById('modal-stage').textContent  = stage;
-      document.getElementById('modal-stage').style.color  = stageStyle.text;
+      document.getElementById('bill-modal-stage').textContent  = stage;
+      document.getElementById('bill-modal-stage').style.color  = stageStyle.text;
 
       // Next action box
-      const nextActionBox = document.getElementById('modal-next-action-box');
+      const nextActionBox = document.getElementById('bill-modal-next-action-box');
       const nextIso = toIsoDate(bill.nextActionDate);
       if (nextIso && nextIso >= new Date().toISOString().split('T')[0]) {
         nextActionBox.style.display = 'block';
         const naText = bill.nextActionDate + (bill.nextActionType ? ` — ${bill.nextActionType}` : '');
-        document.getElementById('modal-next-action').textContent = naText;
+        document.getElementById('bill-modal-next-action').textContent = naText;
       } else {
         nextActionBox.style.display = 'none';
       }
 
       // Amendment section
-      const amendSection = document.getElementById('modal-amendment-section');
+      const amendSection = document.getElementById('bill-modal-amendment-section');
       if (bill.lastAmendmentName) {
-        document.getElementById('modal-amendment-name').textContent = bill.lastAmendmentName;
-        document.getElementById('modal-amendment-date').textContent = bill.lastAmendmentDate || '';
+        document.getElementById('bill-modal-amendment-name').textContent = bill.lastAmendmentName;
+        document.getElementById('bill-modal-amendment-date').textContent = bill.lastAmendmentDate || '';
         amendSection.style.display = 'block';
       } else {
         amendSection.style.display = 'none';
       }
 
       // Last action
-      const lastActionSection = document.getElementById('modal-last-action-section');
+      const lastActionSection = document.getElementById('bill-modal-last-action-section');
       if (bill.lastAction) {
         lastActionSection.style.display = 'block';
-        document.getElementById('modal-last-action').textContent     = bill.lastAction;
-        document.getElementById('modal-last-action-date').textContent = bill.lastActionDate || '';
+        document.getElementById('bill-modal-last-action').textContent     = bill.lastAction;
+        document.getElementById('bill-modal-last-action-date').textContent = bill.lastActionDate || '';
       } else {
         lastActionSection.style.display = 'none';
       }
 
-      document.getElementById('modal-summary').textContent = bill.description || '';
-      document.getElementById('modal-primary-sponsor').textContent = bill.primarySponsor || 'Not listed';
+      document.getElementById('bill-modal-summary').textContent = bill.description || '';
+      document.getElementById('bill-modal-primary-sponsor').textContent = bill.primarySponsor || 'Not listed';
 
-      const disclaimerEl = document.getElementById('modal-amendment-disclaimer');
+      const disclaimerEl = document.getElementById('bill-modal-amendment-disclaimer');
       if (bill.lastAmendmentName != null) {
         disclaimerEl.innerHTML = `⚠️ This bill has been amended. The description may not reflect the latest content. <a href="${bill.url}" target="_blank" rel="noopener noreferrer">View latest</a>`;
         disclaimerEl.style.display = 'block';
@@ -1960,11 +1964,11 @@
         disclaimerEl.style.display = 'none';
       }
 
-      document.getElementById('modal-link').href           = bill.url;
+      document.getElementById('bill-modal-link').href           = bill.url;
 
-      document.getElementById('modal-refresh-btn').style.display =
+      document.getElementById('bill-modal-refresh-btn').style.display =
         bill.userAdded ? 'inline-block' : 'none';
-      document.getElementById('modal-delete-btn').style.display =
+      document.getElementById('bill-modal-delete-btn').style.display =
         bill.userAdded ? 'inline-block' : 'none';
 
       modalOverlay.classList.add('visible');
@@ -1984,7 +1988,7 @@
     }
 
     async function deleteBill(bill) {
-      const deleteBtn = document.getElementById('modal-delete-btn');
+      const deleteBtn = document.getElementById('bill-modal-delete-btn');
       deleteBtn.disabled = true;
       deleteBtn.textContent = 'Deleting…';
       try {
@@ -2004,7 +2008,7 @@
 
     async function refreshBillILGA() {
       if (!currentBill) return;
-      const refreshBtn = document.getElementById('modal-refresh-btn');
+      const refreshBtn = document.getElementById('bill-modal-refresh-btn');
       refreshBtn.disabled = true;
       refreshBtn.textContent = 'Refreshing…';
       try {
@@ -2441,8 +2445,8 @@
         }
       });
 
-      document.getElementById('modal-close').addEventListener('click', closeModal);
-      document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+      document.getElementById('bill-modal-close').addEventListener('click', closeModal);
+      document.getElementById('bill-modal-close-btn').addEventListener('click', closeModal);
       modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
