@@ -448,22 +448,25 @@
     }
 
     .refresh-all-btn {
-      margin-top: 12px;
-      padding: 7px 16px;
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.4);
+      padding: 5px 12px;
+      background: #fff;
+      color: #005a8c;
+      border: 1px solid #005a8c;
       border-radius: 6px;
       cursor: pointer;
-      font-size: 13px;
+      font-size: 12px;
       font-family: inherit;
     }
-    .refresh-all-btn:hover { background: rgba(255,255,255,0.25); }
+    .refresh-all-btn:hover { background: #e8f4fb; }
     .header-last-refreshed {
-      display: block;
-      margin-top: 6px;
-      color: rgba(255,255,255,0.55);
+      color: #777;
       font-size: 12px;
+    }
+    .highlights-refresh-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
     /* Main Grid */
@@ -1204,19 +1207,14 @@
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="header-content">
-      <h1>Impact for Equity State Bill Tracker</h1>
-      <button class="refresh-all-btn" onclick="refreshAllFromILGA()">↻ Refresh from ILGA</button>
-      <small id="header-last-refreshed" class="header-last-refreshed"></small>
-    </div>
-  </header>
-
   <!-- Highlights Bar -->
   <div class="highlights-bar">
     <div class="highlights-card">
       <div class="highlights-heading">Highlights</div>
+      <div class="highlights-refresh-row">
+        <button class="refresh-all-btn" onclick="refreshAllFromILGA()">↻ Refresh from ILGA</button>
+        <small id="header-last-refreshed" class="header-last-refreshed"></small>
+      </div>
       <div class="highlights-container">
         <div class="highlights-panel" id="highlights-sponsored">
           <div class="highlights-panel-title">IFE-Sponsored Bills</div>
@@ -1693,13 +1691,10 @@
         const extra = recentEndorsed.length - 3;
 
         activityList.innerHTML = visible.map(bill => {
-          const d = new Date(bill.stageChangedAt);
-          const dateStr = (d.getMonth() + 1) + '/' + d.getDate();
           return '<div class="highlights-activity-row">'
             + '<a class="highlights-bill-link" href="' + bill.url + '" target="_blank" rel="noopener noreferrer">' + bill.billNumber + '</a>'
             + (bill.title ? ' <span class="highlights-bill-title">' + bill.title + '</span>' : '')
             + ' <span class="arrow">&rarr; ' + bill.stage + '</span>'
-            + ' <span class="date">' + dateStr + '</span>'
             + '</div>';
         }).join('');
 
@@ -1711,13 +1706,10 @@
       // -- Pre-render popup list --
       const popupList = document.getElementById('highlights-popup-list');
       popupList.innerHTML = recentEndorsed.map(bill => {
-        const d = new Date(bill.stageChangedAt);
-        const dateStr = (d.getMonth() + 1) + '/' + d.getDate();
         return '<div class="highlights-popup-row">'
           + '<a class="highlights-bill-link" href="' + bill.url + '" target="_blank" rel="noopener noreferrer" style="min-width:54px;">' + bill.billNumber + '</a>'
           + (bill.title ? ' <span class="highlights-bill-title">' + bill.title + '</span>' : '')
           + ' <span class="arrow">&rarr; ' + bill.stage + '</span>'
-          + ' <span class="date">' + dateStr + '</span>'
           + '</div>';
       }).join('');
     }
