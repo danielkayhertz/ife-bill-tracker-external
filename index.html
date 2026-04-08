@@ -465,8 +465,9 @@
     .highlights-refresh-row {
       display: flex;
       align-items: center;
+      justify-content: flex-end;
       gap: 10px;
-      margin-bottom: 10px;
+      padding: 8px 24px;
     }
 
     /* Main Grid */
@@ -1211,10 +1212,6 @@
   <div class="highlights-bar">
     <div class="highlights-card">
       <div class="highlights-heading">Highlights</div>
-      <div class="highlights-refresh-row">
-        <button class="refresh-all-btn" onclick="refreshAllFromILGA()">↻ Refresh from ILGA</button>
-        <small id="header-last-refreshed" class="header-last-refreshed"></small>
-      </div>
       <div class="highlights-container">
         <div class="highlights-panel" id="highlights-sponsored">
           <div class="highlights-panel-title">IFE-Sponsored Bills</div>
@@ -1237,6 +1234,12 @@
       </div>
       <div class="highlights-popup-list" id="highlights-popup-list"></div>
     </div>
+  </div>
+
+  <!-- Refresh Controls -->
+  <div class="highlights-refresh-row">
+    <button class="refresh-all-btn" onclick="refreshAllFromILGA()">↻ Refresh from ILGA</button>
+    <small id="header-last-refreshed" class="header-last-refreshed"></small>
   </div>
 
   <!-- Program Area Tabs -->
