@@ -1890,7 +1890,7 @@
           <div class="card-tags">
             <span class="tag ${typeClass}">${bill.type}</span>
             ${(Array.isArray(bill.category) ? bill.category : []).map(c => `<span class="tag category">${escapeHtml(c)}</span>`).join('')}
-            ${bill.isShellBill ? '<span class="tag shell-bill">Shell Bill</span>' : ''}
+            ${/* bill.isShellBill ? '<span class="tag shell-bill">Shell Bill</span>' : '' */''}
           </div>
           <div class="bill-number">
             ${bill.billNumber}
