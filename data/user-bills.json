@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "id": 146,
+    "billNumber": "HB624",
+    "title": "Housing - Tech",
+    "description": "Home for Good Act (via House Floor Amendment No. 2, replacing the original technical Housing-Tech bill). Creates a statewide Home for Good Program, coordinated by IHDA and ICJIA, to provide permanent and transitional affordable housing plus reentry/case-management services to people released from IDOC custody on or after 1/1/2027. Requires IHDA to fund acquisition, development, and rehab of housing units and site-based rental subsidies for community-based organizations serving this population; requires ICJIA to fund case management and reentry navigation services and establish regional provider networks. Creates a housing needs assessment tool for people exiting IDOC, a Home for Good Institute (training/TA for CBOs), an Interagency Reentry Workgroup, and a Home for Good Advisory Committee. Effective immediately.",
+    "type": "Watching",
+    "category": [
+      "Affordable Housing",
+      "Housing + CLS"
+    ],
+    "primarySponsor": "Rep. Maurice A. West",
+    "programArea": "Housing",
+    "year": [
+      2025,
+      2026
+    ],
+    "status": "Not passed into law",
+    "url": "https://www.ilga.gov/Legislation/BillStatus?DocNum=624&GAID=18&DocTypeID=HB&SessionID=114",
+    "stage": "In Senate Committee",
+    "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
+    "lastActionDate": "5/22/2026",
+    "ilgaFetchedAt": "2026-09-02T21:33:06Z",
+    "stageChangedAt": "2026-09-02T21:33:06Z",
+    "nextActionDate": null,
+    "nextActionType": null,
+    "lastAmendmentName": "House Floor Amendment No. 2",
+    "lastAmendmentDate": "4/14/2026",
+    "isShellBill": true,
+    "userAdded": true
+  }
+]
