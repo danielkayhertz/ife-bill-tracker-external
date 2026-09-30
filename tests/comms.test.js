@@ -157,7 +157,7 @@ test('buildCampaigns: endorsed/sponsored bills without a def get a fallback; wat
 });
 
 test('buildCampaigns: missing file, unknown bills and duplicates warn instead of crashing', () => {
-  assert.equal(C.buildCampaigns(BILLS, null, null, '2026-09-30').campaigns.length, 4);
+  assert.equal(C.buildCampaigns(BILLS, null, null, '2026-09-30').campaigns.length, 5);
   const defs = [...DEFS, { id: 'dup', bills: ['hb5234', 'HB0000123'] }];
   const { campaigns, warnings } = C.buildCampaigns(BILLS, defs, SESSION, '2026-09-30');
   assert.equal(warnings.length, 2);
