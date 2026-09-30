@@ -1,0 +1,258 @@
+[
+  {
+    "id": "cannabis-storage-rule",
+    "ga": 104,
+    "programArea": "CLS",
+    "name": "Remove Odor-Proof Cannabis Storage Rule",
+    "why": "Removes the requirement that cannabis in a vehicle be kept in an odor-proof container.",
+    "bills": ["HB4782"]
+  },
+  {
+    "id": "credit-for-change",
+    "ga": 104,
+    "programArea": "CLS",
+    "name": "Credit for Change",
+    "why": "Offers day-for-day sentence credit for good behavior from day one to most incarcerated people.",
+    "bills": ["HB5287"]
+  },
+  {
+    "id": "felony-murder-reform",
+    "ga": 104,
+    "programArea": "CLS",
+    "name": "Felony Murder Reform",
+    "why": "Replaces felony murder as first-degree murder with a separate offense sentenced by role and intent.",
+    "bills": ["HB5261"]
+  },
+  {
+    "id": "public-defender-license-cases",
+    "ga": 104,
+    "programArea": "CLS",
+    "name": "Expand Public Defender Representation",
+    "why": "Lets public defenders represent their criminal clients in related license suspension or revocation hearings.",
+    "bills": ["HB4217"]
+  },
+  {
+    "id": "supervised-release-reform",
+    "ga": 104,
+    "programArea": "CLS",
+    "name": "Mandatory Supervised Release Reform",
+    "why": "Lets people on mandatory supervised release earn a day of credit for each day served.",
+    "bills": ["HB5256"]
+  },
+  {
+    "id": "affordable-housing-tax-credit",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Expand Affordable Housing Donation Tax Credit",
+    "why": "Extends and increases the affordable housing donation income tax credit program through 2036.",
+    "bills": ["HB4413", "SB3738"]
+  },
+  {
+    "id": "ban-criminalizing-homelessness",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Ban Criminalizing Homelessness",
+    "why": "Bars governments from fining or penalizing unsheltered homeless people for necessary daily activities in public.",
+    "bills": ["HB1429"]
+  },
+  {
+    "id": "build-illinois-homes",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Build Illinois Homes Act",
+    "why": "Creates state tax credits for developers building or rehabilitating low-income affordable housing.",
+    "bills": ["SB62"]
+  },
+  {
+    "id": "cap-parking-mandates",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Cap Municipal Parking Mandates",
+    "why": "Caps municipal minimum parking requirements at 0.5 spaces per multifamily unit and 1 per single-family home.",
+    "bills": ["SB4064"]
+  },
+  {
+    "id": "circuit-breaker-tax-relief",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Circuit Breaker Property Tax Relief Act",
+    "why": "Provides property tax relief grants to income-eligible homeowners who have had property tax bill spikes.",
+    "bills": ["HB5433", "SB3978"]
+  },
+  {
+    "id": "credit-score-rental-bias",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Ban Credit Score Rental Bias",
+    "why": "Bars landlords from denying a rental applicant with a housing subsidy based on credit score or history.",
+    "bills": ["HB5394"]
+  },
+  {
+    "id": "disability-exemption-renewal",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Disability Homestead Exemption Renewal",
+    "why": "Lets assessors permanently renew the homestead exemption for people with disabilities without annual reapplication.",
+    "bills": ["SB2871"]
+  },
+  {
+    "id": "disparate-impact-protections",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Restore Disparate Impact Protections",
+    "why": "Makes it a civil rights violation to use practices that have a discriminatory effect, not just intent.",
+    "bills": ["SB3777", "HB5386"]
+  },
+  {
+    "id": "end-crime-free-evictions",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "End Crime-Free Housing Evictions",
+    "why": "Bars evicting tenants under crime-free housing ordinances for alleged nuisance activity, including calling for emergency help.",
+    "bills": ["SB2264"]
+  },
+  {
+    "id": "faith-based-housing-byright",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Faith-Based Housing and Mixed-Use By-Right Act",
+    "why": "Allows by-right multifamily and mixed-use housing development on land owned by faith-based organizations.",
+    "bills": ["SB3187"]
+  },
+  {
+    "id": "government-tech",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Government - Tech",
+    "why": null,
+    "bills": ["HB598"]
+  },
+  {
+    "id": "home-for-good",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Home for Good Act",
+    "why": "Creates a statewide program providing housing and reentry services to people leaving incarceration.",
+    "bills": ["SB4162", "HB624"]
+  },
+  {
+    "id": "home-illinois-funding",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Fund the Home Illinois Program",
+    "why": "Appropriates $352.2 million from the General Revenue Fund for grants under the Home Illinois Program.",
+    "bills": ["HB4568", "SB2969"]
+  },
+  {
+    "id": "homeless-student-education-funding",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Fund Homeless Student Education Grants",
+    "why": "Appropriates $5 million to support programming for students experiencing or at risk of homelessness.",
+    "bills": ["HB4521", "SB3260"]
+  },
+  {
+    "id": "housing-plan-public-notice",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Require Public Notice on Housing Plans",
+    "why": "Requires local governments to hold a public hearing before adopting an affordable housing plan.",
+    "bills": ["HB5198"]
+  },
+  {
+    "id": "income-property-disclosure",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Income Property Disclosure Requirements",
+    "why": "Requires owners of income-producing properties to file physical property descriptions with county assessors.",
+    "bills": ["SB3003", "HB5464"]
+  },
+  {
+    "id": "landlord-junk-fees",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Ban Landlord Junk Fees",
+    "why": "Requires landlords to disclose fees upfront and caps deposit, application, and other tenant fees.",
+    "bills": ["HB5234", "SB3763"]
+  },
+  {
+    "id": "legalize-middle-housing",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Legalize Accessory Dwellings and Middle Housing",
+    "why": "Requires municipalities to allow accessory dwelling units and other middle-housing types in single-family zones.",
+    "bills": ["HB5626"]
+  },
+  {
+    "id": "mortgage-nominee-registry",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Mortgage Nominee Registry and Fees",
+    "why": "Creates a registry for mortgage nominees and directs new recording fees to affordable housing.",
+    "bills": ["HB5615", "SB3703"]
+  },
+  {
+    "id": "pha-work-requirements",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Ban PHA Work Requirements",
+    "why": "Prohibits housing authorities from imposing time limits or work requirements for eligibility, unless federally required.",
+    "bills": ["HB4377", "SB3084"]
+  },
+  {
+    "id": "plan-review-deadlines",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Set Building Plan Review Deadlines",
+    "why": "Sets deadlines for municipal plan reviews and inspections, allowing third-party reviewers if towns miss them.",
+    "bills": ["SB4063"]
+  },
+  {
+    "id": "senior-freeze-renewal",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Simplify Senior Tax Freeze Renewal",
+    "why": "Lets counties with 3 million or more residents renew the senior tax freeze exemption without a new application.",
+    "bills": ["SB1750"]
+  },
+  {
+    "id": "single-stair-buildings",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Allow Single-Stair Residential Buildings",
+    "why": "Bars local building codes from prohibiting single-stairway exits in qualifying residential buildings.",
+    "bills": ["SB4061"]
+  },
+  {
+    "id": "small-lot-middle-housing",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Legalize Small-Lot and Middle Housing",
+    "why": "Requires municipalities to allow small-lot single-family homes and conversions to middle-housing types.",
+    "bills": ["SB4060"]
+  },
+  {
+    "id": "standardize-impact-fees",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Standardize Municipal Impact Fees",
+    "why": "Requires municipalities to calculate development impact fees using a standard formula issued by the state.",
+    "bills": ["SB4062"]
+  },
+  {
+    "id": "tax-sale-reform",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Reform Property Tax Sale Process",
+    "why": "Lets counties acquire tax-delinquent property directly and compensates owners for lost equity in tax sales.",
+    "bills": ["SB3940"]
+  },
+  {
+    "id": "tenant-tax-sale-notice",
+    "ga": 104,
+    "programArea": "Housing",
+    "name": "Notify Tenants of Tax Sales",
+    "why": "Requires notifying tenants when their rental property faces a delinquent property tax sale application.",
+    "bills": ["SB3457"]
+  }
+]

@@ -21,6 +21,9 @@ jobs:
       - name: Fetch bill status from ILGA
         run: python scripts/update_bill_status.py
 
+      - name: Check campaigns
+        run: python scripts/validate_campaigns.py
+
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
