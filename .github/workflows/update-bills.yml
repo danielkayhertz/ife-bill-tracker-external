@@ -2,7 +2,7 @@ name: Update Bill Status
 
 on:
   schedule:
-    - cron: '0 13 * * *'   # 1 PM UTC = 8 AM CT
+    - cron: '0 */3 * * *'   # every 3 hours; the script only writes on real changes + a daily heartbeat
   workflow_dispatch:
 
 permissions:
