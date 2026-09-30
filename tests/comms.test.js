@@ -263,3 +263,25 @@ test('isStale / latestFetch', () => {
   assert.equal(C.isStale(bills, new Date('2026-09-08T12:00:00Z')), false);
   assert.equal(C.isStale([{}], new Date()), false);
 });
+
+test('sessionStatus drops malformed phase entries instead of crashing', () => {
+  const session = {
+    ga: 104,
+    phases: [null, { name: 'Veto session', ranges: [{ start: 'bad', end: 'bad' }] }, ...SESSION.phases],
+  };
+  assert.equal(C.sessionStatus(session, '2026-09-30').headline,
+    'Spring session is over. Veto session: Oct 14–16 and Oct 28–30.');
+});
+
+test('buildCampaigns: non-array bills is treated as empty instead of crashing', () => {
+  const { campaigns, warnings } = C.buildCampaigns(null, DEFS, SESSION, '2026-09-30');
+  assert.deepEqual(campaigns, []);
+  assert.equal(warnings.length, 2);
+});
+
+test('buildCampaigns: malformed campaign entries warn and skip instead of crashing', () => {
+  const { campaigns, warnings } = C.buildCampaigns(BILLS, [null, { bills: ['SB62'] }, ...DEFS], SESSION, '2026-09-30');
+  assert.equal(warnings.length, 2);
+  assert.ok(campaigns.some(c => c.id === 'junk-fees'));
+  assert.ok(campaigns.some(c => c.id === 'bill-SB62'));
+});

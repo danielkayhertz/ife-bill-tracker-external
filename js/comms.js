@@ -46,8 +46,20 @@
     return localIso(new Date(y, m - 1, d + n));
   }
 
+  const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+  // Keeps only phases that are objects with a string name and at least one well-formed range;
+  // drops individual malformed ranges first, then drops the phase if none survive. Shared by
+  // springEnd and sessionStatus so malformed session.json data can't desync the two.
+  function cleanPhases(phases) {
+    return (Array.isArray(phases) ? phases : [])
+      .filter(p => p && typeof p === 'object' && typeof p.name === 'string' && Array.isArray(p.ranges) && p.ranges.length)
+      .map(p => ({ ...p, ranges: p.ranges.filter(r => r && ISO_DATE_RE.test(r.start) && ISO_DATE_RE.test(r.end)) }))
+      .filter(p => p.ranges.length);
+  }
+
   function springEnd(session) {
-    const p = (session?.phases || []).find(x => /spring/i.test(x.name || ''));
+    const p = cleanPhases(session?.phases).find(x => /spring/i.test(x.name));
     const r = p?.ranges || [];
     return r.length ? r[r.length - 1].end : null;
   }
@@ -133,11 +145,14 @@
   }
 
   function buildCampaigns(bills, defs, session, todayIso) {
-    const byNum = new Map(bills.map(b => [normBill(b.billNumber), b]));
+    const billList = Array.isArray(bills) ? bills : [];
+    const byNum = new Map(billList.map(b => [normBill(b.billNumber), b]));
     const used = new Set();
     const campaigns = [];
     const warnings = [];
-    for (const def of Array.isArray(defs) ? defs : []) {
+    (Array.isArray(defs) ? defs : []).forEach((def, i) => {
+      if (!def || typeof def !== 'object') { warnings.push(`campaign entry ${i} is not an object`); return; }
+      if (typeof def.id !== 'string' || !def.id) { warnings.push(`campaign entry ${i} has no id`); return; }
       const members = [];
       for (const n of Array.isArray(def.bills) ? def.bills : []) {
         const k = normBill(n);
@@ -148,8 +163,8 @@
         members.push(b);
       }
       if (members.length) campaigns.push(makeCampaign(def, members, session, todayIso));
-    }
-    for (const b of bills) {
+    });
+    for (const b of billList) {
       const k = normBill(b.billNumber);
       if ((b.type === 'Endorsed' || b.type === 'Sponsored') && !used.has(k)) {
         used.add(k);
@@ -216,8 +231,7 @@
   function sessionStatus(session, todayIso) {
     const empty = { ga: session?.ga || null, headline: '', springEnded: false, gaEnded: false, current: null, next: null };
     if (!session || !Array.isArray(session.phases)) return empty;
-    const phases = session.phases
-      .filter(p => Array.isArray(p.ranges) && p.ranges.length)
+    const phases = cleanPhases(session.phases)
       .map(p => ({ ...p, start: p.ranges[0].start, end: p.ranges[p.ranges.length - 1].end }));
     const current = phases.find(p => todayIso >= p.start && todayIso <= p.end) || null;
     const next = phases.filter(p => p.start > todayIso).sort((a, b) => a.start.localeCompare(b.start))[0] || null;
