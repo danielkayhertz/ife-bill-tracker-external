@@ -105,9 +105,179 @@
     }[outcome] || '';
   }
 
+  const rank = o => OUTCOME_RANK.indexOf(o);
+
+  function makeCampaign(def, members, session, todayIso) {
+    const bills = members.map(b => ({ bill: b, outcome: billOutcome(b, session, todayIso) }));
+    const bestEntry = bills.reduce((a, c) => (rank(c.outcome) < rank(a.outcome) ? c : a));
+    const lead = members.find(b => normBill(b.billNumber) === normBill(def.leadBill)) || bestEntry.bill;
+    const outcome = OUTCOME_RANK.includes(def.outcomeOverride) ? def.outcomeOverride : bestEntry.outcome;
+    return {
+      id: def.id,
+      ga: def.ga || session?.ga || null,
+      programArea: def.programArea || lead.programArea || 'Housing',
+      name: def.name || lead.title || normBill(lead.billNumber),
+      why: def.why || null,
+      winNote: def.winNote || null,
+      overrideNote: def.overrideNote || null,
+      fallback: !!def.fallback,
+      type: members.some(b => b.type === 'Sponsored') ? 'Sponsored' : 'Endorsed',
+      categories: [...new Set(members.flatMap(b => (Array.isArray(b.category) ? b.category : [])))],
+      lead,
+      best: bestEntry.bill,
+      bills,
+      outcome,
+      pa: outcome === 'law' && bestEntry.outcome === 'law' ? paNumber(bestEntry.bill) : null,
+      lastActionIso: members.map(b => mdyToIso(b.lastActionDate)).filter(Boolean).sort().pop() || '',
+    };
+  }
+
+  function buildCampaigns(bills, defs, session, todayIso) {
+    const byNum = new Map(bills.map(b => [normBill(b.billNumber), b]));
+    const used = new Set();
+    const campaigns = [];
+    const warnings = [];
+    for (const def of Array.isArray(defs) ? defs : []) {
+      const members = [];
+      for (const n of Array.isArray(def.bills) ? def.bills : []) {
+        const k = normBill(n);
+        const b = byNum.get(k);
+        if (!b) { warnings.push(`${def.id}: bill ${n} not found`); continue; }
+        if (used.has(k)) { warnings.push(`${def.id}: ${n} is already in another campaign`); continue; }
+        used.add(k);
+        members.push(b);
+      }
+      if (members.length) campaigns.push(makeCampaign(def, members, session, todayIso));
+    }
+    for (const b of bills) {
+      const k = normBill(b.billNumber);
+      if ((b.type === 'Endorsed' || b.type === 'Sponsored') && !used.has(k)) {
+        used.add(k);
+        campaigns.push(makeCampaign({ id: 'bill-' + k, fallback: true }, [b], session, todayIso));
+      }
+    }
+    return { campaigns, warnings };
+  }
+
+  function groupCampaigns(campaigns) {
+    return OUTCOME_RANK
+      .map(outcome => ({
+        outcome,
+        items: campaigns.filter(c => c.outcome === outcome).sort((a, b) =>
+          (a.type === 'Sponsored' ? 0 : 1) - (b.type === 'Sponsored' ? 0 : 1)
+          || b.lastActionIso.localeCompare(a.lastActionIso)),
+      }))
+      .filter(g => g.items.length);
+  }
+
+  function outcomeCounts(campaigns) {
+    const c = {};
+    for (const x of campaigns) c[x.outcome] = (c[x.outcome] || 0) + 1;
+    return c;
+  }
+
+  function comingUp(campaigns, todayIso, days = 14) {
+    const end = addDaysIso(todayIso, days);
+    const rows = [];
+    for (const campaign of campaigns) {
+      for (const { bill } of campaign.bills) {
+        const date = mdyToIso(bill.nextActionDate);
+        if (date && date >= todayIso && date <= end) {
+          rows.push({ date, campaign, bill, action: bill.nextActionType || 'Scheduled action' });
+        }
+      }
+    }
+    return rows.sort((a, b) => a.date.localeCompare(b.date) || a.bill.billNumber.localeCompare(b.bill.billNumber));
+  }
+
+  function floorVotes(campaigns) {
+    return campaigns.filter(c => c.outcome === 'moving'
+      && c.bills.some(x => x.outcome === 'moving' && awaitingFloorVote(x.bill)));
+  }
+
+  function formatDate(iso) {
+    const [, m, d] = iso.split('-').map(Number);
+    return `${MONTHS[m - 1]} ${d}`;
+  }
+
+  function formatRange(r) {
+    const [, sm, sd] = r.start.split('-').map(Number);
+    const [, em, ed] = r.end.split('-').map(Number);
+    if (r.start === r.end) return `${MONTHS[sm - 1]} ${sd}`;
+    if (sm === em) return `${MONTHS[sm - 1]} ${sd}–${ed}`;
+    return `${MONTHS[sm - 1]} ${sd}–${MONTHS[em - 1]} ${ed}`;
+  }
+
+  function formatRanges(ranges) {
+    const parts = ranges.map(formatRange);
+    return parts.length <= 2 ? parts.join(' and ') : parts.slice(0, -1).join(', ') + ', and ' + parts[parts.length - 1];
+  }
+
+  function sessionStatus(session, todayIso) {
+    const empty = { ga: session?.ga || null, headline: '', springEnded: false, gaEnded: false, current: null, next: null };
+    if (!session || !Array.isArray(session.phases)) return empty;
+    const phases = session.phases
+      .filter(p => Array.isArray(p.ranges) && p.ranges.length)
+      .map(p => ({ ...p, start: p.ranges[0].start, end: p.ranges[p.ranges.length - 1].end }));
+    const current = phases.find(p => todayIso >= p.start && todayIso <= p.end) || null;
+    const next = phases.filter(p => p.start > todayIso).sort((a, b) => a.start.localeCompare(b.start))[0] || null;
+    const past = phases.filter(p => p.end < todayIso).sort((a, b) => a.end.localeCompare(b.end)).pop() || null;
+    const se = springEnd(session);
+    const gaEnded = !!session.gaEnd && todayIso > session.gaEnd;
+    let headline = '';
+    if (gaEnded) headline = `The ${ordinal(session.ga)} General Assembly has ended.`;
+    else if (current) headline = `${current.name} is underway: ${formatRanges(current.ranges)}.`;
+    else if (past && next) headline = `${past.name} is over. ${next.name}: ${formatRanges(next.ranges)}.`;
+    else if (past) headline = `${past.name} is over.`;
+    else if (next) headline = `${next.name} begins ${formatDate(next.start)}.`;
+    return { ga: session.ga || null, headline, springEnded: !!se && todayIso > se, gaEnded, current, next };
+  }
+
+  function comingUpEmptyText(status) {
+    if (status.gaEnded) return 'No hearings scheduled.';
+    if (status.current) return "No hearings scheduled for IFE's bills in the next two weeks.";
+    if (status.next) {
+      const name = status.next.name.charAt(0).toLowerCase() + status.next.name.slice(1);
+      return `No hearings scheduled. Bills can move again during ${name}, ${formatRanges(status.next.ranges)}.`;
+    }
+    return 'No hearings scheduled.';
+  }
+
+  function staffUpdate(session, programArea, status) {
+    const u = session?.updates?.[programArea];
+    if (!u || !u.text || status.gaEnded) return null;
+    const [y, m] = String(u.date || '').split('-').map(Number);
+    return { text: u.text, label: y && m ? `IFE update, ${FULL_MONTHS[m - 1]} ${y}` : 'IFE update' };
+  }
+
+  function blurb(c, status, url) {
+    const who = c.type === 'Sponsored' ? 'IFE-sponsored' : 'IFE-endorsed';
+    const ref = `${c.name} (${normBill((c.outcome === 'law' ? c.best : c.lead).billNumber)})`;
+    const body = {
+      law: c.pa ? `was signed into law as Public Act ${c.pa}.` : 'was signed into law.',
+      governor: "passed both chambers and is on the governor's desk.",
+      vetoed: 'was vetoed. The General Assembly can still override the veto.',
+      moving: 'is moving in the Illinois General Assembly.',
+      stalled: status?.springEnded ? "didn't advance this session." : 'is stalled in the Illinois General Assembly.',
+      died: `did not pass in the ${ordinal(c.ga)} General Assembly.`,
+    }[c.outcome];
+    return `${who}: ${ref} ${body} ${url}`.trim();
+  }
+
+  function latestFetch(bills) {
+    return bills.map(b => b.ilgaFetchedAt).filter(Boolean).sort().pop() || null;
+  }
+
+  function isStale(bills, now, days = 3) {
+    const f = latestFetch(bills);
+    return !!f && (now - new Date(f)) > days * 86400000;
+  }
+
   const api = {
     OUTCOME_RANK, MONTHS, FULL_MONTHS, esc, normBill, parseHash, hashFor, mdyToIso, localIso, addDaysIso,
     springEnd, hasUpcoming, billOutcome, paNumber, awaitingFloorVote, ordinal, outcomeLabel, groupHeading,
+    buildCampaigns, groupCampaigns, outcomeCounts, comingUp, floorVotes, sessionStatus, formatRange,
+    formatRanges, comingUpEmptyText, staffUpdate, blurb, latestFetch, isStale,
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.Comms = api;
