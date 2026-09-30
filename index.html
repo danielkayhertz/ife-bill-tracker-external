@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IFE Internal Bill Tracker</title>
+  <title>IFE Illinois Bill Tracker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
@@ -431,47 +431,6 @@
       width: 15px;
       height: 15px;
       cursor: pointer;
-    }
-
-    .add-bill-btn {
-      padding: 9px 16px;
-      background-color: #005a8c;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: inherit;
-      white-space: nowrap;
-      margin-left: auto;
-    }
-
-    .add-bill-btn:hover {
-      background-color: #004a7a;
-    }
-
-    .refresh-all-btn {
-      padding: 5px 12px;
-      background: #fff;
-      color: #005a8c;
-      border: 1px solid #005a8c;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 12px;
-      font-family: inherit;
-    }
-    .refresh-all-btn:hover { background: #e8f4fb; }
-    .header-last-refreshed {
-      color: #777;
-      font-size: 12px;
-    }
-    .highlights-refresh-row {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
-      padding: 8px 24px;
     }
 
     /* Main Grid */
@@ -1033,15 +992,6 @@
 
     .required { color: #c62828; }
 
-    .add-bill-error {
-      font-size: 13px;
-      color: #c62828;
-      margin-bottom: 8px;
-      padding: 8px 12px;
-      background: #ffebee;
-      border-radius: 6px;
-    }
-
     /* Footer */
     .footer {
       background-color: #005a8c;
@@ -1210,7 +1160,6 @@
       .footer-content { flex-direction: column; text-align: center; }
       .footer-address { text-align: center; }
       .form-row { flex-direction: column; }
-      .add-bill-btn { margin-left: 0; }
     }
   </style>
 </head>
@@ -1241,12 +1190,6 @@
       </div>
       <div class="highlights-popup-list" id="highlights-popup-list"></div>
     </div>
-  </div>
-
-  <!-- Refresh Controls -->
-  <div class="highlights-refresh-row">
-    <button class="refresh-all-btn" onclick="refreshAllFromILGA()">↻ Refresh from ILGA</button>
-    <small id="header-last-refreshed" class="header-last-refreshed"></small>
   </div>
 
   <!-- Program Area Tabs -->
@@ -1363,26 +1306,9 @@
 
         <div class="bill-modal-actions">
           <a class="btn-primary" id="bill-modal-link" href="#" target="_blank" rel="noopener noreferrer">View on ILGA.gov &#8594;</a>
-          <button class="btn-secondary" id="bill-modal-refresh-btn" style="display:none;" onclick="refreshBillILGA()">Refresh from ILGA</button>
-          <button class="btn-danger" id="bill-modal-delete-btn" style="display:none;" onclick="confirmDeleteBill()">Delete Bill</button>
           <button class="btn-secondary" id="bill-modal-close-btn">Close</button>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Refresh All Progress Overlay -->
-  <div class="bill-modal-overlay" id="refresh-overlay">
-    <div class="bill-modal" style="max-width:420px;text-align:center;padding:40px 32px;">
-      <h3 id="refresh-overlay-title" style="margin:0 0 16px;">Refreshing from ILGA.gov…</h3>
-      <p id="refresh-progress-text" style="color:#555;margin-bottom:12px;">Starting…</p>
-      <div style="background:#e0e0e0;border-radius:6px;height:10px;margin-bottom:16px;">
-        <div id="refresh-progress-bar"
-             style="background:#1976d2;height:10px;border-radius:6px;width:0%;transition:width 0.2s;"></div>
-      </div>
-      <p id="refresh-status-text" style="color:#666;font-size:14px;min-height:20px;"></p>
-      <button id="refresh-close-btn" class="btn-secondary"
-              style="display:none;margin-top:16px;" onclick="document.getElementById('refresh-overlay').classList.remove('visible')">Close</button>
     </div>
   </div>
 
@@ -1391,9 +1317,14 @@
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
-    // ── GitHub API config ─────────────────────────────────────────────────────
-    const WORKER_URL = 'https://ifeinternaltracker.dhertz.workers.dev'; // set after deploying Cloudflare Worker
-    const GITHUB_REPO  = 'danielkayhertz/ife-bill-tracker-external';
+    // ── Data source ───────────────────────────────────────────────────────────
+    // Public repo, so the page reads files directly (raw.githubusercontent caches ~5 min).
+    // On localhost, read the working copy so unpushed data files can be tested.
+    const GITHUB_REPO = 'danielkayhertz/ife-bill-tracker-external';
+    const DATA_BASE = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
+      ? 'data/'
+      : `https://raw.githubusercontent.com/${GITHUB_REPO}/master/data/`;
+    const CURRENT_GA = 104;  // used only if data/session.json is unavailable
 
     // ── Fallback data (used when bills.json unreachable) ─────────────────────
     const FALLBACK_DATA = [
@@ -1569,7 +1500,6 @@
     let legislationData = [];
     let notesData       = {};
     let currentBill     = null;
-    let addBillIlgaData = null;
     let currentProgramArea = "Housing";
     let currentFilters  = { stage: "All", type: "All", category: new Set(), changedSince: "", upcomingOnly: false, search: "" };
 
@@ -1591,52 +1521,26 @@
     const searchEl        = document.getElementById('search-filter');
     const filterCount     = document.getElementById('filter-count');
 
-    // ── GitHub API helpers ────────────────────────────────────────────────────
-    async function readGitHubFile(path) {
-      const r = await fetch(`${WORKER_URL}/github/repos/${GITHUB_REPO}/contents/${path}`, {
-        headers: { Accept: 'application/vnd.github.v3+json' }
-      });
-      if (r.status === 404) return { content: null, sha: null };
-      if (!r.ok) throw new Error(`GitHub API ${r.status}`);
-      const d = await r.json();
-      return { content: JSON.parse(atob(d.content.replace(/\n/g, ''))), sha: d.sha };
-    }
-
-    async function writeGitHubFile(path, content, sha, message) {
-      const body = {
-        message,
-        content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2))))
-      };
-      if (sha) body.sha = sha;
-      const r = await fetch(`${WORKER_URL}/github/repos/${GITHUB_REPO}/contents/${path}`, {
-        method: 'PUT',
-        headers: {
-          Accept: 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body)
-      });
-      if (r.status === 409) throw new Error('conflict');
-      if (!r.ok) throw new Error(`GitHub API ${r.status}`);
+    // ── Data helpers ──────────────────────────────────────────────────────────
+    async function readDataFile(name, fallback) {
+      const r = await fetch(DATA_BASE + name, { cache: 'no-cache' });
+      if (r.status === 404) return fallback;
+      if (!r.ok) throw new Error(`${name}: HTTP ${r.status}`);
       return r.json();
     }
 
     // ── Init ──────────────────────────────────────────────────────────────────
     async function init() {
       try {
-        const [billsResp, userBillsResp, notesResp] = await Promise.all([
-          readGitHubFile('data/bills.json'),
-          readGitHubFile('data/user-bills.json'),
-          readGitHubFile('data/notes.json')
+        const [bills, userBills, notes] = await Promise.all([
+          readDataFile('bills.json', null),
+          readDataFile('user-bills.json', []),
+          readDataFile('notes.json', {}),
         ]);
-        legislationData = billsResp.content || FALLBACK_DATA;
-        const userBills = userBillsResp.content || [];
-        notesData = notesResp.content || {};
-        if (userBills.length > 0) {
-          legislationData = [...legislationData, ...userBills];
-        }
+        legislationData = [...(bills || FALLBACK_DATA), ...(userBills || [])];
+        notesData = notes || {};
       } catch (e) {
-        console.warn('GitHub API unavailable, using fallback:', e);
+        console.warn('Data files unavailable, using fallback:', e);
         legislationData = FALLBACK_DATA;
         notesData = {};
       }
@@ -1646,18 +1550,6 @@
       populateCategoryFilter();
       renderCards();
       setupEventListeners();
-      updateLastFetched();
-    }
-
-    function updateLastFetched() {
-      const date = legislationData[0]?.ilgaFetchedAt;
-      if (!date) return;
-      const d = new Date(date);
-      const headerEl = document.getElementById('header-last-refreshed');
-      if (headerEl) {
-        headerEl.textContent = 'Last refreshed ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-          + ' at ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-      }
     }
 
     function updateHighlights() {
@@ -1994,11 +1886,6 @@
 
       document.getElementById('bill-modal-link').href           = bill.url;
 
-      document.getElementById('bill-modal-refresh-btn').style.display =
-        bill.userAdded ? 'inline-block' : 'none';
-      document.getElementById('bill-modal-delete-btn').style.display =
-        bill.userAdded ? 'inline-block' : 'none';
-
       modalOverlay.classList.add('visible');
       document.body.style.overflow = 'hidden';
     }
@@ -2007,391 +1894,6 @@
       modalOverlay.classList.remove('visible');
       document.body.style.overflow = '';
       currentBill = null;
-    }
-
-    function confirmDeleteBill() {
-      if (!currentBill) return;
-      const ok = confirm(`Delete ${currentBill.billNumber} — "${currentBill.title}"?\n\nThis cannot be undone.`);
-      if (ok) deleteBill(currentBill);
-    }
-
-    async function deleteBill(bill) {
-      const deleteBtn = document.getElementById('bill-modal-delete-btn');
-      deleteBtn.disabled = true;
-      deleteBtn.textContent = 'Deleting…';
-      try {
-        const { content, sha } = await readGitHubFile('data/user-bills.json');
-        const updated = (content || []).filter(b => b.billNumber !== bill.billNumber);
-        await writeGitHubFile('data/user-bills.json', updated, sha, `Delete bill: ${bill.billNumber}`);
-        legislationData = legislationData.filter(b => b.billNumber !== bill.billNumber);
-        closeModal();
-        updateHighlights();
-        renderCards();
-      } catch (e) {
-        alert(`Delete failed: ${e.message}`);
-        deleteBtn.disabled = false;
-        deleteBtn.textContent = 'Delete Bill';
-      }
-    }
-
-    async function refreshBillILGA() {
-      if (!currentBill) return;
-      const refreshBtn = document.getElementById('bill-modal-refresh-btn');
-      refreshBtn.disabled = true;
-      refreshBtn.textContent = 'Refreshing…';
-      try {
-        const data = await fetchBillFromILGA(currentBill.billNumber);
-        const updates = {
-          primarySponsor:    data.primarySponsor,
-          stage:             data.stage,
-          lastAction:        data.lastAction,
-          lastActionDate:    data.lastActionDate,
-          nextActionDate:    data.nextActionDate,
-          nextActionType:    data.nextActionType,
-          lastAmendmentName: data.lastAmendmentName,
-          lastAmendmentDate: data.lastAmendmentDate,
-          isShellBill:       data.isShellBill,
-          ilgaFetchedAt:     new Date().toISOString(),
-        };
-        const { content, sha } = await readGitHubFile('data/user-bills.json');
-        const userBills = (content || []).map(b =>
-          b.billNumber === currentBill.billNumber ? { ...b, ...updates } : b
-        );
-        await writeGitHubFile('data/user-bills.json', userBills, sha, `Refresh bill: ${currentBill.billNumber}`);
-        Object.assign(currentBill, updates);
-        legislationData = legislationData.map(b =>
-          b.billNumber === currentBill.billNumber ? { ...b, ...updates } : b
-        );
-        renderCards();
-        openModal(currentBill);
-      } catch (e) {
-        alert(`Refresh failed: ${e.message}`);
-        refreshBtn.disabled = false;
-        refreshBtn.textContent = 'Refresh from ILGA';
-      }
-    }
-
-    async function refreshAllFromILGA() {
-      const overlay      = document.getElementById('refresh-overlay');
-      const titleEl      = document.getElementById('refresh-overlay-title');
-      const progressText = document.getElementById('refresh-progress-text');
-      const progressBar  = document.getElementById('refresh-progress-bar');
-      const statusText   = document.getElementById('refresh-status-text');
-      const closeBtn     = document.getElementById('refresh-close-btn');
-
-      // Reset overlay
-      titleEl.textContent      = 'Refreshing from ILGA.gov…';
-      progressText.textContent = 'Starting…';
-      progressBar.style.width  = '0%';
-      statusText.textContent   = '';
-      closeBtn.style.display   = 'none';
-      overlay.classList.add('visible');
-
-      const baseBills = legislationData.filter(b => !b.userAdded);
-      const userBills = legislationData.filter(b =>  b.userAdded);
-      const allBills  = [...baseBills, ...userBills];
-      const total     = allBills.length;
-
-      const ilgaFields = [
-        'stage', 'primarySponsor', 'lastAction', 'lastActionDate',
-        'nextActionDate', 'nextActionType', 'lastAmendmentName',
-        'lastAmendmentDate', 'isShellBill'
-      ];
-
-      const updatedBase = [...baseBills];
-      const updatedUser = [...userBills];
-
-      for (let i = 0; i < allBills.length; i++) {
-        const bill = allBills[i];
-        progressText.textContent = `${i + 1} / ${total} — ${bill.billNumber}`;
-        progressBar.style.width  = `${Math.round(((i + 1) / total) * 100)}%`;
-
-        try {
-          const data = await fetchBillFromILGA(bill.billNumber);
-          const fetchedAt = new Date().toISOString();
-          const stageChanged = data.stage !== bill.stage;
-          const updates = {};
-          for (const f of ilgaFields) updates[f] = data[f];
-          updates.ilgaFetchedAt  = fetchedAt;
-          updates.stageChangedAt = stageChanged ? fetchedAt : (bill.stageChangedAt || fetchedAt);
-
-          if (bill.userAdded) {
-            const idx = updatedUser.findIndex(b => b.billNumber === bill.billNumber);
-            if (idx !== -1) updatedUser[idx] = { ...updatedUser[idx], ...updates };
-          } else {
-            const idx = updatedBase.findIndex(b => b.billNumber === bill.billNumber);
-            if (idx !== -1) updatedBase[idx] = { ...updatedBase[idx], ...updates };
-          }
-        } catch (e) {
-          statusText.textContent = `Warning: ${bill.billNumber} failed — ${e.message}`;
-        }
-      }
-
-      // Update in-memory data
-      legislationData = [...updatedBase, ...updatedUser];
-      updateHighlights();
-      renderCards();
-      updateLastFetched();
-
-      // Write to GitHub
-      try {
-        progressText.textContent = 'Writing bills.json to GitHub…';
-        const { sha: baseSha } = await readGitHubFile('data/bills.json');
-        await writeGitHubFile('data/bills.json', updatedBase, baseSha, 'Refresh all: update bills.json from ILGA');
-
-        if (updatedUser.length > 0) {
-          progressText.textContent = 'Writing user-bills.json to GitHub…';
-          const { sha: userSha } = await readGitHubFile('data/user-bills.json');
-          await writeGitHubFile('data/user-bills.json', updatedUser, userSha, 'Refresh all: update user-bills.json from ILGA');
-        }
-
-        titleEl.textContent      = 'Refresh complete';
-        progressText.textContent = `Updated ${total} bills`;
-        progressBar.style.width  = '100%';
-        statusText.textContent   = 'Data saved to GitHub ✓';
-      } catch (e) {
-        titleEl.textContent    = 'Refresh complete (write error)';
-        statusText.textContent = `In-memory data updated, but GitHub write failed: ${e.message}`;
-      }
-
-      closeBtn.style.display = 'inline-block';
-    }
-
-    // ── ILGA fetch (browser-side, for refresh) ───────────────────────────────
-    async function fetchWithProxy(xmlUrl) {
-      const workerUrl = xmlUrl.replace('https://www.ilga.gov', `${WORKER_URL}/ilga`);
-      const ctrl = new AbortController();
-      setTimeout(() => ctrl.abort(), 10000);
-      const resp = await fetch(workerUrl, { signal: ctrl.signal });
-      if (resp.ok) return await resp.text();
-      throw new Error('Could not reach ILGA.gov. Check your connection or try again later.');
-    }
-
-    async function fetchBillFromILGA(rawBillNumber) {
-      const m = rawBillNumber.trim().toUpperCase().match(/^([A-Z]+)(\d+)$/);
-      if (!m) throw new Error('Invalid format — use e.g. HB1234 or SB567.');
-      const docType = m[1], docNum = m[2].padStart(4, '0');
-      const xmlUrl  = `https://www.ilga.gov/ftp/legislation/104/BillStatus/XML/10400${docType}${docNum}.xml`;
-
-      const text = await fetchWithProxy(xmlUrl);
-
-      const xml = new DOMParser().parseFromString(text, 'text/xml');
-      if (xml.querySelector('parsererror')) throw new Error('Bill not found or XML parse error.');
-
-      // Primary sponsor
-      const sponsorsEl = xml.querySelector('sponsor > sponsors');
-      const primarySponsor = sponsorsEl?.textContent?.trim().split(/[-,]|\s+and\s+/)[0]?.trim() || '';
-
-      // Last action (with freshness fallback from <actions> history)
-      const lastActionEl   = xml.querySelector('lastaction > action');
-      const lastDateEl     = xml.querySelector('lastaction > statusdate');
-      const lastChamberEl  = xml.querySelector('lastaction > chamber');
-      let lastAction       = lastActionEl?.textContent?.trim() || '';
-      let lastActionDate   = lastDateEl?.textContent?.trim()   || '';
-      let lastActionChamber= (lastChamberEl?.textContent?.trim() || '').toLowerCase();
-
-      // Classify an action into a stage, or return null if not stage-relevant
-      function classifyAction(actionText, chamber, docType) {
-        const la = actionText.toLowerCase();
-        const ch = (chamber || '').toLowerCase();
-        if (la.includes('approved by governor') || la.includes('public act')) return 'Signed into Law';
-        if (la.includes('sent to the governor') || la.includes('to the governor')) return 'Awaiting Governor Signature';
-        if (la.includes('passed both') || la.includes('enrolled')) return 'Enrolled';
-        if (la.includes('passed senate')) return 'Passed Senate';
-        if (la.includes('passed house')) return 'Passed House';
-        if (/passed\s+\d{3}-\d{3}-\d{3}/.test(la)) {
-          if (ch === 'house') return 'Passed House';
-          if (ch === 'senate') return 'Passed Senate';
-        }
-        if (la.includes('vetoed') || la.includes('failed') || la.includes('did not pass') || la.includes('tabled') || la.includes('withdrawn')) return 'Failed';
-        if (['placed on calendar order of 2nd reading', 'placed on calendar order of 3rd reading',
-             'placed on calendar 2nd reading', 'placed on calendar 3rd reading',
-             'second reading', 'third reading',
-             'do pass', 'approved for consideration',
-             'recalled from committee'].some(s => la.includes(s))) {
-          if (ch === 'house') return 'Passed House Committee';
-          if (ch === 'senate') return 'Passed Senate Committee';
-        }
-        if (ch === 'senate' && docType === 'HB') return 'In Senate Committee';
-        if (ch === 'house' && docType === 'SB') return 'In House Committee';
-        if (la.includes('arrive in senate')) return 'In Senate Committee';
-        if (la.includes('arrive in house')) return 'In House Committee';
-        return null;
-      }
-
-      // Walk <actions> to find the most recent substantive action; substitute if newer
-      const actionHistory = [];
-      {
-        const SKIP = [
-          'added as ', 'removed as ', 'alternate',
-          'added co-sponsor', 'removed co-sponsor',
-          'added chief co-sponsor', 'removed chief co-sponsor',
-          'added alternate', 'removed alternate',
-          'rule 19(a)',
-          'fiscal note', 'home rule note', 'state mandates note',
-          'pension note', 'balanced budget note', 'judicial note',
-        ];
-        function _parseActDate(s) {
-          if (!s) return null;
-          const p = s.split('/');
-          if (p.length !== 3) return null;
-          return [parseInt(p[2]), parseInt(p[0]), parseInt(p[1])]; // [y,m,d]
-        }
-        function _cmpDate(a, b) {
-          if (!a || !b) return 0;
-          for (let i = 0; i < 3; i++) { if (a[i] !== b[i]) return a[i] - b[i]; }
-          return 0;
-        }
-        const actionsEl = xml.querySelector('actions');
-        if (actionsEl) {
-          let curDate = '', curChamber = '', bestAction = '', bestDate = '', bestChamber = '', bestParsed = null;
-          for (const child of actionsEl.children) {
-            if (child.tagName === 'statusdate') { curDate = child.textContent.trim(); }
-            else if (child.tagName === 'chamber') { curChamber = child.textContent.trim(); }
-            else if (child.tagName === 'action') {
-              const t = child.textContent.trim();
-              // Collect all actions with chambers for history fallback
-              if (t) actionHistory.push({ text: t, chamber: curChamber.toLowerCase() });
-              if (!t || SKIP.some(p => t.toLowerCase().startsWith(p))) continue;
-              const parsed = _parseActDate(curDate);
-              if (parsed && (bestParsed === null || _cmpDate(parsed, bestParsed) >= 0)) {
-                bestAction = t; bestDate = curDate; bestChamber = curChamber; bestParsed = parsed;
-              }
-            }
-          }
-          if (bestDate && _cmpDate(_parseActDate(bestDate), _parseActDate(lastActionDate)) > 0) {
-            // Only substitute if the history action maps to a real stage
-            if (classifyAction(bestAction, bestChamber, docType) !== null) {
-              lastAction        = bestAction;
-              lastActionDate    = bestDate;
-              lastActionChamber = bestChamber.toLowerCase();
-            }
-          }
-        }
-      }
-
-      // Next scheduled action — may be in <nextaction> or <committeehearing>
-      const nextActionEl_  = xml.querySelector('nextaction > action');
-      const nextDateEl_    = xml.querySelector('nextaction > statusdate');
-      let nextActionDate   = nextDateEl_?.textContent?.trim()  || null;
-      let nextActionType   = nextActionEl_?.textContent?.trim()|| null;
-      if (!nextActionDate) {
-        const chEl = xml.querySelector('committeehearing');
-        if (chEl) {
-          const raw = chEl.textContent.trim();
-          const dm  = raw.match(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})\s+(\d{4})\b/);
-          if (dm) {
-            const mo = {Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12};
-            nextActionDate = `${mo[dm[1]]}/${parseInt(dm[2])}/${dm[3]}`;
-            nextActionType = raw.slice(0, dm.index).trim() || null;
-          }
-        }
-      }
-
-      // Amendments
-      const synopsisEl = xml.querySelector('synopsis');
-      let lastAmendmentName = null, isShellBill = false;
-      if (synopsisEl) {
-        let currentTitle = null;
-        for (const child of synopsisEl.children) {
-          if (child.tagName === 'synopsistitle') {
-            const t = child.textContent.trim();
-            if (t) currentTitle = t;
-          } else if (child.tagName === 'SynopsisText' && currentTitle) {
-            lastAmendmentName = currentTitle;
-            if (child.textContent.trim().startsWith('Replaces everything after the enacting clause'))
-              isShellBill = true;
-            currentTitle = null;
-          }
-        }
-      }
-      let lastAmendmentDate = null;
-      if (lastAmendmentName) {
-        const actionsEl = xml.querySelector('actions');
-        if (actionsEl) {
-          let cur = null;
-          for (const child of actionsEl.children) {
-            if (child.tagName === 'statusdate') cur = child.textContent.trim();
-            else if (child.tagName === 'action' && child.textContent.includes(lastAmendmentName.trim())) {
-              lastAmendmentDate = cur; break;
-            }
-          }
-        }
-      }
-
-      // Stage (mirrors Python map_stage logic)
-      let stage = classifyAction(lastAction, lastActionChamber, docType);
-      if (!stage) {
-        // Walk action history in reverse to find most recent stage-relevant action
-        for (let i = actionHistory.length - 1; i >= 0; i--) {
-          stage = classifyAction(actionHistory[i].text, actionHistory[i].chamber, docType);
-          if (stage) break;
-        }
-      }
-      if (!stage) {
-        stage = docType === 'HB' ? 'In House Committee' : 'In Senate Committee';
-      }
-
-      const ilgaUrl = `https://www.ilga.gov/Legislation/BillStatus?DocNum=${m[2]}&GAID=18&DocTypeID=${docType}&SessionID=114`;
-      return {
-        billNumber: rawBillNumber.trim().toUpperCase(),
-        primarySponsor, stage, lastAction, lastActionDate,
-        nextActionDate, nextActionType, ilgaUrl,
-        lastAmendmentName, lastAmendmentDate, isShellBill
-      };
-    }
-
-
-    async function lookupBillILGA() {
-      const rawNum   = document.getElementById('add-bill-number-input').value.trim();
-      const statusEl = document.getElementById('lookup-status');
-      const previewEl= document.getElementById('ilga-preview');
-
-      if (!rawNum) {
-        statusEl.textContent = 'Please enter a bill number first.';
-        statusEl.className   = 'lookup-status error';
-        return;
-      }
-
-      statusEl.textContent = 'Looking up…';
-      statusEl.className   = 'lookup-status loading';
-      previewEl.style.display = 'none';
-      document.getElementById('preview-next-action-row').style.display = 'none';
-      addBillIlgaData = null;
-
-      try {
-        const data = await fetchBillFromILGA(rawNum);
-        addBillIlgaData = data;
-        document.getElementById('preview-sponsor').textContent    = data.primarySponsor || '(not found)';
-        document.getElementById('preview-stage').textContent      = data.stage;
-        document.getElementById('preview-last-action').textContent= data.lastAction
-          + (data.lastActionDate ? ` (${data.lastActionDate})` : '');
-        const nextActionRowEl = document.getElementById('preview-next-action-row');
-        if (data.nextActionDate) {
-          document.getElementById('preview-next-action').textContent =
-            data.nextActionDate + (data.nextActionType ? ` — ${data.nextActionType}` : '');
-          nextActionRowEl.style.display = 'flex';
-        } else {
-          nextActionRowEl.style.display = 'none';
-        }
-        previewEl.style.display  = 'block';
-        statusEl.textContent     = 'Found on ILGA ✓';
-        statusEl.className       = 'lookup-status success';
-        document.getElementById('add-bill-number-input').value = data.billNumber;
-      } catch (e) {
-        statusEl.textContent = e.message;
-        statusEl.className   = 'lookup-status error';
-      }
-    }
-
-    async function addBill(billData) {
-      const { content, sha } = await readGitHubFile('data/user-bills.json');
-      const userBills = content || [];
-      userBills.push(billData);
-      await writeGitHubFile('data/user-bills.json', userBills, sha, `Add bill: ${billData.billNumber}`);
-      legislationData.push(billData);
-      updateHighlights();
-      renderCards();
     }
 
     // ── Event listeners ───────────────────────────────────────────────────────
