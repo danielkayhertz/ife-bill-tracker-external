@@ -164,7 +164,7 @@
     "ga": 104,
     "programArea": "Housing",
     "name": "Income Property Disclosure Requirements",
-    "why": "Requires owners of income-producing properties to file physical property descriptions with county assessors.",
+    "why": "Lets counties that opt in by ordinance require income-property owners to file physical descriptions with assessors.",
     "bills": ["SB3003", "HB5464"]
   },
   {
@@ -172,7 +172,7 @@
     "ga": 104,
     "programArea": "Housing",
     "name": "Ban Landlord Junk Fees",
-    "why": "Requires landlords to disclose fees upfront and caps deposit, application, and other tenant fees.",
+    "why": "Caps application fees at $50, bans some fees outright, and allows only one deposit or move-related fee.",
     "bills": ["HB5234", "SB3763"]
   },
   {
@@ -188,7 +188,7 @@
     "ga": 104,
     "programArea": "Housing",
     "name": "Mortgage Nominee Registry and Fees",
-    "why": "Creates a registry for mortgage nominees and directs new recording fees to affordable housing.",
+    "why": "Creates a mortgage-nominee registry; a $150 fee funds rental housing support, and $25 of a county fee funds affordable housing.",
     "bills": ["HB5615", "SB3703"]
   },
   {
