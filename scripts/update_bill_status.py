@@ -10,6 +10,7 @@ Run from ife-bill-tracker-external/ directory:
 
 import json
 import re
+import ssl
 import sys
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -41,11 +42,48 @@ def get_xml_url(bill_number):
     return f"{ILGA_FTP_BASE}{doc_type}{padded}.xml"
 
 
+USER_AGENT = "IFE-BillTracker/1.0"
+
+# ILGA's server sends only its leaf certificate, not the intermediate that
+# signed it. Browsers and Windows fetch the missing intermediate on their own;
+# OpenSSL on the Linux Actions runner does not, so every fetch failed with
+# CERTIFICATE_VERIFY_FAILED from 2026-09-08. We bundle the intermediate here and
+# add it to the trust store; the chain must still end at a root the system
+# already trusts. We do NOT fetch it over the network at runtime: it was
+# downloaded once from the "CA Issuers" URL in ILGA's certificate
+# (http://crt.sectigo.com/SectigoPublicServerAuthenticationCAOVR40.crt),
+# verified (subject "Sectigo Public Server Authentication CA OV R40"; chains to
+# a certifi root), and committed as a pinned file — fetching a trust anchor
+# over plain HTTP at runtime would let a network attacker substitute their own.
+# ILGA's certificate expires 2026-12-23; if fetches start failing again after a
+# renewal, get the new intermediate from the new leaf certificate's Authority
+# Information Access "CA Issuers" URL, verify it the same way, and replace
+# this file.
+INTERMEDIATE_PEM = Path(__file__).parent / "certs" / "sectigo-public-server-authentication-ca-ov-r40.pem"
+
+
+def build_ssl_context(cafile=None):
+    """Default trust store (or `cafile`) plus ILGA's missing intermediate."""
+    ctx = ssl.create_default_context(cafile=cafile)
+    ctx.load_verify_locations(cafile=str(INTERMEDIATE_PEM))
+    return ctx
+
+
+_ssl_context = None
+
+
+def get_ssl_context():
+    global _ssl_context
+    if _ssl_context is None:
+        _ssl_context = build_ssl_context()
+    return _ssl_context
+
+
 def fetch_xml(url):
     """Fetch URL; return bytes or None on error."""
     try:
-        req = urllib.request.Request(url, headers={"User-Agent": "IFE-BillTracker/1.0"})
-        with urllib.request.urlopen(req, timeout=15) as resp:
+        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        with urllib.request.urlopen(req, timeout=15, context=get_ssl_context()) as resp:
             return resp.read()
     except Exception as e:
         print(f"    WARNING: fetch failed for {url}: {e}", file=sys.stderr)
@@ -360,6 +398,22 @@ def update_bill(bill, fetched_at):
     return {**bill, **fields}
 
 
+def _without_fetch_time(bills):
+    return [{k: v for k, v in b.items() if k != "ilgaFetchedAt"} for b in bills]
+
+
+def should_write(old, new, now, heartbeat_hours=20):
+    """Write when ILGA data changed, or once a day so ilgaFetchedAt shows the
+    fetch is alive. Without this, the 3-hourly run would commit 8 times a day."""
+    if _without_fetch_time(old) != _without_fetch_time(new):
+        return True
+    prev = max((b.get("ilgaFetchedAt") or "" for b in old), default="")
+    if not prev:
+        return True
+    prev_dt = datetime.strptime(prev, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+    return (now - prev_dt).total_seconds() > heartbeat_hours * 3600
+
+
 def main():
     repo_root       = Path(__file__).parent.parent
     bills_path      = repo_root / "data" / "bills.json"
@@ -396,9 +450,13 @@ def main():
         print("ERROR: All bill fetches failed — not writing output.", file=sys.stderr)
         sys.exit(1)
 
-    with open(bills_path, "w", encoding="utf-8") as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
-    print(f"Written to {bills_path}")
+    now = datetime.now(timezone.utc)
+    if should_write(bills, results, now):
+        with open(bills_path, "w", encoding="utf-8") as f:
+            json.dump(results, f, indent=2, ensure_ascii=False)
+        print(f"Written to {bills_path}")
+    else:
+        print("No ILGA changes and heartbeat not due — bills.json left as is.")
 
     # ── Refresh user-added bills ──────────────────────────────────────────────
     if not user_bills_path.exists():
@@ -419,9 +477,12 @@ def main():
         updated = update_bill(bill, fetched_at)
         updated_user.append(updated if updated is not None else bill)
 
-    with open(user_bills_path, "w", encoding="utf-8") as f:
-        json.dump(updated_user, f, indent=2, ensure_ascii=False)
-    print(f"Done. Refreshed {len(updated_user)} user-added bill(s).")
+    if should_write(user_bills, updated_user, now):
+        with open(user_bills_path, "w", encoding="utf-8") as f:
+            json.dump(updated_user, f, indent=2, ensure_ascii=False)
+        print(f"Done. Refreshed {len(updated_user)} user-added bill(s).")
+    else:
+        print("No changes to user-added bills.")
 
 
 if __name__ == "__main__":
