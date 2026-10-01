@@ -1358,6 +1358,7 @@
     // ── State ─────────────────────────────────────────────────────────────────
     let legislationData = [];
     let notesData       = {};
+    let usingFallback   = false;  // true when bills.json couldn't be read; suppresses outcome claims
     let currentBill     = null;
     let currentProgramArea = "Housing";
     let currentFilters  = { stage: "All", type: "All", category: new Set(), changedSince: "", upcomingOnly: false, search: "" };
@@ -1397,17 +1398,33 @@
 
     // ── Init ──────────────────────────────────────────────────────────────────
     async function init() {
+      // bills.json, user-bills.json, and notes.json are read independently, each with its own
+      // catch: a single shared Promise.all would let one file's failure (e.g. a notes.json 500)
+      // reject the whole batch and silently fall back to FALLBACK_DATA for bills too, which has
+      // no lastAction/lastActionDate and would make every bill look stalled.
+      let bills = null;
       try {
-        const [bills, userBills, notes] = await Promise.all([
-          readDataFile('bills.json', null),
-          readDataFile('user-bills.json', []),
-          readDataFile('notes.json', {}),
-        ]);
-        legislationData = [...(bills || FALLBACK_DATA), ...(userBills || [])];
-        notesData = notes || {};
+        bills = await readDataFile('bills.json', null);
       } catch (e) {
-        console.warn('Data files unavailable, using fallback:', e);
-        legislationData = FALLBACK_DATA;
+        console.warn('bills.json:', e);
+        bills = null;
+      }
+      usingFallback = !bills;
+      legislationData = bills || FALLBACK_DATA;
+
+      let userBills = [];
+      try {
+        userBills = await readDataFile('user-bills.json', []);
+      } catch (e) {
+        console.warn('user-bills.json:', e);
+        userBills = [];
+      }
+      legislationData = [...legislationData, ...(userBills || [])];
+
+      try {
+        notesData = (await readDataFile('notes.json', {})) || {};
+      } catch (e) {
+        console.warn('notes.json:', e);
         notesData = {};
       }
 
@@ -1615,7 +1632,7 @@
           </p>` : ''}
           <div class="card-footer">
             <span class="status-badge" style="background-color:${stageStyle.bg};color:${stageStyle.text};border:1px solid ${stageStyle.border};">${Comms.esc(stage)}</span>
-            ${(() => { const o = Comms.billOutcome(bill, sessionData, todayIso()); return `<span class="card-outcome">${outcomePill(o, Comms.outcomeLabel(o, currentStatus(), Comms.paNumber(bill)))}</span>`; })()}
+            ${usingFallback ? '' : (() => { const o = Comms.billOutcome(bill, sessionData, todayIso()); return `<span class="card-outcome">${outcomePill(o, Comms.outcomeLabel(o, currentStatus(), Comms.paNumber(bill)))}</span>`; })()}
           </div>
         </div>
       `;
@@ -1709,6 +1726,10 @@
     function currentGa()     { return sessionData?.ga || CURRENT_GA; }
 
     function rebuildCampaigns() {
+      // On fallback data (bills.json unreachable) there's no real lastAction/lastActionDate to
+      // derive an outcome from, so don't build campaigns at all: no campaign window, no agenda
+      // groups, no summary counts — the page must make no outcome claims in that state.
+      if (usingFallback) { campaigns = []; return; }
       const res = Comms.buildCampaigns(legislationData, campaignDefs, sessionData, todayIso());
       campaigns = res.campaigns;
       res.warnings.forEach(w => console.warn('[campaigns]', w));

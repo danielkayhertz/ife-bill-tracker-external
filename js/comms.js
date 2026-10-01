@@ -89,7 +89,9 @@
     const se = springEnd(session);
     if (se && todayIso > se) {
       const last = mdyToIso(bill.lastActionDate);
-      if ((!last || last <= se) && !hasUpcoming(bill, todayIso)) return 'stalled';
+      // A missing lastActionDate (e.g. FALLBACK_DATA, used when bills.json can't be read) must
+      // not be treated as "no activity since spring" — that would mark every such bill stalled.
+      if (last && last <= se && !hasUpcoming(bill, todayIso)) return 'stalled';
     }
     return 'moving';
   }
