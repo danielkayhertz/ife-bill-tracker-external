@@ -1624,6 +1624,7 @@
     }
 
     function openModal(bill, anchorEl, fromLink = false) {
+      closeCampaign();
       currentBill = bill;
       const typeClass  = (bill.type || 'endorsed').toLowerCase();
       const stage      = bill.stage || bill.status;
