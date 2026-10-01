@@ -82,3 +82,14 @@ test('bill cards keep only the law tag; the rest of the outcome tags are gone fr
   assert.ok(html.includes(`o === 'law' ? \`<span class="card-outcome">`), 'card outcome pill should render for law only');
   assert.ok(html.includes('function progressChips('), 'missing step chips renderer');
 });
+
+test('WordPress embed survives email line-wrapping: no // comments in the script, short lines', () => {
+  const embed = fs.readFileSync(require('node:path').join(__dirname, '..', 'embed', 'wordpress-embed.html'), 'utf8');
+  const script = embed.slice(embed.indexOf('<script>'), embed.indexOf('</script>'));
+  assert.ok(!/(^|\s)\/\/\s/m.test(script), 'a wrapped // comment turns the rest of its line into code');
+  const long = embed.split(/\r?\n/).filter(l => l.length > 72);
+  assert.deepEqual(long, [], 'lines over 72 characters get wrapped by email clients');
+  const parent = fs.readFileSync(require('node:path').join(__dirname, '..', 'embed', 'test-parent.html'), 'utf8');
+  const norm = t => t.replace(/\s+/g, ' ').trim();
+  assert.ok(norm(parent).includes(norm(script.replace('<script>', ''))), 'test-parent.html script is out of sync with the embed');
+});
