@@ -9,7 +9,7 @@ Single-file SPA for tracking Illinois housing + CLS legislation externally (publ
 - **`data/user-bills.json`** — bills added outside the CSV pipeline (e.g. HB624); hand-edited (there is no "Add Bill" UI anymore — that write path was removed); still read and merged into the bill list by `index.html` at init; cleared by `update_bills_from_csv.py` on each CSV migration
 - **`data/notes.json`** — shared IFE notes, keyed by bill number
 - **`update_bills_from_csv.py`** — CSV migration script; rebuilds bills.json + user-bills.json + FALLBACK_DATA from the two authoritative CSVs
-- **`js/comms.js`** — pure logic for the comms layer (links, dates, bill outcomes, campaigns, session status, coming up, blurbs). No DOM access, so it's tested directly: `node --test tests/comms.test.js`
+- **`js/comms.js`** — pure logic for the comms layer (links, dates, bill outcomes, campaigns, session status, coming up, blurbs). No DOM access, so it's tested directly: `node --test tests/comms.test.js tests/static.test.js` — run tests per file, not per directory; `node --test tests/` fails to discover tests on Windows with Node 22.
 - **`data/campaigns.json`** and **`data/session.json`** — hand-edited; never written by a script
 - **`scripts/validate_campaigns.py`** — checks `campaigns.json` against `bills.json` (bad bill numbers, duplicates, etc.); also run by the update Action
 - **`embed/wordpress-embed.html`** — the WordPress Custom HTML block that embeds the tracker on IFE's site; `embed/test-parent.html` is the local harness standing in for that page (serve the repo on :8000 for the tracker and :8001 for the harness)
@@ -43,6 +43,37 @@ The external tracker no longer uses the Cloudflare Worker. The Worker (shared wi
   userAdded: true    // only on user-bills.json entries
 }
 ```
+
+## Comms Layer Data (session.json / campaigns.json)
+
+**`data/session.json`** (hand-edited, never written by a script):
+```js
+{
+  ga, gaStart, gaEnd,                  // GA number; start/end ISO dates for the "died" cutoff
+  phases: [
+    { name, ranges: [{ start, end }] } // e.g. "Spring session", "Veto session"; a phase can have
+  ],                                   // more than one range (veto session usually does)
+  updates: { Housing: {text, date} | null, CLS: {text, date} | null },  // optional staff blurb per program area, shown in the session summary until the GA ends
+  sources: [ "https://..." ]           // citations for the phase dates; not shown on the page
+}
+```
+
+**`data/campaigns.json`** (hand-edited, never written by a script; array of campaign objects):
+```js
+{
+  id,                // string, unique — stable key used in #hash links and the campaign window; validate_campaigns.py warns on a duplicate
+  ga,                // GA number; falls back to session.json's ga if omitted
+  programArea,       // "Housing" | "CLS"
+  name,              // campaign display name; falls back to the lead bill's title if omitted
+  why,               // "Why it matters" blurb shown in the campaign window, or null
+  bills,             // array of bill numbers, any formatting normBill() accepts (e.g. "SB0062" or "sb 62")
+  leadBill,          // optional — which bill represents the campaign by default (falls back to the best-outcome bill); validate_campaigns.py warns if it isn't in `bills`
+  outcomeOverride,   // optional — one of law | governor | vetoed | moving | stalled | died; overrides the computed best-of-members outcome; validate_campaigns.py warns on any other value
+  overrideNote,      // optional — shown alongside an outcomeOverride
+  winNote,           // optional — shown once the campaign becomes law
+}
+```
+A bill not covered by any campaigns.json entry still renders, as a single-bill fallback campaign titled after its ILGA title; `scripts/validate_campaigns.py` logs that as a warning, never an error.
 
 ## Key Hardcoded Values
 - `GITHUB_REPO` = `'danielkayhertz/ife-bill-tracker-external'`
