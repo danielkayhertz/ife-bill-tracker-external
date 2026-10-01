@@ -19,3 +19,12 @@ test('reads data from raw.githubusercontent.com (or local data/ in dev)', () => 
 test('page title is not "Internal"', () => {
   assert.ok(!/<title>[^<]*Internal/i.test(html));
 });
+
+test('comms layer is wired in', () => {
+  assert.ok(html.includes('<script src="js/comms.js"></script>'));
+  for (const id of ['comms', 'session-summary', 'coming-up', 'agenda-groups', 'all-bills', 'jump-all-bills', 'print-agenda']) {
+    assert.ok(html.includes(`id="${id}"`), `missing #${id}`);
+  }
+  assert.ok(!html.includes('id="highlights-'), 'old highlights bar still present');
+  assert.ok(html.includes('@media print'));
+});
