@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Embed test parent</title></head>
+<body style="font-family:sans-serif;margin:0">
+  <div style="height:600px;background:#003F70;color:#fff;padding:24px">
+    Fake IFE page header (600px) — local test harness for embed/wordpress-embed.html.
+    Serve the repo on :8000 (tracker) and :8001 (this page) so they are cross-origin.
+  </div>
+  <iframe id="ife-bill-tracker"
+          src="http://localhost:8000/"
+          title="Impact for Equity Illinois Bill Tracker"
+          style="width:100%;border:0;min-height:900px;display:block;"
+          allow="clipboard-write"></iframe>
+  <script>
+  /* KEEP IN SYNC with the <script> in embed/wordpress-embed.html */
+  (function () {
+    var frame = document.getElementById('ife-bill-tracker');
+    var base = frame.getAttribute('src').split('#')[0];
+    var origin = new URL(base, location.href).origin;
+    // Incoming link: pass #104-HB5234 through to the tracker.
+    if (/^#(\d+-)?[A-Za-z]+\d+$/.test(location.hash)) frame.src = base + location.hash;
+    frame.addEventListener('load', function () {
+      frame.contentWindow.postMessage(
+        { type: 'bill-tracker-parent', url: location.origin + location.pathname + location.search }, origin);
+    });
+    window.addEventListener('message', function (e) {
+      if (e.origin !== origin || e.source !== frame.contentWindow || !e.data) return;
+      var d = e.data;
+      if (d.type === 'bill-tracker-resize' && d.height > 0) {
+        frame.style.height = d.height + 'px';
+      } else if (d.type === 'bill-tracker-hash' && typeof d.hash === 'string') {
+        history.replaceState(null, '', location.pathname + location.search + d.hash);
+      } else if (d.type === 'bill-tracker-scroll' && typeof d.top === 'number') {
+        var y = frame.getBoundingClientRect().top + window.pageYOffset + d.top - 20;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      }
+    });
+  })();
+  </script>
+</body>
+</html>
