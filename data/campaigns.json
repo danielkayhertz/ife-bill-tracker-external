@@ -13,7 +13,7 @@
     "programArea": "CLS",
     "name": "Credit for Change",
     "why": "Offers day-for-day sentence credit for good behavior from day one to most incarcerated people.",
-    "bills": ["HB5287"]
+    "bills": ["HB5287", "SB3354"]
   },
   {
     "id": "felony-murder-reform",
