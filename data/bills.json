@@ -18,13 +18,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-04-18T14:03:09Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 2,
@@ -45,13 +51,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:28Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 3,
@@ -72,13 +84,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:28Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 4,
@@ -99,13 +117,19 @@
     "stage": "Passed Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "4/17/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-04-03T21:47:00Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": "Senate Committee Amendment No. 1",
     "lastAmendmentDate": "3/3/2026",
-    "isShellBill": true
+    "isShellBill": true,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": "3/11/2026",
+      "senate": null
+    }
   },
   {
     "id": 5,
@@ -126,13 +150,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:28Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 6,
@@ -154,13 +184,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T02:24:37Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 7,
@@ -182,13 +218,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "4/24/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:29Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 8,
@@ -209,13 +251,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:30Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 9,
@@ -236,13 +284,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "2/10/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:31Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 10,
@@ -264,13 +318,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/5/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:32Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 11,
@@ -291,13 +351,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:32Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 12,
@@ -318,13 +384,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/6/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.458Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 13,
@@ -345,13 +417,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:32Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 14,
@@ -372,13 +450,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/5/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:32Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 15,
@@ -399,13 +483,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/2/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:33Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 16,
@@ -426,13 +516,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "6/1/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:33Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 17,
@@ -453,13 +549,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/5/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.595Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 18,
@@ -480,13 +582,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.639Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 19,
@@ -507,13 +615,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "6/1/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:28.155Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 20,
@@ -534,13 +648,19 @@
     "stage": "Signed into Law",
     "lastAction": "Public Act . . . . . . . . . 104-0554",
     "lastActionDate": "7/10/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-07-14T14:58:38Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": "House Floor Amendment No. 2",
     "lastAmendmentDate": "4/1/2026",
-    "isShellBill": true
+    "isShellBill": true,
+    "steps": {
+      "houseCommittee": "2/18/2026",
+      "house": "4/14/2026",
+      "senateCommittee": "5/27/2026",
+      "senate": "5/31/2026"
+    }
   },
   {
     "id": 21,
@@ -561,13 +681,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T02:24:40Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 22,
@@ -588,13 +714,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.042Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 23,
@@ -616,13 +748,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T02:24:40Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 24,
@@ -643,13 +781,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "1/13/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:27Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 25,
@@ -670,13 +814,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:28Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 26,
@@ -697,13 +847,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "1/16/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:28Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 27,
@@ -724,13 +880,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(b) / Re-referred to Rules Committee",
     "lastActionDate": "7/1/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T02:24:41Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 28,
@@ -751,13 +913,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Pursuant to Senate Rule 3-9(b) / Referred to Assignments",
     "lastActionDate": "7/2/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T02:24:41Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 29,
@@ -778,13 +946,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "2/10/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:31Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 30,
@@ -805,13 +979,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.356Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 31,
@@ -832,13 +1012,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Pursuant to Senate Rule 3-9(b) / Referred to Assignments",
     "lastActionDate": "7/2/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T02:24:41Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 32,
@@ -859,13 +1045,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(b) / Re-referred to Rules Committee",
     "lastActionDate": "7/1/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.406Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 33,
@@ -886,13 +1078,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Pursuant to Senate Rule 3-9(b) / Referred to Assignments",
     "lastActionDate": "7/2/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:29Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 34,
@@ -914,13 +1112,19 @@
     "stage": "Passed House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "4/17/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-04-03T21:47:00Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": "3/19/2025",
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 35,
@@ -943,13 +1147,19 @@
     "stage": "Passed House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "4/11/2025",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-04-03T21:47:00Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": "3/20/2025",
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 36,
@@ -972,13 +1182,19 @@
     "stage": "Passed House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "4/11/2025",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-04-03T21:47:00Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": "3/20/2025",
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 37,
@@ -999,13 +1215,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "1/14/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:29Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 38,
@@ -1026,13 +1248,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "1/29/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:30Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 39,
@@ -1053,13 +1281,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:30Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 40,
@@ -1081,13 +1315,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Pursuant to Senate Rule 3-9(b) / Referred to Assignments",
     "lastActionDate": "7/2/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T02:24:42Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 41,
@@ -1109,13 +1349,19 @@
     "stage": "Signed into Law",
     "lastAction": "Public Act . . . . . . . . . 104-0514",
     "lastActionDate": "6/26/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-07-02T15:21:41Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": "House Committee Amendment No. 1",
     "lastAmendmentDate": "3/23/2026",
-    "isShellBill": true
+    "isShellBill": true,
+    "steps": {
+      "houseCommittee": "3/25/2026",
+      "house": "4/9/2026",
+      "senateCommittee": "4/30/2026",
+      "senate": "5/30/2026"
+    }
   },
   {
     "id": 42,
@@ -1137,13 +1383,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/5/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:31Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 43,
@@ -1165,13 +1417,19 @@
     "stage": "Passed House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "4/17/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-04-03T21:47:00Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": "House Floor Amendment No. 2",
     "lastAmendmentDate": "4/14/2026",
-    "isShellBill": true
+    "isShellBill": true,
+    "steps": {
+      "houseCommittee": "3/25/2026",
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 44,
@@ -1192,13 +1450,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "6/1/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-04-17T14:22:33Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": "House Floor Amendment No. 1",
     "lastAmendmentDate": "3/20/2026",
-    "isShellBill": true
+    "isShellBill": true,
+    "steps": {
+      "houseCommittee": "3/19/2026",
+      "house": "4/15/2026",
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 45,
@@ -1220,13 +1484,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:32Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 46,
@@ -1248,13 +1518,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/5/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:32Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 47,
@@ -1275,13 +1551,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "4/24/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:33Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 48,
@@ -1302,13 +1584,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:33Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 49,
@@ -1330,13 +1618,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/5/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:33Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 50,
@@ -1357,13 +1651,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "6/1/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.788Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 51,
@@ -1384,13 +1684,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/25/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.829Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 52,
@@ -1412,13 +1718,19 @@
     "stage": "Passed Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "6/2/2025",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-04-03T21:47:00Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": "3/19/2025",
+      "senate": null
+    }
   },
   {
     "id": 53,
@@ -1441,13 +1753,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "2/19/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.870Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 54,
@@ -1468,13 +1786,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/19/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.922Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 55,
@@ -1496,13 +1820,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/19/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.963Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 56,
@@ -1523,13 +1853,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/19/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:28.006Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 57,
@@ -1550,13 +1886,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/19/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:28.055Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 58,
@@ -1577,13 +1919,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/19/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:28.106Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 59,
@@ -1604,13 +1952,19 @@
     "stage": "Passed Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "4/17/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:26.991Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": "3/5/2026",
+      "senate": null
+    }
   },
   {
     "id": 60,
@@ -1633,13 +1987,19 @@
     "stage": "Signed into Law",
     "lastAction": "Public Act . . . . . . . . . 104-0744",
     "lastActionDate": "7/31/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-08-01T14:36:59Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": "House Floor Amendment No. 1",
     "lastAmendmentDate": "5/29/2026",
-    "isShellBill": true
+    "isShellBill": true,
+    "steps": {
+      "houseCommittee": "5/27/2026",
+      "house": "6/1/2026",
+      "senateCommittee": "5/6/2026",
+      "senate": "5/20/2026"
+    }
   },
   {
     "id": 61,
@@ -1660,13 +2020,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:28.389Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 62,
@@ -1688,13 +2054,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/4/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:29Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 63,
@@ -1715,13 +2087,19 @@
     "stage": "Signed into Law",
     "lastAction": "Public Act . . . . . . . . . 104-0460",
     "lastActionDate": "2/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:26.588Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": "House Floor Amendment No. 2",
     "lastAmendmentDate": "2/23/2026",
-    "isShellBill": true
+    "isShellBill": true,
+    "steps": {
+      "houseCommittee": "3/12/2025",
+      "house": "2/24/2026",
+      "senateCommittee": "2/25/2026",
+      "senate": "2/26/2026"
+    }
   },
   {
     "id": 64,
@@ -1742,13 +2120,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T02:24:41Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 65,
@@ -1769,13 +2153,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:31Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 66,
@@ -1796,13 +2186,19 @@
     "stage": "Passed Senate Committee",
     "lastAction": "Rule 19(b) / Re-referred to Rules Committee",
     "lastActionDate": "7/1/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-06-01T18:42:23Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": "Senate Floor Amendment No. 1",
     "lastAmendmentDate": "5/31/2026",
-    "isShellBill": true
+    "isShellBill": true,
+    "steps": {
+      "houseCommittee": "3/25/2026",
+      "house": "4/14/2026",
+      "senateCommittee": "5/30/2026",
+      "senate": "5/31/2026"
+    }
   },
   {
     "id": 67,
@@ -1823,13 +2219,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/15/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T02:24:40Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 68,
@@ -1850,13 +2252,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "6/1/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-04-17T14:22:33Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": "House Floor Amendment No. 1",
     "lastAmendmentDate": "4/9/2026",
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": "3/25/2026",
+      "house": "4/15/2026",
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 69,
@@ -1877,13 +2285,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:26Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 70,
@@ -1904,13 +2318,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:27Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 71,
@@ -1931,13 +2351,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "1/14/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:27Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 72,
@@ -1958,13 +2384,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "1/14/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:27Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 73,
@@ -1985,13 +2417,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:27Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 74,
@@ -2012,13 +2450,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:27Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 75,
@@ -2039,13 +2483,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:27Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 76,
@@ -2066,13 +2516,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:27Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 77,
@@ -2093,13 +2549,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:27Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 78,
@@ -2120,13 +2582,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:27Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 79,
@@ -2147,13 +2615,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "1/29/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:27Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 80,
@@ -2174,13 +2648,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:27Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 81,
@@ -2201,13 +2681,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:27Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 82,
@@ -2228,13 +2714,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.093Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 83,
@@ -2255,13 +2747,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/6/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.259Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 84,
@@ -2282,13 +2780,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:28Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 85,
@@ -2309,13 +2813,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.308Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 86,
@@ -2337,13 +2847,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:28Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 87,
@@ -2364,13 +2880,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:28Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 88,
@@ -2391,13 +2913,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:28Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 89,
@@ -2418,13 +2946,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:28Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 90,
@@ -2445,13 +2979,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:28Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 91,
@@ -2472,13 +3012,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "1/26/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T02:24:41Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 92,
@@ -2499,13 +3045,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "1/30/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:28Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 93,
@@ -2526,13 +3078,19 @@
     "stage": "Passed Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "4/17/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:23.013Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": "3/5/2026",
+      "senate": null
+    }
   },
   {
     "id": 94,
@@ -2553,13 +3111,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(b) / Re-referred to Rules Committee",
     "lastActionDate": "7/1/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:29Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 95,
@@ -2580,13 +3144,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "2/3/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:29Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 96,
@@ -2607,13 +3177,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "6/1/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:29Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 97,
@@ -2635,13 +3211,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "1/14/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:29Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 98,
@@ -2662,13 +3244,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:29Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 99,
@@ -2689,13 +3277,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:29Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 100,
@@ -2716,13 +3310,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:29Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 101,
@@ -2743,13 +3343,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "2/6/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:29Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 102,
@@ -2770,13 +3376,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:30Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 103,
@@ -2797,13 +3409,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:30Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 104,
@@ -2824,13 +3442,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/2/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:30Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 105,
@@ -2851,13 +3475,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/2/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:30Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 106,
@@ -2878,13 +3508,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "2/3/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:30Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 107,
@@ -2905,13 +3541,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:30Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 108,
@@ -2932,13 +3574,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:30Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 109,
@@ -2959,13 +3607,19 @@
     "stage": "Passed House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "4/17/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-04-03T21:47:00Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": "House Committee Amendment No. 1",
     "lastAmendmentDate": "3/19/2026",
-    "isShellBill": true
+    "isShellBill": true,
+    "steps": {
+      "houseCommittee": "3/26/2026",
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 110,
@@ -2986,13 +3640,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:30Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 111,
@@ -3013,13 +3673,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:30Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 112,
@@ -3040,13 +3706,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "2/10/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:31Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 113,
@@ -3067,13 +3739,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "2/10/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:31Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 114,
@@ -3094,13 +3772,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/5/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:31Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 115,
@@ -3121,13 +3805,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:31Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 116,
@@ -3148,13 +3838,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:31Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 117,
@@ -3175,13 +3871,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "2/10/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:31Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 118,
@@ -3202,13 +3904,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:31Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 119,
@@ -3229,13 +3937,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:31Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 120,
@@ -3256,13 +3970,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:32Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 121,
@@ -3283,13 +4003,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:32Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 122,
@@ -3310,13 +4036,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:32Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 123,
@@ -3337,13 +4069,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "2/13/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:32Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 124,
@@ -3364,13 +4102,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "2/13/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:32Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 125,
@@ -3391,13 +4135,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/5/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:33Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 126,
@@ -3418,13 +4168,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/5/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:33Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 127,
@@ -3445,13 +4201,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:33Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 128,
@@ -3472,13 +4234,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "6/1/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-02-25T22:49:33Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 129,
@@ -3499,13 +4267,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "6/1/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.508Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 130,
@@ -3526,13 +4300,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "4/24/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.555Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 131,
@@ -3553,13 +4333,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.677Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 132,
@@ -3580,13 +4366,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "2/6/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.712Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 133,
@@ -3607,13 +4399,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:27.747Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 134,
@@ -3634,13 +4432,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Referred to Assignments",
     "lastActionDate": "4/28/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-04-29T15:21:08Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": "House Floor Amendment No. 3",
     "lastAmendmentDate": "4/22/2026",
-    "isShellBill": true
+    "isShellBill": true,
+    "steps": {
+      "houseCommittee": "3/12/2025",
+      "house": "4/22/2026",
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 135,
@@ -3661,13 +4465,19 @@
     "stage": "Passed House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "4/17/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-04-03T21:47:00Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": "2/26/2026",
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 136,
@@ -3688,13 +4498,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "5/22/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:28.430Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 137,
@@ -3716,13 +4532,19 @@
     "stage": "In Senate Committee",
     "lastAction": "Rule 3-9(a) / Re-referred to Assignments",
     "lastActionDate": "4/24/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:28.474Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 138,
@@ -3743,13 +4565,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:28.563Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 139,
@@ -3770,13 +4598,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:28.613Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 140,
@@ -3797,13 +4631,19 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:28.524Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 141,
@@ -3824,13 +4664,19 @@
     "stage": "Signed into Law",
     "lastAction": "Public Act . . . . . . . . . 104-0482",
     "lastActionDate": "6/26/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-07-02T15:21:41Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": "House Floor Amendment No. 2",
     "lastAmendmentDate": "2/27/2026",
-    "isShellBill": true
+    "isShellBill": true,
+    "steps": {
+      "houseCommittee": "2/24/2026",
+      "house": "4/14/2026",
+      "senateCommittee": "5/6/2026",
+      "senate": "5/20/2026"
+    }
   },
   {
     "id": 142,
@@ -3851,13 +4697,19 @@
     "stage": "In House Committee",
     "lastAction": "Referred to Rules Committee",
     "lastActionDate": "2/10/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-11T03:32:28.705Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 143,
@@ -3878,13 +4730,19 @@
     "stage": "Passed House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "4/17/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-04-03T21:47:00Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": "3/26/2026",
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 144,
@@ -3905,13 +4763,19 @@
     "stage": "Passed House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "4/17/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-04-03T21:47:00Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": "3/24/2026",
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   },
   {
     "id": 145,
@@ -3934,12 +4798,18 @@
     "stage": "In House Committee",
     "lastAction": "Rule 19(a) / Re-referred to Rules Committee",
     "lastActionDate": "3/27/2026",
-    "ilgaFetchedAt": "2026-10-01T17:37:32Z",
+    "ilgaFetchedAt": "2026-10-01T17:43:56Z",
     "stageChangedAt": "2026-03-18T14:24:04Z",
     "nextActionDate": null,
     "nextActionType": null,
     "lastAmendmentName": null,
     "lastAmendmentDate": null,
-    "isShellBill": false
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    }
   }
 ]
