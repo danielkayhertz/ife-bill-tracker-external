@@ -925,14 +925,15 @@
     .jump-link { align-self: flex-end; background: none; border: none; color: #005a8c; font: 600 13px 'Montserrat', sans-serif; cursor: pointer; padding: 0; }
     .jump-link:hover { text-decoration: underline; }
     .session-summary { background: #fff; border-top: 5px solid #003F70; border-radius: 0 0 10px 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); padding: 18px 22px; }
-    .summary-headline { font-size: 18px; font-weight: 700; color: #003F70; margin-bottom: 10px; }
-    .summary-facts { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 6px; }
-    .summary-fact { font-size: 13px; color: #444; }
-    .summary-fact strong { display: block; font-size: 26px; color: #005a8c; line-height: 1.1; }
+    .summary-lead { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+    .summary-sentence { flex: 1 1 360px; font-size: 18px; font-weight: 600; line-height: 1.45; color: #003F70; margin: 0; }
+    .summary-sentence strong { font-size: 22px; color: #005a8c; }
+    .learn-more { background: #005a8c; color: #fff; border: none; border-radius: 6px; padding: 9px 16px; font: 600 13px 'Montserrat', sans-serif; cursor: pointer; white-space: nowrap; }
+    .learn-more:hover { background: #00446b; }
     .summary-update { margin: 12px 0 0; padding: 10px 14px; border-left: 3px solid #005a8c; background: #f6f8fa; font-size: 14px; line-height: 1.55; color: #333; white-space: pre-line; }
     .summary-update-label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #666; margin-bottom: 4px; white-space: normal; }
     .summary-stale { margin-top: 8px; font-size: 12px; color: #8a6d3b; }
-    .coming-up, .agenda { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); padding: 16px 22px; }
+    .coming-up, .priorities { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); padding: 16px 22px; }
     .comms-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #666; margin: 0 0 8px; }
     .comms-sublabel { font-size: 12px; font-weight: 700; color: #444; margin: 12px 0 6px; }
     .comms-empty { font-size: 14px; color: #666; font-style: italic; }
@@ -942,8 +943,16 @@
     .coming-name { flex: 1; font-weight: 600; font-size: 14px; }
     .coming-name small, .agenda-bills { color: #777; font-weight: 400; font-size: 12px; margin-left: 6px; }
     .coming-action { font-size: 12px; color: #555; }
-    .agenda-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
-    .agenda-title { font-size: 20px; color: #003F70; }
+    .agenda-title { font-size: 20px; color: #003F70; margin-bottom: 4px; }
+    .agenda .agenda-group:first-child { margin-top: 0; }
+    .priority-card { display: block; width: 100%; text-align: left; background: none; border: none; border-bottom: 1px solid #eee; padding: 14px 2px; font-family: inherit; color: #222; cursor: pointer; }
+    .priority-card:last-child { border-bottom: none; }
+    .priority-card:hover { background: #f6f8fa; }
+    .priority-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
+    .priority-name { font-weight: 700; font-size: 16px; color: #003F70; }
+    .priority-why { display: block; margin: 6px 0 8px; font-size: 14px; line-height: 1.5; color: #444; }
+    .priority-bill { display: block; font-size: 13px; color: #555; margin-top: 3px; }
+    .priority-bill strong { color: #005a8c; margin-right: 4px; }
     .print-link { background: none; border: none; color: #005a8c; font: 600 12px 'Montserrat', sans-serif; cursor: pointer; }
     .agenda-group { margin-top: 12px; }
     .agenda-main { flex: 1; display: flex; flex-direction: column; gap: 2px; }
@@ -964,9 +973,15 @@
     @media print {
       body { background: #fff; }
       .program-tabs, .jump-link, .print-link, .filters, .main-content, .all-bills-heading,
-      .bill-modal-overlay, .coming-up.is-empty { display: none !important; }
+      .bill-modal-overlay, .coming-up.is-empty, .learn-more,
+      #agenda-modal-overlay .bill-modal-close-btn, #agenda-modal-overlay .bill-modal-actions { display: none !important; }
+      /* The agenda lives in the Learn more popup on screen; on paper it prints after the page sections. */
+      #agenda-modal-overlay { display: block !important; position: static; background: none; padding: 0; }
+      #agenda-modal-overlay .bill-modal { position: static; transform: none; width: auto; max-width: none; max-height: none; overflow: visible; box-shadow: none; border: 1px solid #ccc; border-radius: 10px; margin-top: 16px; }
+      #agenda-modal-overlay .bill-modal-header { background: none; color: #003F70; padding: 16px 22px 0; }
       .comms { background: #fff; padding: 0; border: none; }
-      .session-summary, .coming-up, .agenda { box-shadow: none; border: 1px solid #ccc; }
+      .session-summary, .coming-up, .priorities { box-shadow: none; border: 1px solid #ccc; }
+      .priority-card { break-inside: avoid; }
       .agenda-row, .coming-row { break-inside: avoid; }
       .print-date { display: block; }
     }
@@ -995,7 +1010,7 @@
       .form-row { flex-direction: column; }
       .coming-row, .agenda-row { flex-wrap: wrap; }
       .coming-date { min-width: 0; }
-      .summary-facts { gap: 16px; }
+      .summary-sentence { font-size: 16px; }
     }
   </style>
 </head>
@@ -1014,12 +1029,9 @@
       <button type="button" class="jump-link" id="jump-all-bills">Jump to all tracked bills &darr;</button>
       <div class="session-summary" id="session-summary"></div>
       <div class="coming-up" id="coming-up"></div>
-      <div class="agenda" id="agenda">
-        <div class="agenda-head">
-          <h2 class="agenda-title">IFE's agenda</h2>
-          <button type="button" class="print-link" id="print-agenda">Print agenda</button>
-        </div>
-        <div id="agenda-groups"></div>
+      <div class="priorities" id="priorities">
+        <h2 class="agenda-title">IFE's top legislative priorities</h2>
+        <div id="priorities-list"></div>
       </div>
       <p class="print-date" id="print-date"></p>
     </div>
@@ -1165,6 +1177,24 @@
           <button class="btn-secondary" id="campaign-copy-blurb">Copy blurb</button>
           <button class="btn-secondary" id="campaign-modal-close-btn">Close</button>
           <span class="copy-status" id="campaign-copy-status" aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Learn more: IFE's full agenda for the current tab -->
+  <div class="bill-modal-overlay" id="agenda-modal-overlay">
+    <div class="bill-modal" role="dialog" aria-modal="true" aria-labelledby="agenda-modal-title">
+      <div class="bill-modal-header endorsed">
+        <button class="bill-modal-close-btn" id="agenda-modal-close" aria-label="Close">&#215;</button>
+        <h2 class="bill-modal-bill-number" id="agenda-modal-title">IFE's agenda</h2>
+        <p class="bill-modal-header-sponsor" id="agenda-modal-area"></p>
+      </div>
+      <div class="bill-modal-body agenda" id="agenda">
+        <div id="agenda-groups"></div>
+        <div class="bill-modal-actions">
+          <button class="btn-secondary" id="print-agenda">Print agenda</button>
+          <button class="btn-secondary" id="agenda-modal-close-btn">Close</button>
         </div>
       </div>
     </div>
@@ -1642,6 +1672,7 @@
 
     function openModal(bill, anchorEl, fromLink = false) {
       closeCampaign();
+      closeAgenda();
       currentBill = bill;
       const typeClass  = Comms.esc((bill.type || 'endorsed').toLowerCase());
       const stage      = bill.stage || bill.status;
@@ -1749,19 +1780,17 @@
 
     function renderSummary() {
       const st = currentStatus();
-      const counts = Comms.outcomeCounts(areaCampaigns());
-      const facts = [
-        ['law', 'became law'], ['governor', "on the governor's desk"], ['vetoed', 'vetoed'],
-        ['moving', 'moving'], ['stalled', st.springEnded ? "didn't advance" : 'stalled'], ['died', 'did not pass'],
-      ].filter(([k]) => counts[k])
-       .map(([k, t]) => `<div class="summary-fact"><strong>${counts[k]}</strong>${Comms.esc(t)}</div>`).join('');
+      const parts = Comms.summaryParts(Comms.outcomeCounts(areaCampaigns()), st);
+      const sentence = parts
+        ? parts.map(p => typeof p === 'number' ? `<strong>${p}</strong>` : Comms.esc(p)).join('')
+        : '';
       const upd = Comms.staffUpdate(sessionData, currentProgramArea, st);
       const fetched = Comms.latestFetch(legislationData);
       const stale = Comms.isStale(legislationData, new Date());
       const el = document.getElementById('session-summary');
       el.innerHTML =
-        (st.headline ? `<p class="summary-headline">${Comms.esc(st.headline)}</p>` : '')
-        + (facts ? `<div class="summary-facts" aria-label="IFE's bills this General Assembly">${facts}</div>` : '')
+        (sentence ? `<div class="summary-lead"><p class="summary-sentence">${sentence}</p>`
+          + `<button type="button" class="learn-more" id="learn-more">Learn more</button></div>` : '')
         + (upd ? `<blockquote class="summary-update"><span class="summary-update-label">${Comms.esc(upd.label)}</span>${Comms.esc(upd.text)}</blockquote>` : '')
         + (stale ? `<p class="summary-stale">Status data last updated ${Comms.esc(new Date(fetched).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }))}.</p>` : '');
       el.style.display = el.innerHTML ? '' : 'none';
@@ -1792,10 +1821,29 @@
       el.classList.toggle('is-empty', !rows.length && !floor.length);
     }
 
+    function areaName() { return currentProgramArea === 'CLS' ? 'Criminal Legal System' : 'Housing'; }
+
+    function renderPriorities() {
+      const st = currentStatus();
+      const list = areaCampaigns().filter(c => c.type === 'Sponsored');
+      document.getElementById('priorities').style.display = list.length ? '' : 'none';
+      document.getElementById('priorities-list').innerHTML = list.map(c => `
+        <button type="button" class="priority-card" data-campaign="${Comms.esc(c.id)}">
+          <span class="priority-head">
+            <span class="priority-name">${Comms.esc(c.name)}</span>
+            ${outcomePill(c.outcome, Comms.outcomeLabel(c.outcome, st, c.pa))}
+          </span>
+          ${c.why ? `<span class="priority-why">${Comms.esc(c.why)}</span>` : ''}
+          ${c.bills.map(({ bill }) => `
+            <span class="priority-bill"><strong>${Comms.esc(Comms.normBill(bill.billNumber))}</strong>${
+              bill.lastAction ? Comms.esc((bill.lastActionDate ? bill.lastActionDate + ' · ' : '') + bill.lastAction) : ''}</span>`).join('')}
+        </button>`).join('');
+    }
+
     function renderAgenda() {
       const st = currentStatus();
       const groups = Comms.groupCampaigns(areaCampaigns());
-      document.getElementById('agenda').style.display = groups.length ? '' : 'none';
+      document.getElementById('agenda-modal-area').textContent = `${areaName()} · ${Comms.ordinal(currentGa())} General Assembly`;
       document.getElementById('agenda-groups').innerHTML = groups.map(g => `
         <div class="agenda-group">
           <h3 class="comms-label">${Comms.esc(Comms.groupHeading(g.outcome, st))} (${g.items.length})</h3>
@@ -1811,7 +1859,7 @@
         </div>`).join('');
     }
 
-    function renderComms() { renderSummary(); renderComingUp(); renderAgenda(); }
+    function renderComms() { renderSummary(); renderComingUp(); renderPriorities(); renderAgenda(); }
 
     // The iframe has no scrollbar of its own (the parent page scrolls it),
     // so scrolling inside the embed has to be done by the parent.
@@ -1881,6 +1929,7 @@
     function openCampaign(c, anchorEl, fromLink = false) {
       if (!c) return;
       closeModal();
+      closeAgenda();
       currentCampaign = c;
       const st = currentStatus();
       const today = todayIso();
@@ -1927,6 +1976,17 @@
       document.body.style.overflow = '';
       currentCampaign = null;
       setLinkHash('');
+    }
+
+    const agendaOverlay = document.getElementById('agenda-modal-overlay');
+    function openAgenda(anchorEl) {
+      closeModal(); closeCampaign();
+      showOverlay(agendaOverlay, anchorEl, false);
+    }
+    function closeAgenda() {
+      if (!agendaOverlay.classList.contains('visible')) return;
+      agendaOverlay.classList.remove('visible');
+      document.body.style.overflow = '';
     }
 
     function openFromHash(hash) {
@@ -2030,16 +2090,26 @@
       });
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-          closeModal(); closeCampaign();
+          closeModal(); closeCampaign(); closeAgenda();
           infoBtn.setAttribute('aria-expanded', 'false');
           infoPopover.classList.remove('visible');
         }
       });
 
       document.getElementById('comms').addEventListener('click', (e) => {
+        if (e.target.closest('#learn-more')) { openAgenda(e.target.closest('#learn-more')); return; }
         const row = e.target.closest('[data-campaign]');
         if (row) openCampaign(campaigns.find(c => c.id === row.dataset.campaign), row);
       });
+      // A row in the Learn more popup swaps the popup for that campaign's window, anchored
+      // where the popup was (the row itself disappears with the popup).
+      agendaOverlay.addEventListener('click', (e) => {
+        if (e.target === agendaOverlay) { closeAgenda(); return; }
+        const row = e.target.closest('[data-campaign]');
+        if (row) openCampaign(campaigns.find(c => c.id === row.dataset.campaign), document.getElementById('session-summary'));
+      });
+      document.getElementById('agenda-modal-close').addEventListener('click', closeAgenda);
+      document.getElementById('agenda-modal-close-btn').addEventListener('click', closeAgenda);
       document.getElementById('jump-all-bills').addEventListener('click', () =>
         requestParentScroll(document.getElementById('all-bills')));
       document.getElementById('print-agenda').addEventListener('click', () => {

@@ -289,6 +289,26 @@
     return `${who}: ${ref} ${body} ${url}`.trim();
   }
 
+  // The banner sentence, as text pieces and numbers (the page bolds the numbers).
+  // "Another N" counts every campaign that hasn't become law. Once the GA is over
+  // nothing is still being worked on, so that sentence is dropped.
+  function summaryParts(counts, status) {
+    const law = counts.law || 0;
+    const total = Object.values(counts).reduce((a, b) => a + b, 0);
+    if (!total) return null;
+    const bills = law === 1 ? 'bill' : 'bills';
+    let parts;
+    if (status.gaEnded) parts = [`In the ${ordinal(status.ga)} General Assembly, `, law, ` IFE-endorsed ${bills} became law.`];
+    else if (status.springEnded) parts = ['During the Spring session, ', law, ` IFE-endorsed ${bills} became law.`];
+    else parts = ['So far this session, ', law, ` IFE-endorsed ${bills} ${law === 1 ? 'has' : 'have'} become law.`];
+    const other = total - law;
+    if (other && !status.gaEnded) {
+      parts[parts.length - 1] += ' We and our partners are still working on another ';
+      parts.push(other, '.');
+    }
+    return parts;
+  }
+
   function latestFetch(bills) {
     return bills.map(b => b.ilgaFetchedAt).filter(Boolean).sort().pop() || null;
   }
@@ -302,7 +322,7 @@
     OUTCOME_RANK, MONTHS, FULL_MONTHS, esc, safeUrl, normBill, parseHash, hashFor, mdyToIso, localIso, addDaysIso,
     springEnd, hasUpcoming, billOutcome, paNumber, awaitingFloorVote, ordinal, outcomeLabel, groupHeading,
     buildCampaigns, groupCampaigns, outcomeCounts, comingUp, floorVotes, sessionStatus, formatRange,
-    formatRanges, comingUpEmptyText, staffUpdate, blurb, latestFetch, isStale,
+    formatRanges, comingUpEmptyText, staffUpdate, blurb, summaryParts, latestFetch, isStale,
   };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.Comms = api;

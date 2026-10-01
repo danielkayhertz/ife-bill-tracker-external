@@ -29,6 +29,16 @@ test('comms layer is wired in', () => {
   assert.ok(html.includes('@media print'));
 });
 
+test('agenda lives in a Learn more popup; priorities section takes its place on the page', () => {
+  for (const id of ['priorities', 'agenda-modal-overlay', 'agenda-modal-close']) {
+    assert.ok(html.includes(`id="${id}"`), `missing #${id}`);
+  }
+  const comms = html.slice(html.indexOf('<section class="comms"'), html.indexOf('</section>'));
+  assert.ok(!comms.includes('id="agenda-groups"'), 'agenda list should not be inline in the comms section');
+  assert.ok(comms.includes("IFE's top legislative priorities"));
+  assert.ok(html.includes('Learn more'));
+});
+
 test('ILGA/staff bill fields are escaped before HTML interpolation', () => {
   // A direct `${bill.xxx}` template interpolation (no Comms.esc/escapeHtml wrapper) would inject
   // unescaped ILGA/staff text straight into the DOM. After the fix every such field is wrapped.
