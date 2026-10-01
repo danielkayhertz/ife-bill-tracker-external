@@ -17,6 +17,11 @@ def norm(n):
     return m.group(1) + m.group(2) if m else None
 
 
+# Outcome rank, matching js/comms.js's OUTCOME_RANK exactly (law > governor > vetoed > moving >
+# stalled > died). A campaign's optional outcomeOverride must be one of these.
+VALID_OUTCOMES = {"law", "governor", "vetoed", "moving", "stalled", "died"}
+
+
 def check(bills, campaigns):
     warnings, owner = [], {}
     known = {}
@@ -25,18 +30,32 @@ def check(bills, campaigns):
             warnings.append(f"bill entry is not an object: {b!r}")
             continue
         known[norm(b.get("billNumber"))] = b
+    seen_ids = set()
     for c in campaigns:
         if not isinstance(c, dict):
             warnings.append(f"campaign entry is not an object: {c!r}")
             continue
-        for n in c.get("bills", []):
+        cid = c.get("id")
+        if cid in seen_ids:
+            warnings.append(f"duplicate campaign id: {cid}")
+        else:
+            seen_ids.add(cid)
+        bill_list = c.get("bills", [])
+        for n in bill_list:
             k = norm(n)
             if k not in known:
-                warnings.append(f"campaign {c.get('id')}: bill {n} is not in bills.json or user-bills.json")
+                warnings.append(f"campaign {cid}: bill {n} is not in bills.json or user-bills.json")
             elif k in owner:
-                warnings.append(f"bill {n} is in two campaigns: {owner[k]} and {c.get('id')}")
+                warnings.append(f"bill {n} is in two campaigns: {owner[k]} and {cid}")
             else:
-                owner[k] = c.get("id")
+                owner[k] = cid
+        lead = c.get("leadBill")
+        if lead is not None and norm(lead) not in {norm(n) for n in bill_list}:
+            warnings.append(f"campaign {cid}: leadBill {lead} is not in its bills list")
+        override = c.get("outcomeOverride")
+        if override is not None and override not in VALID_OUTCOMES:
+            warnings.append(
+                f"campaign {cid}: outcomeOverride {override!r} is not one of {sorted(VALID_OUTCOMES)}")
     for k, b in known.items():
         if b.get("type") in ("Endorsed", "Sponsored") and k not in owner:
             warnings.append(f"{b['type']} bill {b['billNumber']} has no campaign; "

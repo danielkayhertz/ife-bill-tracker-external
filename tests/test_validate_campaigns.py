@@ -56,6 +56,37 @@ def test_main_survives_malformed_campaigns_json(tmp_path, capsys):
     assert "::warning::" in out
 
 
+def test_duplicate_campaign_id_warns():
+    camps = [{"id": "a", "bills": ["HB5234"]}, {"id": "a", "bills": ["SB0062"]}]
+    w = vc.check(BILLS, camps)
+    assert any("duplicate campaign id: a" in x for x in w)
+
+
+def test_lead_bill_not_in_campaign_bills_warns():
+    camps = [{"id": "a", "bills": ["HB5234", "SB0062"], "leadBill": "HB9999"}]
+    w = vc.check(BILLS, camps)
+    assert any("leadBill" in x and "HB9999" in x for x in w)
+
+
+def test_lead_bill_in_campaign_bills_does_not_warn():
+    camps = [{"id": "a", "bills": ["HB5234", "SB0062"], "leadBill": "sb62"}]
+    w = vc.check(BILLS, camps)
+    assert not any("leadBill" in x for x in w)
+
+
+def test_invalid_outcome_override_warns():
+    camps = [{"id": "a", "bills": ["HB5234"], "outcomeOverride": "won"}]
+    w = vc.check(BILLS, camps)
+    assert any("outcomeOverride" in x and "won" in x for x in w)
+
+
+def test_valid_outcome_override_does_not_warn():
+    for outcome in ["law", "governor", "vetoed", "moving", "stalled", "died"]:
+        camps = [{"id": "a", "bills": ["HB5234"], "outcomeOverride": outcome}]
+        w = vc.check(BILLS, camps)
+        assert not any("outcomeOverride" in x for x in w), (outcome, w)
+
+
 def test_main_survives_non_dict_campaign_entries(tmp_path, capsys):
     (tmp_path / "bills.json").write_text(json.dumps(BILLS), encoding="utf-8")
     (tmp_path / "user-bills.json").write_text("[]", encoding="utf-8")
