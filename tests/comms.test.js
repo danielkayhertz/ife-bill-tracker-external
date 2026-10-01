@@ -134,7 +134,7 @@ test('labels switch wording when spring ends', () => {
   assert.equal(C.outcomeLabel('law', {}, '104-0514'), 'Law · PA 104-0514');
   assert.equal(C.outcomeLabel('law', {}, null), 'Law');
   assert.equal(C.outcomeLabel('died', { ga: 104 }), 'Died with the 104th GA');
-  assert.equal(C.groupHeading('stalled', { springEnded: true }), "Didn't advance this session");
+  assert.equal(C.groupHeading('stalled', { springEnded: true }), 'Not yet law');
   assert.equal(C.groupHeading('law', {}), 'Became law');
   assert.equal(C.ordinal(104), '104th');
   assert.equal(C.ordinal(101), '101st');
@@ -333,4 +333,39 @@ test('summaryParts: after the GA ends, no "still working on" claim', () => {
 
 test('summaryParts: no campaigns means no sentence', () => {
   assert.equal(C.summaryParts({}, C.sessionStatus(SESSION, '2026-09-30')), null);
+});
+
+const NO_STEPS = { houseCommittee: null, house: null, senateCommittee: null, senate: null };
+
+test('billSteps: House bill reads House first, Senate bill reads Senate first', () => {
+  const hb = C.billSteps({ billNumber: 'HB5198', steps: { ...NO_STEPS, houseCommittee: '3/25/2026', house: '4/15/2026' } });
+  assert.deepEqual(hb.chambers, [
+    { name: 'House', committee: '3/25/2026', floor: '4/15/2026' },
+    { name: 'Senate', committee: null, floor: null },
+  ]);
+  assert.equal(hb.passed, 2);
+  const sb = C.billSteps({ billNumber: 'SB3084', steps: NO_STEPS });
+  assert.deepEqual(sb.chambers.map(c => c.name), ['Senate', 'House']);
+  assert.equal(sb.passed, 0);
+});
+
+test('billSteps: null when the update script has not recorded steps yet', () => {
+  assert.equal(C.billSteps({ billNumber: 'HB1' }), null);
+  assert.equal(C.billSteps({ billNumber: 'HB1', steps: 'bad' }), null);
+});
+
+test('stepsNote: all four steps passed but not law means a concurrence vote is pending in the origin chamber', () => {
+  const all = { houseCommittee: '1/1/2026', house: '1/2/2026', senateCommittee: '1/3/2026', senate: '1/4/2026' };
+  assert.equal(C.stepsNote({ billNumber: 'HB4377', steps: all }, 'stalled'), 'Awaiting House concurrence vote');
+  assert.equal(C.stepsNote({ billNumber: 'SB9', steps: all }, 'moving'), 'Awaiting Senate concurrence vote');
+  assert.equal(C.stepsNote({ billNumber: 'HB4377', steps: all }, 'law'), null);
+  assert.equal(C.stepsNote({ billNumber: 'HB5198', steps: { ...NO_STEPS, house: '1/2/2026' } }, 'stalled'), null);
+});
+
+test('furthestBill: the campaign bill with the most steps passed, lead bill on a tie', () => {
+  const a = { billNumber: 'HB4377', steps: { ...NO_STEPS, houseCommittee: 'x', house: 'x', senateCommittee: 'x' } };
+  const b = { billNumber: 'SB3084', steps: NO_STEPS };
+  assert.equal(C.furthestBill({ lead: b, bills: [{ bill: a }, { bill: b }] }), a);
+  const c = { billNumber: 'SB1', steps: NO_STEPS };
+  assert.equal(C.furthestBill({ lead: c, bills: [{ bill: b }, { bill: c }] }), c);
 });

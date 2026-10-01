@@ -951,11 +951,25 @@
     .priority-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; }
     .priority-name { font-weight: 700; font-size: 16px; color: #003F70; }
     .priority-why { display: block; margin: 6px 0 8px; font-size: 14px; line-height: 1.5; color: #444; }
-    .priority-bill { display: block; font-size: 13px; color: #555; margin-top: 3px; }
-    .priority-bill strong { color: #005a8c; margin-right: 4px; }
+    .priority-bill { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-size: 13px; color: #555; margin-top: 6px; }
+    .priority-bill strong { color: #005a8c; min-width: 54px; }
+    /* Legislative steps: one pill per chamber, Committee | Floor, IFE lime once passed */
+    .steps { display: inline-flex; flex-wrap: wrap; gap: 6px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .steps-ch { display: inline-flex; align-items: stretch; border: 1.5px solid #c9cfd4; border-radius: 11px; overflow: hidden; font-size: 10px; font-weight: 600; white-space: nowrap; background: #fff; }
+    .steps-ch.any { border-color: #cbdc00; }
+    .steps-ch .nm { display: flex; align-items: center; padding: 2px 7px; background: #f3f5f6; color: #555; font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    .steps-ch.any .nm { background: #eef3c0; color: #003F70; }
+    .steps-ch .st { display: flex; align-items: center; gap: 3px; padding: 2px 7px 2px 5px; color: #7d858b; border-left: 1px solid #e3e6e8; }
+    .steps-ch .st.on { background: #cbdc00; color: #003F70; border-left-color: #b9c900; }
+    .steps-ch .ck { position: relative; flex: none; width: 9px; height: 9px; }
+    .steps-ch .ck::after { content: ''; position: absolute; left: 2.5px; top: 0; width: 3px; height: 6px; border: solid #003F70; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+    .steps-ch .oc { flex: none; width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid #c9cfd4; }
+    .steps-note { font-size: 11px; font-weight: 600; color: #003F70; font-style: italic; }
+    .agenda-status { flex: 0 0 auto; margin-left: auto; display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 4px 8px; }
     .print-link { background: none; border: none; color: #005a8c; font: 600 12px 'Montserrat', sans-serif; cursor: pointer; }
     .agenda-group { margin-top: 12px; }
-    .agenda-main { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+    .agenda-row { flex-wrap: wrap; }
+    .agenda-main { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
     .agenda-name { font-weight: 600; font-size: 14px; }
     .agenda-bills { margin-left: 0; }
     .agenda-why { font-size: 13px; color: #555; }
@@ -1662,7 +1676,7 @@
           </p>` : ''}
           <div class="card-footer">
             <span class="status-badge" style="background-color:${stageStyle.bg};color:${stageStyle.text};border:1px solid ${stageStyle.border};">${Comms.esc(stage)}</span>
-            ${usingFallback ? '' : (() => { const o = Comms.billOutcome(bill, sessionData, todayIso()); return `<span class="card-outcome">${outcomePill(o, Comms.outcomeLabel(o, currentStatus(), Comms.paNumber(bill)))}</span>`; })()}
+            ${usingFallback ? '' : (() => { const o = Comms.billOutcome(bill, sessionData, todayIso()); return o === 'law' ? `<span class="card-outcome">${outcomePill(o, Comms.outcomeLabel(o, currentStatus(), Comms.paNumber(bill)))}</span>` : ''; })()}
           </div>
         </div>
       `;
@@ -1773,6 +1787,24 @@
     function outcomePill(outcome, label) {
       return `<span class="outcome-pill outcome-${outcome}">${Comms.esc(label)}</span>`;
     }
+    // Committee/Floor chips per chamber, filled once the bill has passed that step.
+    function progressChips(bill, outcome) {
+      const s = Comms.billSteps(bill);
+      if (!s) return '';
+      const step = (label, date) => `<span class="st${date ? ' on' : ''}"><span class="${date ? 'ck' : 'oc'}"></span>${label}</span>`;
+      const said = s.chambers.flatMap(c => [
+        `${c.name} committee: ${c.committee ? 'passed ' + c.committee : 'not yet'}`,
+        `${c.name} floor: ${c.floor ? 'passed ' + c.floor : 'not yet'}`]).join('; ');
+      const note = Comms.stepsNote(bill, outcome);
+      return `<span class="steps" role="img" aria-label="${Comms.esc(said)}" title="${Comms.esc(said.replace(/; /g, '\n'))}">`
+        + s.chambers.map(c => `<span class="steps-ch${c.committee ? ' any' : ''}"><span class="nm">${c.name}</span>${step('Committee', c.committee)}${step('Floor', c.floor)}</span>`).join('')
+        + `</span>${note ? `<span class="steps-note">${Comms.esc(note)}</span>` : ''}`;
+    }
+    // Bills still in play show their steps; anything settled (law, governor, vetoed, died) keeps its pill.
+    const inPlay = o => o === 'moving' || o === 'stalled';
+    function statusMarkup(outcome, label, bill) {
+      return inPlay(outcome) && Comms.billSteps(bill) ? progressChips(bill, outcome) : outcomePill(outcome, label);
+    }
     function fmtDay(iso) {
       const [y, m, d] = iso.split('-').map(Number);
       return new Date(y, m - 1, d).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
@@ -1827,17 +1859,20 @@
       const st = currentStatus();
       const list = areaCampaigns().filter(c => c.type === 'Sponsored');
       document.getElementById('priorities').style.display = list.length ? '' : 'none';
-      document.getElementById('priorities-list').innerHTML = list.map(c => `
+      document.getElementById('priorities-list').innerHTML = list.map(c => {
+        const chips = c.bills.every(x => Comms.billSteps(x.bill));
+        return `
         <button type="button" class="priority-card" data-campaign="${Comms.esc(c.id)}">
           <span class="priority-head">
             <span class="priority-name">${Comms.esc(c.name)}</span>
-            ${outcomePill(c.outcome, Comms.outcomeLabel(c.outcome, st, c.pa))}
+            ${chips && inPlay(c.outcome) ? '' : outcomePill(c.outcome, Comms.outcomeLabel(c.outcome, st, c.pa))}
           </span>
           ${c.why ? `<span class="priority-why">${Comms.esc(c.why)}</span>` : ''}
-          ${c.bills.map(({ bill }) => `
-            <span class="priority-bill"><strong>${Comms.esc(Comms.normBill(bill.billNumber))}</strong>${
-              bill.lastAction ? Comms.esc((bill.lastActionDate ? bill.lastActionDate + ' · ' : '') + bill.lastAction) : ''}</span>`).join('')}
-        </button>`).join('');
+          ${c.bills.map(({ bill, outcome }) => `
+            <span class="priority-bill"><strong>${Comms.esc(Comms.normBill(bill.billNumber))}</strong>${chips ? progressChips(bill, outcome) : ''}${
+              bill.lastAction ? `<span class="priority-act">${Comms.esc((bill.lastActionDate ? bill.lastActionDate + ' · ' : '') + bill.lastAction)}</span>` : ''}</span>`).join('')}
+        </button>`;
+      }).join('');
     }
 
     function renderAgenda() {
@@ -1854,7 +1889,7 @@
                 <small class="agenda-bills">${c.bills.map(x => Comms.esc(Comms.normBill(x.bill.billNumber))).join(' · ')}</small>
                 ${c.why ? `<span class="agenda-why">${Comms.esc(c.why)}</span>` : ''}
               </span>
-              ${outcomePill(c.outcome, Comms.outcomeLabel(c.outcome, st, c.pa))}
+              <span class="agenda-status">${statusMarkup(c.outcome, Comms.outcomeLabel(c.outcome, st, c.pa), Comms.furthestBill(c))}</span>
             </button>`).join('')}
         </div>`).join('');
     }
@@ -1939,7 +1974,9 @@
         + c.categories.map(x => `<span class="bill-modal-tag">${Comms.esc(x)}</span>`).join('');
       document.getElementById('campaign-modal-name').textContent = c.name;
       document.getElementById('campaign-modal-ga').textContent = c.ga ? `${Comms.ordinal(c.ga)} General Assembly` : '';
-      document.getElementById('campaign-modal-outcome').innerHTML = outcomePill(c.outcome, Comms.outcomeLabel(c.outcome, st, c.pa));
+      // When every bill shows its steps below, a "didn't advance" pill up here would only repeat less.
+      document.getElementById('campaign-modal-outcome').innerHTML = inPlay(c.outcome) && c.bills.every(x => Comms.billSteps(x.bill))
+        ? '' : outcomePill(c.outcome, Comms.outcomeLabel(c.outcome, st, c.pa));
       const why = document.getElementById('campaign-modal-why');
       why.innerHTML = c.why ? `<strong>Why it matters:</strong> ${Comms.esc(c.why)}` : '';
       why.style.display = c.why ? '' : 'none';
@@ -1953,7 +1990,7 @@
           <div class="campaign-bill-head">
             <strong>${Comms.esc(Comms.normBill(bill.billNumber))}</strong>
             ${bill.primarySponsor ? `<span>${Comms.esc(bill.primarySponsor)}</span>` : ''}
-            ${outcomePill(outcome, Comms.outcomeLabel(outcome, st, Comms.paNumber(bill)))}
+            ${statusMarkup(outcome, Comms.outcomeLabel(outcome, st, Comms.paNumber(bill)), bill)}
           </div>
           ${bill.lastAction ? `<p class="campaign-bill-action">${Comms.esc(bill.lastActionDate || '')} · ${Comms.esc(bill.lastAction)}</p>` : ''}
           ${next && next >= today ? `<p class="campaign-bill-next">Next: ${Comms.esc(bill.nextActionDate)}${bill.nextActionType ? ' — ' + Comms.esc(bill.nextActionType) : ''}</p>` : ''}

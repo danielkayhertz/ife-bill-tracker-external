@@ -201,6 +201,51 @@ def get_action_texts(root):
     return entries
 
 
+COMMITTEE_PASS_RE = re.compile(r"\bdo pass\b|^placed on calendar (order of )?2nd reading|^second reading")
+FLOOR_PASS_RE     = re.compile(r"^third reading\b.*\bpassed\b")
+ARRIVE_RE         = re.compile(r"^arrived? in (house|senate)\b")
+BOTH_PASSED_RE    = re.compile(r"passed both houses|sent to the governor|governor approved|public act")
+
+
+def get_steps(root):
+    """Return the date (M/D/YYYY, as ILGA writes it) each of the four steps was first reached,
+    or None: {houseCommittee, house, senateCommittee, senate}.
+
+    Unlike `stage`, which says where a bill is now, this records every step it has passed, so
+    a bill sent back for a concurrence vote still shows that it passed the second chamber.
+    A floor pass implies its committee step; arriving in one chamber implies the other passed.
+    """
+    committee = {"house": None, "senate": None}
+    floor     = {"house": None, "senate": None}
+    actions_el = root.find("actions")
+    if actions_el is not None:
+        date, chamber = None, ""
+        for child in actions_el:
+            tag = child.tag.lower()
+            if tag == "statusdate":
+                date = (child.text or "").strip() or None
+            elif tag == "chamber":
+                chamber = (child.text or "").strip().lower()
+            elif tag == "action" and child.text:
+                la = child.text.strip().lower()
+                passed = []
+                if BOTH_PASSED_RE.search(la):
+                    passed = [("committee", "house"), ("committee", "senate"), ("floor", "house"), ("floor", "senate")]
+                elif (m := ARRIVE_RE.search(la)):
+                    other = "house" if m.group(1) == "senate" else "senate"
+                    passed = [("committee", other), ("floor", other)]
+                elif chamber in committee and FLOOR_PASS_RE.search(la):
+                    passed = [("committee", chamber), ("floor", chamber)]
+                elif chamber in committee and COMMITTEE_PASS_RE.search(la):
+                    passed = [("committee", chamber)]
+                for kind, ch in passed:
+                    d = committee if kind == "committee" else floor
+                    if d[ch] is None:
+                        d[ch] = date
+    return {"houseCommittee": committee["house"], "house": floor["house"],
+            "senateCommittee": committee["senate"], "senate": floor["senate"]}
+
+
 MONTH_MAP = {'Jan':'1','Feb':'2','Mar':'3','Apr':'4','May':'5','Jun':'6',
              'Jul':'7','Aug':'8','Sep':'9','Oct':'10','Nov':'11','Dec':'12'}
 
@@ -383,6 +428,7 @@ def _ilga_fields_from_xml(xml_bytes, bill_number, prev_stage, prev_stage_changed
         "lastAmendmentName": last_amendment_name,
         "lastAmendmentDate": last_amendment_date,
         "isShellBill":       is_shell_bill,
+        "steps":             get_steps(root),
     }
 
 

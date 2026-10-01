@@ -77,3 +77,8 @@ test('campaign window and link handling exist', () => {
   }
   assert.ok(!html.includes('// Replaced in Task 7.'), 'openCampaign stub still present');
 });
+
+test('bill cards keep only the law tag; the rest of the outcome tags are gone from the main list', () => {
+  assert.ok(html.includes(`o === 'law' ? \`<span class="card-outcome">`), 'card outcome pill should render for law only');
+  assert.ok(html.includes('function progressChips('), 'missing step chips renderer');
+});
