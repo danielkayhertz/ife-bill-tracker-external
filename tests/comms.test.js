@@ -308,3 +308,29 @@ test('buildCampaigns: malformed campaign entries warn and skip instead of crashi
   assert.ok(campaigns.some(c => c.id === 'junk-fees'));
   assert.ok(campaigns.some(c => c.id === 'bill-SB62'));
 });
+
+test('summaryParts: after spring, law count and everything else still being worked on', () => {
+  const st = C.sessionStatus(SESSION, '2026-09-30');
+  assert.deepEqual(C.summaryParts({ law: 3, stalled: 22, moving: 2 }, st),
+    ['During the Spring session, ', 3, ' IFE-endorsed bills became law. We and our partners are still working on another ', 24, '.']);
+});
+
+test('summaryParts: singular bill, and no second sentence when nothing is left', () => {
+  const st = C.sessionStatus(SESSION, '2026-09-30');
+  assert.deepEqual(C.summaryParts({ law: 1 }, st), ['During the Spring session, ', 1, ' IFE-endorsed bill became law.']);
+});
+
+test('summaryParts: before spring ends the sentence is in the present perfect', () => {
+  const st = C.sessionStatus(SESSION, '2026-03-01');
+  assert.deepEqual(C.summaryParts({ law: 0, moving: 5 }, st),
+    ['So far this session, ', 0, ' IFE-endorsed bills have become law. We and our partners are still working on another ', 5, '.']);
+});
+
+test('summaryParts: after the GA ends, no "still working on" claim', () => {
+  const st = C.sessionStatus(SESSION, '2027-02-01');
+  assert.deepEqual(C.summaryParts({ law: 3, died: 24 }, st), ['In the 104th General Assembly, ', 3, ' IFE-endorsed bills became law.']);
+});
+
+test('summaryParts: no campaigns means no sentence', () => {
+  assert.equal(C.summaryParts({}, C.sessionStatus(SESSION, '2026-09-30')), null);
+});
