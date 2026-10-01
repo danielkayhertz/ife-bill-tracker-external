@@ -124,8 +124,33 @@
   function groupHeading(outcome, status) {
     return {
       law: 'Became law', governor: "On the governor's desk", vetoed: 'Vetoed', moving: 'Moving',
-      stalled: status?.springEnded ? "Didn't advance this session" : 'Stalled', died: 'Did not pass',
+      stalled: status?.springEnded ? 'Not yet law' : 'Stalled', died: 'Did not pass',
     }[outcome] || '';
+  }
+
+  // bill.steps is written by scripts/update_bill_status.py: the date each step was first
+  // reached, or null. Chambers are listed in the order the bill moves through them.
+  function billSteps(bill) {
+    const s = bill?.steps;
+    if (!s || typeof s !== 'object') return null;
+    const house = { name: 'House', committee: s.houseCommittee || null, floor: s.house || null };
+    const senate = { name: 'Senate', committee: s.senateCommittee || null, floor: s.senate || null };
+    const chambers = /^SB/.test(normBill(bill.billNumber)) ? [senate, house] : [house, senate];
+    const passed = chambers.reduce((n, c) => n + (c.committee ? 1 : 0) + (c.floor ? 1 : 0), 0);
+    return { chambers, passed };
+  }
+
+  // Both chambers passed it but it isn't law: the second chamber amended it, so the
+  // chamber it started in still has to vote to concur.
+  function stepsNote(bill, outcome) {
+    const s = billSteps(bill);
+    if (!s || s.passed < 4 || (outcome !== 'moving' && outcome !== 'stalled')) return null;
+    return `Awaiting ${s.chambers[0].name} concurrence vote`;
+  }
+
+  function furthestBill(c) {
+    const n = b => billSteps(b)?.passed ?? -1;
+    return c.bills.map(x => x.bill).reduce((best, b) => (n(b) > n(best) ? b : best), c.lead);
   }
 
   const rank = o => OUTCOME_RANK.indexOf(o);
@@ -320,7 +345,7 @@
 
   const api = {
     OUTCOME_RANK, MONTHS, FULL_MONTHS, esc, safeUrl, normBill, parseHash, hashFor, mdyToIso, localIso, addDaysIso,
-    springEnd, hasUpcoming, billOutcome, paNumber, awaitingFloorVote, ordinal, outcomeLabel, groupHeading,
+    springEnd, hasUpcoming, billOutcome, paNumber, awaitingFloorVote, ordinal, outcomeLabel, groupHeading, billSteps, stepsNote, furthestBill,
     buildCampaigns, groupCampaigns, outcomeCounts, comingUp, floorVotes, sessionStatus, formatRange,
     formatRanges, comingUpEmptyText, staffUpdate, blurb, summaryParts, latestFetch, isStale,
   };
