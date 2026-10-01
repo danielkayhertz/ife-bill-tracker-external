@@ -123,8 +123,8 @@
     "id": "government-tech",
     "ga": 104,
     "programArea": "Housing",
-    "name": "Government - Tech",
-    "why": null,
+    "name": "Property Tax Sale Reform",
+    "why": "Reforms the tax sale system to comply with a Supreme Court ruling requiring that home equity in excess of property tax debt owed be returned to the homeowner.",
     "bills": ["HB598"]
   },
   {
@@ -155,8 +155,8 @@
     "id": "housing-plan-public-notice",
     "ga": 104,
     "programArea": "Housing",
-    "name": "Require Public Notice on Housing Plans",
-    "why": "Requires local governments to hold a public hearing before adopting an affordable housing plan.",
+    "name": "Affordable Housing Planning and Appeal Act Reform",
+    "why": "Expands and strengthens the Affordable Housing Planning and Appeal Act, which aims to increase affordable housing in Illinois' least affordable communities.",
     "bills": ["HB5198"]
   },
   {
