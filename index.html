@@ -803,36 +803,51 @@
     .program-tabs {
       background: white;
       border-bottom: 1px solid #e0e0e0;
-      padding: 0 24px;
+      padding: 14px 24px;
     }
 
     .program-tabs-inner {
       max-width: 1200px;
       margin: 0 auto;
       display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tabs-label {
+      margin-right: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #51585e;
     }
 
     .tab-btn {
-      padding: 12px 24px;
-      border: none;
-      background: none;
-      font-size: 14px;
-      font-weight: 600;
-      color: #666;
+      padding: 8px 18px;
+      border: 2px solid #003F70;
+      border-radius: 6px;
+      background: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      color: #003F70;
       cursor: pointer;
-      border-bottom: 3px solid transparent;
       font-family: inherit;
-      transition: color 0.15s, border-color 0.15s;
-    }
-
-    .tab-btn.active {
-      color: #005a8c;
-      border-bottom-color: #005a8c;
+      transition: background-color 0.15s, color 0.15s;
     }
 
     .tab-btn:hover {
-      color: #005a8c;
-      background: #f0f7ff;
+      background: #f0f5fa;
+    }
+
+    .tab-btn.active {
+      background: #003F70;
+      color: #fff;
+    }
+
+    @media (max-width: 600px) {
+      .tabs-label { flex-basis: 100%; }
     }
 
     /* Info icon + IFE status popover */
@@ -1032,7 +1047,8 @@
 <body>
   <!-- Program Area Tabs -->
   <div class="program-tabs">
-    <div class="program-tabs-inner" role="group" aria-label="Program area">
+    <div class="program-tabs-inner" role="group" aria-labelledby="tabs-label">
+      <span class="tabs-label" id="tabs-label">Choose a program area</span>
       <button class="tab-btn active" aria-pressed="true" data-area="Housing">Housing</button>
       <button class="tab-btn" aria-pressed="false" data-area="CLS">Criminal Legal System</button>
     </div>
