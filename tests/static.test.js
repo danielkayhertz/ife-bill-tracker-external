@@ -28,3 +28,13 @@ test('comms layer is wired in', () => {
   assert.ok(!html.includes('id="highlights-'), 'old highlights bar still present');
   assert.ok(html.includes('@media print'));
 });
+
+test('campaign window and link handling exist', () => {
+  for (const id of ['campaign-modal-overlay', 'campaign-copy-link', 'campaign-copy-blurb', 'bill-modal-copy-link']) {
+    assert.ok(html.includes(`id="${id}"`), `missing #${id}`);
+  }
+  for (const s of ['function openFromHash(', "'bill-tracker-hash'", "'bill-tracker-parent'", "'hashchange'"]) {
+    assert.ok(html.includes(s), `missing ${s}`);
+  }
+  assert.ok(!html.includes('// Replaced in Task 7.'), 'openCampaign stub still present');
+});

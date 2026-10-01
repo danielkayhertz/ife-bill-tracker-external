@@ -971,6 +971,18 @@
       .print-date { display: block; }
     }
 
+    .campaign-why { margin: 12px 0 6px; font-size: 15px; line-height: 1.5; }
+    .campaign-note { margin: 0 0 10px; font-size: 14px; color: #1b5e20; }
+    .campaign-bill { border: 1px solid #e6e6e6; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
+    .campaign-bill-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; }
+    .campaign-bill-head strong { color: #005a8c; }
+    .campaign-bill-action, .campaign-bill-next { font-size: 13px; color: #555; margin: 6px 0; }
+    .campaign-bill a { font-size: 13px; color: #005a8c; }
+    .campaign-details { margin: 12px 0; }
+    .campaign-details summary { cursor: pointer; font-weight: 600; color: #005a8c; }
+    .campaign-detail-bill { margin-top: 10px; }
+    .copy-status { font-size: 12px; color: #1b5e20; align-self: center; }
+
     /* Responsive */
     @media (max-width: 768px) {
       .header h1 { font-size: 26px; }
@@ -1121,7 +1133,38 @@
 
         <div class="bill-modal-actions">
           <a class="btn-primary" id="bill-modal-link" href="#" target="_blank" rel="noopener noreferrer">View on ILGA.gov &#8594;</a>
+          <button class="btn-secondary" id="bill-modal-copy-link">Copy link</button>
+          <span class="copy-status" id="bill-copy-status" aria-live="polite"></span>
           <button class="btn-secondary" id="bill-modal-close-btn">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Campaign Modal -->
+  <div class="bill-modal-overlay" id="campaign-modal-overlay">
+    <div class="bill-modal" role="dialog" aria-modal="true" aria-labelledby="campaign-modal-name">
+      <div class="bill-modal-header" id="campaign-modal-header">
+        <button class="bill-modal-close-btn" id="campaign-modal-close" aria-label="Close">&#215;</button>
+        <div class="bill-modal-tags" id="campaign-modal-tags"></div>
+        <h2 class="bill-modal-bill-number" id="campaign-modal-name"></h2>
+        <p class="bill-modal-header-sponsor" id="campaign-modal-ga"></p>
+      </div>
+      <div class="bill-modal-body">
+        <div id="campaign-modal-outcome"></div>
+        <p class="campaign-why" id="campaign-modal-why"></p>
+        <p class="campaign-note" id="campaign-modal-note"></p>
+        <h4 class="bill-modal-summary-label">Bills</h4>
+        <div id="campaign-modal-bills"></div>
+        <details class="campaign-details">
+          <summary>Bill details</summary>
+          <div id="campaign-modal-details"></div>
+        </details>
+        <div class="bill-modal-actions">
+          <button class="btn-primary" id="campaign-copy-link">Copy link</button>
+          <button class="btn-secondary" id="campaign-copy-blurb">Copy blurb</button>
+          <button class="btn-secondary" id="campaign-modal-close-btn">Close</button>
+          <span class="copy-status" id="campaign-copy-status" aria-live="polite"></span>
         </div>
       </div>
     </div>
@@ -1380,6 +1423,8 @@
       populateCategoryFilter();
       renderCards();
       setupEventListeners();
+      openFromHash(location.hash);
+      window.addEventListener('hashchange', () => openFromHash(location.hash));
     }
 
     function positionPopupNear(popupEl, anchorEl) {
@@ -1578,9 +1623,8 @@
       return card;
     }
 
-    function openModal(bill, anchorEl) {
+    function openModal(bill, anchorEl, fromLink = false) {
       currentBill = bill;
-      positionPopupNear(document.querySelector('#bill-modal-overlay .bill-modal'), anchorEl);
       const typeClass  = (bill.type || 'endorsed').toLowerCase();
       const stage      = bill.stage || bill.status;
       const stageStyle = stageConfig[stage] || stageConfig[bill.status] || { bg: '#f5f5f5', text: '#666', border: '#ddd' };
@@ -1645,14 +1689,17 @@
 
       document.getElementById('bill-modal-link').href           = bill.url;
 
-      modalOverlay.classList.add('visible');
-      document.body.style.overflow = 'hidden';
+      document.getElementById('bill-copy-status').textContent = '';
+      showOverlay(modalOverlay, anchorEl, fromLink);
+      setLinkHash(Comms.hashFor(currentGa(), bill.billNumber));
     }
 
     function closeModal() {
+      if (!modalOverlay.classList.contains('visible')) return;
       modalOverlay.classList.remove('visible');
       document.body.style.overflow = '';
       currentBill = null;
+      setLinkHash('');
     }
 
     // ── Comms layer ───────────────────────────────────────────────────────────
@@ -1772,8 +1819,110 @@
       renderCards();
     }
 
-    // Replaced in Task 7.
-    function openCampaign(c, anchorEl) { if (c) openModal(c.lead, anchorEl); }
+    // ── Campaign window + links ───────────────────────────────────────────────
+    const campaignOverlay = document.getElementById('campaign-modal-overlay');
+    let currentCampaign = null;
+
+    function setLinkHash(hash) {
+      history.replaceState(null, '', location.pathname + location.search + hash);
+      if (embedded) window.parent.postMessage({ type: 'bill-tracker-hash', hash }, '*');
+    }
+
+    function shareUrl(hash) {
+      return (parentUrl || location.origin + location.pathname) + hash;
+    }
+
+    async function copyText(text, statusEl) {
+      try {
+        await navigator.clipboard.writeText(text);
+        statusEl.textContent = 'Copied';
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        ta.remove();
+        statusEl.textContent = ok ? 'Copied' : `Copy failed. Select and copy: ${text}`;
+      }
+    }
+
+    function showOverlay(overlay, anchorEl, fromLink) {
+      const box = overlay.querySelector('.bill-modal');
+      positionPopupNear(box, fromLink ? document.getElementById('comms') : anchorEl);
+      overlay.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+      // positionPopupNear sets `top` in a rAF; scroll after it lands.
+      if (fromLink) requestAnimationFrame(() => requestAnimationFrame(() => requestParentScroll(box)));
+    }
+
+    function openCampaign(c, anchorEl, fromLink = false) {
+      if (!c) return;
+      closeModal();
+      currentCampaign = c;
+      const st = currentStatus();
+      const today = todayIso();
+      document.getElementById('campaign-modal-header').className = `bill-modal-header ${c.type.toLowerCase()}`;
+      document.getElementById('campaign-modal-tags').innerHTML =
+        `<span class="bill-modal-tag">IFE ${Comms.esc(c.type)}</span>`
+        + c.categories.map(x => `<span class="bill-modal-tag">${Comms.esc(x)}</span>`).join('');
+      document.getElementById('campaign-modal-name').textContent = c.name;
+      document.getElementById('campaign-modal-ga').textContent = c.ga ? `${Comms.ordinal(c.ga)} General Assembly` : '';
+      document.getElementById('campaign-modal-outcome').innerHTML = outcomePill(c.outcome, Comms.outcomeLabel(c.outcome, st, c.pa));
+      const why = document.getElementById('campaign-modal-why');
+      why.innerHTML = c.why ? `<strong>Why it matters:</strong> ${Comms.esc(c.why)}` : '';
+      why.style.display = c.why ? '' : 'none';
+      const note = document.getElementById('campaign-modal-note');
+      note.textContent = c.winNote || c.overrideNote || '';
+      note.style.display = note.textContent ? '' : 'none';
+      document.getElementById('campaign-modal-bills').innerHTML = c.bills.map(({ bill, outcome }) => {
+        const next = Comms.mdyToIso(bill.nextActionDate);
+        return `
+        <div class="campaign-bill">
+          <div class="campaign-bill-head">
+            <strong>${Comms.esc(Comms.normBill(bill.billNumber))}</strong>
+            ${bill.primarySponsor ? `<span>${Comms.esc(bill.primarySponsor)}</span>` : ''}
+            ${outcomePill(outcome, Comms.outcomeLabel(outcome, st, Comms.paNumber(bill)))}
+          </div>
+          ${bill.lastAction ? `<p class="campaign-bill-action">${Comms.esc(bill.lastActionDate || '')} · ${Comms.esc(bill.lastAction)}</p>` : ''}
+          ${next && next >= today ? `<p class="campaign-bill-next">Next: ${Comms.esc(bill.nextActionDate)}${bill.nextActionType ? ' — ' + Comms.esc(bill.nextActionType) : ''}</p>` : ''}
+          <a href="${Comms.esc(bill.url)}" target="_blank" rel="noopener noreferrer">View on ILGA.gov &rarr;</a>
+        </div>`;
+      }).join('');
+      document.getElementById('campaign-modal-details').innerHTML = c.bills.map(({ bill }) => `
+        <p class="campaign-detail-bill"><strong>${Comms.esc(Comms.normBill(bill.billNumber))}: ${Comms.esc(bill.title)}</strong></p>
+        ${bill.lastAmendmentName != null ? `<p class="card-amendment-disclaimer">⚠️ This bill has been amended. The description may not reflect the latest content. <a href="${Comms.esc(bill.url)}" target="_blank" rel="noopener noreferrer">View latest</a></p>` : ''}
+        <p class="bill-modal-summary">${Comms.esc(bill.description || '')}</p>`).join('');
+      document.getElementById('campaign-copy-status').textContent = '';
+      document.querySelector('#campaign-modal-overlay details').open = false;
+      showOverlay(campaignOverlay, anchorEl, fromLink);
+      setLinkHash(Comms.hashFor(c.ga || currentGa(), (c.outcome === 'law' ? c.best : c.lead).billNumber));
+    }
+
+    function closeCampaign() {
+      if (!campaignOverlay.classList.contains('visible')) return;
+      campaignOverlay.classList.remove('visible');
+      document.body.style.overflow = '';
+      currentCampaign = null;
+      setLinkHash('');
+    }
+
+    function openFromHash(hash) {
+      const link = Comms.parseHash(hash, currentGa());
+      if (!link || link.ga !== currentGa()) return false;
+      const bill = legislationData.find(b => Comms.normBill(b.billNumber) === link.billNumber);
+      if (!bill) return false;
+      const c = campaignForBill(bill);
+      switchProgramArea(c ? c.programArea : (bill.programArea || 'Housing'));
+      if (c) openCampaign(c, null, true);
+      else openModal(bill, null, true);
+      return true;
+    }
+
+    window.addEventListener('message', (e) => {
+      if (e.source !== window.parent || !e.data || e.data.type !== 'bill-tracker-parent') return;
+      if (typeof e.data.url === 'string' && /^https?:\/\//.test(e.data.url)) parentUrl = e.data.url;
+    });
 
     // ── Event listeners ───────────────────────────────────────────────────────
     function setupEventListeners() {
@@ -1841,9 +1990,25 @@
       document.getElementById('bill-modal-close').addEventListener('click', closeModal);
       document.getElementById('bill-modal-close-btn').addEventListener('click', closeModal);
       modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+      document.getElementById('campaign-modal-close').addEventListener('click', closeCampaign);
+      document.getElementById('campaign-modal-close-btn').addEventListener('click', closeCampaign);
+      campaignOverlay.addEventListener('click', (e) => { if (e.target === campaignOverlay) closeCampaign(); });
+      document.getElementById('campaign-copy-link').addEventListener('click', () => {
+        const c = currentCampaign;
+        copyText(shareUrl(Comms.hashFor(c.ga || currentGa(), (c.outcome === 'law' ? c.best : c.lead).billNumber)),
+                 document.getElementById('campaign-copy-status'));
+      });
+      document.getElementById('campaign-copy-blurb').addEventListener('click', () => {
+        const c = currentCampaign;
+        const url = shareUrl(Comms.hashFor(c.ga || currentGa(), (c.outcome === 'law' ? c.best : c.lead).billNumber));
+        copyText(Comms.blurb(c, currentStatus(), url), document.getElementById('campaign-copy-status'));
+      });
+      document.getElementById('bill-modal-copy-link').addEventListener('click', () => {
+        copyText(shareUrl(Comms.hashFor(currentGa(), currentBill.billNumber)), document.getElementById('bill-copy-status'));
+      });
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-          closeModal();
+          closeModal(); closeCampaign();
           infoBtn.setAttribute('aria-expanded', 'false');
           infoPopover.classList.remove('visible');
         }
