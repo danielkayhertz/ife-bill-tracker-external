@@ -1,0 +1,18 @@
+{
+  "ga": 104,
+  "gaStart": "2025-01-08",
+  "gaEnd": "2027-01-12",
+  "phases": [
+    { "name": "Spring session", "ranges": [{ "start": "2026-01-13", "end": "2026-05-31" }] },
+    { "name": "Veto session", "ranges": [{ "start": "2026-11-17", "end": "2026-11-19" }, { "start": "2026-12-01", "end": "2026-12-03" }] }
+  ],
+  "updates": { "Housing": null, "CLS": null },
+  "sources": [
+    "https://www.ilga.gov/documents/senate/schedules/2025_Senate_Spring_Session.pdf",
+    "https://www.ilga.gov/Uploads/Schedules/Senate/2026_104th_GA_Senate_Session.pdf",
+    "https://www.ilga.gov/Uploads/Schedules/Senate/2026%20104th%20GA%20Veto%20Calendar.pdf",
+    "https://www.ilga.gov/Uploads/Schedules/House/2026_104th_GA_House_Session.pdf",
+    "https://www.ilga.gov/Uploads/Schedules/House/House%20Calendar%20-%202026%20Veto%20Session.pdf",
+    "https://www.ilga.gov/commission/lrb/con4.htm"
+  ]
+}

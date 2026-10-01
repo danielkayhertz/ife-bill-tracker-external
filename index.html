@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IFE Internal Bill Tracker</title>
+  <title>IFE Illinois Bill Tracker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
@@ -59,215 +59,6 @@
       margin: 0 auto;
       max-width: 560px;
       line-height: 1.6;
-    }
-
-    /* Highlights Bar */
-    .highlights-bar {
-      background: #eceef1;
-      padding: 20px 24px;
-      border-bottom: 1px solid #e0e0e0;
-    }
-
-    .highlights-card {
-      max-width: 1200px;
-      margin: 0 auto;
-      background: #fff;
-      border-top: 5px solid #003F70;
-      border-radius: 0 0 10px 10px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-      padding: 20px 24px;
-    }
-
-    .highlights-heading {
-      font-family: "Gotham", "Calibri", "Segoe UI", sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      color: #003F70;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      display: inline-block;
-      padding-bottom: 6px;
-      border-bottom: 3px solid #F37021;
-      margin-bottom: 14px;
-    }
-
-    .highlights-container {
-      display: flex;
-      gap: 28px;
-    }
-
-    .highlights-panel {
-      flex: 1;
-    }
-
-    .highlights-panel:first-child {
-      border-right: 1px solid #e0e0e0;
-      padding-right: 24px;
-    }
-
-    .highlights-panel-title {
-      font-size: 11px;
-      text-transform: uppercase;
-      color: #666;
-      letter-spacing: 1px;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .highlights-sponsored-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .highlights-sponsored-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .highlights-bill-link {
-      font-weight: 600;
-      font-size: 13px;
-      color: #005a8c;
-      text-decoration: none;
-    }
-
-    .highlights-bill-link:hover {
-      text-decoration: underline;
-    }
-
-    .highlights-bill-title {
-      font-size: 12px;
-      color: #666;
-    }
-
-    .highlights-stage-badge {
-      padding: 2px 8px;
-      border-radius: 10px;
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .highlights-activity-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .highlights-activity-row {
-      font-size: 13px;
-      color: #333;
-      line-height: 1.5;
-    }
-
-    .highlights-activity-row .arrow {
-      color: #444;
-    }
-
-    .highlights-activity-row .date {
-      color: #999;
-      font-size: 12px;
-    }
-
-    .highlights-show-more {
-      font-size: 12px;
-      color: #1976d2;
-      text-decoration: none;
-      font-weight: 500;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 0;
-      margin-top: 4px;
-    }
-
-    .highlights-show-more:hover {
-      text-decoration: underline;
-    }
-
-    .highlights-empty {
-      font-size: 13px;
-      color: #999;
-      font-style: italic;
-    }
-
-    /* Highlights Popup */
-    .highlights-popup-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.3);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .highlights-popup-overlay.visible {
-      display: flex;
-    }
-
-    .highlights-popup {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-      padding: 20px;
-      max-width: 480px;
-      width: 90%;
-      max-height: 70vh;
-      overflow-y: auto;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 101;
-    }
-
-    .highlights-popup-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .highlights-popup-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #333;
-    }
-
-    .highlights-popup-close {
-      cursor: pointer;
-      font-size: 22px;
-      color: #888;
-      background: none;
-      border: none;
-      line-height: 1;
-      padding: 0 4px;
-    }
-
-    .highlights-popup-close:hover {
-      color: #333;
-    }
-
-    .highlights-popup-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .highlights-popup-row {
-      font-size: 13px;
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-    }
-
-    .highlights-popup-row .date {
-      color: #999;
-      font-size: 12px;
-      margin-left: auto;
-      white-space: nowrap;
     }
 
     /* Filters */
@@ -431,47 +222,6 @@
       width: 15px;
       height: 15px;
       cursor: pointer;
-    }
-
-    .add-bill-btn {
-      padding: 9px 16px;
-      background-color: #005a8c;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: inherit;
-      white-space: nowrap;
-      margin-left: auto;
-    }
-
-    .add-bill-btn:hover {
-      background-color: #004a7a;
-    }
-
-    .refresh-all-btn {
-      padding: 5px 12px;
-      background: #fff;
-      color: #005a8c;
-      border: 1px solid #005a8c;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 12px;
-      font-family: inherit;
-    }
-    .refresh-all-btn:hover { background: #e8f4fb; }
-    .header-last-refreshed {
-      color: #777;
-      font-size: 12px;
-    }
-    .highlights-refresh-row {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
-      padding: 8px 24px;
     }
 
     /* Main Grid */
@@ -947,7 +697,6 @@
     }
     .btn-danger:hover { background: #b91c1c; }
 
-    /* Add Bill Modal form styles */
     .form-label {
       display: block;
       font-size: 12px;
@@ -995,25 +744,6 @@
       flex: 1;
     }
 
-    .lookup-status {
-      font-size: 13px;
-      margin-top: 6px;
-      min-height: 18px;
-    }
-
-    .lookup-status.error   { color: #c62828; }
-    .lookup-status.success { color: #2e7d32; }
-    .lookup-status.loading { color: #888; }
-
-    .ilga-preview {
-      background: #f8f9fa;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      padding: 12px 14px;
-      margin-top: 10px;
-      margin-bottom: 4px;
-    }
-
     .preview-row {
       display: flex;
       gap: 8px;
@@ -1032,15 +762,6 @@
     }
 
     .required { color: #c62828; }
-
-    .add-bill-error {
-      font-size: 13px;
-      color: #c62828;
-      margin-bottom: 8px;
-      padding: 8px 12px;
-      background: #ffebee;
-      border-radius: 6px;
-    }
 
     /* Footer */
     .footer {
@@ -1198,11 +919,73 @@
 
     .bill-modal-amendment-disclaimer a { color: #005a8c; font-weight: 600; }
 
+    /* Comms layer */
+    .comms { background: #eceef1; padding: 20px 24px; border-bottom: 1px solid #e0e0e0; }
+    .comms-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+    .jump-link { align-self: flex-end; background: none; border: none; color: #005a8c; font: 600 13px 'Montserrat', sans-serif; cursor: pointer; padding: 0; }
+    .jump-link:hover { text-decoration: underline; }
+    .session-summary { background: #fff; border-top: 5px solid #003F70; border-radius: 0 0 10px 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); padding: 18px 22px; }
+    .summary-headline { font-size: 18px; font-weight: 700; color: #003F70; margin-bottom: 10px; }
+    .summary-facts { display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 6px; }
+    .summary-fact { font-size: 13px; color: #444; }
+    .summary-fact strong { display: block; font-size: 26px; color: #005a8c; line-height: 1.1; }
+    .summary-update { margin: 12px 0 0; padding: 10px 14px; border-left: 3px solid #005a8c; background: #f6f8fa; font-size: 14px; line-height: 1.55; color: #333; white-space: pre-line; }
+    .summary-update-label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #666; margin-bottom: 4px; white-space: normal; }
+    .summary-stale { margin-top: 8px; font-size: 12px; color: #8a6d3b; }
+    .coming-up, .agenda { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); padding: 16px 22px; }
+    .comms-label { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #666; margin: 0 0 8px; }
+    .comms-sublabel { font-size: 12px; font-weight: 700; color: #444; margin: 12px 0 6px; }
+    .comms-empty { font-size: 14px; color: #666; font-style: italic; }
+    .coming-row, .agenda-row { display: flex; width: 100%; align-items: center; gap: 12px; text-align: left; background: none; border: none; border-bottom: 1px solid #eee; padding: 9px 2px; font-family: inherit; cursor: pointer; color: #222; }
+    .coming-row:hover, .agenda-row:hover { background: #f6f8fa; }
+    .coming-date { min-width: 96px; font-weight: 700; color: #005a8c; font-size: 13px; }
+    .coming-name { flex: 1; font-weight: 600; font-size: 14px; }
+    .coming-name small, .agenda-bills { color: #777; font-weight: 400; font-size: 12px; margin-left: 6px; }
+    .coming-action { font-size: 12px; color: #555; }
+    .agenda-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+    .agenda-title { font-size: 20px; color: #003F70; }
+    .print-link { background: none; border: none; color: #005a8c; font: 600 12px 'Montserrat', sans-serif; cursor: pointer; }
+    .agenda-group { margin-top: 12px; }
+    .agenda-main { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+    .agenda-name { font-weight: 600; font-size: 14px; }
+    .agenda-bills { margin-left: 0; }
+    .agenda-why { font-size: 13px; color: #555; }
+    .outcome-pill { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 12px; white-space: nowrap; border: 1px solid transparent; }
+    .outcome-law      { background: #e8f5e9; color: #1b5e20; border-color: #81c784; }
+    .outcome-governor { background: #e3f2fd; color: #0d47a1; border-color: #90caf9; }
+    .outcome-vetoed   { background: #fff3e0; color: #e65100; border-color: #ffb74d; }
+    .outcome-moving   { background: #e3f2fd; color: #1565c0; border-color: #90caf9; }
+    .outcome-stalled  { background: #f1f1f1; color: #616161; border-color: #d0d0d0; }
+    .outcome-died     { background: #f5f5f5; color: #9e9e9e; border-color: #e0e0e0; }
+    .all-bills-heading { max-width: 1200px; margin: 28px auto 0; padding: 0 24px; font-size: 20px; color: #003F70; }
+    .card-outcome { margin-left: 6px; }
+    .print-date { display: none; font-size: 11px; color: #666; }
+
+    @media print {
+      body { background: #fff; }
+      .program-tabs, .jump-link, .print-link, .filters, .main-content, .all-bills-heading,
+      .bill-modal-overlay, .coming-up.is-empty { display: none !important; }
+      .comms { background: #fff; padding: 0; border: none; }
+      .session-summary, .coming-up, .agenda { box-shadow: none; border: 1px solid #ccc; }
+      .agenda-row, .coming-row { break-inside: avoid; }
+      .print-date { display: block; }
+    }
+
+    .campaign-why { margin: 12px 0 6px; font-size: 15px; line-height: 1.5; }
+    .campaign-note { margin: 0 0 10px; font-size: 14px; color: #1b5e20; }
+    .campaign-bill { border: 1px solid #e6e6e6; border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
+    .campaign-bill-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px; }
+    .campaign-bill-head strong { color: #005a8c; }
+    .campaign-bill-action, .campaign-bill-next { font-size: 13px; color: #555; margin: 6px 0; }
+    .campaign-bill a { font-size: 13px; color: #005a8c; }
+    .campaign-details { margin: 12px 0; }
+    .campaign-details summary { cursor: pointer; font-weight: 600; color: #005a8c; }
+    .campaign-detail-bill { margin-top: 10px; }
+    .copy-status { font-size: 12px; color: #1b5e20; align-self: center; }
+
     /* Responsive */
     @media (max-width: 768px) {
       .header h1 { font-size: 26px; }
-      .highlights-container { flex-direction: column; gap: 16px; }
-      .highlights-panel:first-child { border-right: none; padding-right: 0; margin-bottom: 8px; }
       .filters-row { flex-direction: column; align-items: stretch; }
       .filter-select { width: 100%; }
       .filter-count { margin-left: 0; text-align: center; }
@@ -1210,45 +993,13 @@
       .footer-content { flex-direction: column; text-align: center; }
       .footer-address { text-align: center; }
       .form-row { flex-direction: column; }
-      .add-bill-btn { margin-left: 0; }
+      .coming-row, .agenda-row { flex-wrap: wrap; }
+      .coming-date { min-width: 0; }
+      .summary-facts { gap: 16px; }
     }
   </style>
 </head>
 <body>
-  <!-- Highlights Bar -->
-  <div class="highlights-bar">
-    <div class="highlights-card">
-      <div class="highlights-heading">Highlights</div>
-      <div class="highlights-container">
-        <div class="highlights-panel" id="highlights-sponsored">
-          <div class="highlights-panel-title">IFE-Sponsored Bills</div>
-          <div class="highlights-sponsored-list" id="highlights-sponsored-list"></div>
-        </div>
-        <div class="highlights-panel" id="highlights-activity">
-          <div class="highlights-panel-title">Recent Endorsed Bill Activity</div>
-          <div class="highlights-activity-list" id="highlights-activity-list"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Highlights Popup -->
-  <div class="highlights-popup-overlay" id="highlights-popup-overlay">
-    <div class="highlights-popup">
-      <div class="highlights-popup-header">
-        <span class="highlights-popup-title">Endorsed Bill Activity &mdash; Last 30 Days</span>
-        <button class="highlights-popup-close" id="highlights-popup-close">&times;</button>
-      </div>
-      <div class="highlights-popup-list" id="highlights-popup-list"></div>
-    </div>
-  </div>
-
-  <!-- Refresh Controls -->
-  <div class="highlights-refresh-row">
-    <button class="refresh-all-btn" onclick="refreshAllFromILGA()">↻ Refresh from ILGA</button>
-    <small id="header-last-refreshed" class="header-last-refreshed"></small>
-  </div>
-
   <!-- Program Area Tabs -->
   <div class="program-tabs">
     <div class="program-tabs-inner" role="group" aria-label="Program area">
@@ -1256,6 +1007,25 @@
       <button class="tab-btn" aria-pressed="false" data-area="CLS">Criminal Legal System</button>
     </div>
   </div>
+
+  <!-- Comms layer: session summary, Coming up, IFE's agenda -->
+  <section class="comms" id="comms" aria-label="IFE's legislative agenda">
+    <div class="comms-inner">
+      <button type="button" class="jump-link" id="jump-all-bills">Jump to all tracked bills &darr;</button>
+      <div class="session-summary" id="session-summary"></div>
+      <div class="coming-up" id="coming-up"></div>
+      <div class="agenda" id="agenda">
+        <div class="agenda-head">
+          <h2 class="agenda-title">IFE's agenda</h2>
+          <button type="button" class="print-link" id="print-agenda">Print agenda</button>
+        </div>
+        <div id="agenda-groups"></div>
+      </div>
+      <p class="print-date" id="print-date"></p>
+    </div>
+  </section>
+
+  <h2 class="all-bills-heading" id="all-bills">All tracked bills (<span id="all-bills-count">0</span>)</h2>
 
   <!-- Filters -->
   <div class="filters">
@@ -1363,37 +1133,57 @@
 
         <div class="bill-modal-actions">
           <a class="btn-primary" id="bill-modal-link" href="#" target="_blank" rel="noopener noreferrer">View on ILGA.gov &#8594;</a>
-          <button class="btn-secondary" id="bill-modal-refresh-btn" style="display:none;" onclick="refreshBillILGA()">Refresh from ILGA</button>
-          <button class="btn-danger" id="bill-modal-delete-btn" style="display:none;" onclick="confirmDeleteBill()">Delete Bill</button>
+          <button class="btn-secondary" id="bill-modal-copy-link">Copy link</button>
+          <span class="copy-status" id="bill-copy-status" aria-live="polite"></span>
           <button class="btn-secondary" id="bill-modal-close-btn">Close</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Refresh All Progress Overlay -->
-  <div class="bill-modal-overlay" id="refresh-overlay">
-    <div class="bill-modal" style="max-width:420px;text-align:center;padding:40px 32px;">
-      <h3 id="refresh-overlay-title" style="margin:0 0 16px;">Refreshing from ILGA.gov…</h3>
-      <p id="refresh-progress-text" style="color:#555;margin-bottom:12px;">Starting…</p>
-      <div style="background:#e0e0e0;border-radius:6px;height:10px;margin-bottom:16px;">
-        <div id="refresh-progress-bar"
-             style="background:#1976d2;height:10px;border-radius:6px;width:0%;transition:width 0.2s;"></div>
+  <!-- Campaign Modal -->
+  <div class="bill-modal-overlay" id="campaign-modal-overlay">
+    <div class="bill-modal" role="dialog" aria-modal="true" aria-labelledby="campaign-modal-name">
+      <div class="bill-modal-header" id="campaign-modal-header">
+        <button class="bill-modal-close-btn" id="campaign-modal-close" aria-label="Close">&#215;</button>
+        <div class="bill-modal-tags" id="campaign-modal-tags"></div>
+        <h2 class="bill-modal-bill-number" id="campaign-modal-name"></h2>
+        <p class="bill-modal-header-sponsor" id="campaign-modal-ga"></p>
       </div>
-      <p id="refresh-status-text" style="color:#666;font-size:14px;min-height:20px;"></p>
-      <button id="refresh-close-btn" class="btn-secondary"
-              style="display:none;margin-top:16px;" onclick="document.getElementById('refresh-overlay').classList.remove('visible')">Close</button>
+      <div class="bill-modal-body">
+        <div id="campaign-modal-outcome"></div>
+        <p class="campaign-why" id="campaign-modal-why"></p>
+        <p class="campaign-note" id="campaign-modal-note"></p>
+        <h4 class="bill-modal-summary-label">Bills</h4>
+        <div id="campaign-modal-bills"></div>
+        <details class="campaign-details">
+          <summary>Bill details</summary>
+          <div id="campaign-modal-details"></div>
+        </details>
+        <div class="bill-modal-actions">
+          <button class="btn-primary" id="campaign-copy-link">Copy link</button>
+          <button class="btn-secondary" id="campaign-copy-blurb">Copy blurb</button>
+          <button class="btn-secondary" id="campaign-modal-close-btn">Close</button>
+          <span class="copy-status" id="campaign-copy-status" aria-live="polite"></span>
+        </div>
+      </div>
     </div>
   </div>
 
+  <script src="js/comms.js"></script>
   <script>
     function escapeHtml(s) {
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
-    // ── GitHub API config ─────────────────────────────────────────────────────
-    const WORKER_URL = 'https://ifeinternaltracker.dhertz.workers.dev'; // set after deploying Cloudflare Worker
-    const GITHUB_REPO  = 'danielkayhertz/ife-bill-tracker-external';
+    // ── Data source ───────────────────────────────────────────────────────────
+    // Public repo, so the page reads files directly (raw.githubusercontent caches ~5 min).
+    // On localhost, read the working copy so unpushed data files can be tested.
+    const GITHUB_REPO = 'danielkayhertz/ife-bill-tracker-external';
+    const DATA_BASE = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
+      ? 'data/'
+      : `https://raw.githubusercontent.com/${GITHUB_REPO}/master/data/`;
+    const CURRENT_GA = 104;  // used only if data/session.json is unavailable
 
     // ── Fallback data (used when bills.json unreachable) ─────────────────────
     const FALLBACK_DATA = [
@@ -1568,10 +1358,17 @@
     // ── State ─────────────────────────────────────────────────────────────────
     let legislationData = [];
     let notesData       = {};
+    let usingFallback   = false;  // true when bills.json couldn't be read; suppresses outcome claims
     let currentBill     = null;
-    let addBillIlgaData = null;
     let currentProgramArea = "Housing";
     let currentFilters  = { stage: "All", type: "All", category: new Set(), changedSince: "", upcomingOnly: false, search: "" };
+
+    // ── Comms layer state ─────────────────────────────────────────────────────
+    let campaignDefs = [];
+    let sessionData  = null;
+    let campaigns    = [];
+    let parentUrl    = null;   // the IFE page URL, sent by the WordPress embed
+    const embedded   = window.parent !== window;
 
     // ── DOM refs ──────────────────────────────────────────────────────────────
     const grid            = document.getElementById('legislation-grid');
@@ -1591,137 +1388,60 @@
     const searchEl        = document.getElementById('search-filter');
     const filterCount     = document.getElementById('filter-count');
 
-    // ── GitHub API helpers ────────────────────────────────────────────────────
-    async function readGitHubFile(path) {
-      const r = await fetch(`${WORKER_URL}/github/repos/${GITHUB_REPO}/contents/${path}`, {
-        headers: { Accept: 'application/vnd.github.v3+json' }
-      });
-      if (r.status === 404) return { content: null, sha: null };
-      if (!r.ok) throw new Error(`GitHub API ${r.status}`);
-      const d = await r.json();
-      return { content: JSON.parse(atob(d.content.replace(/\n/g, ''))), sha: d.sha };
-    }
-
-    async function writeGitHubFile(path, content, sha, message) {
-      const body = {
-        message,
-        content: btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2))))
-      };
-      if (sha) body.sha = sha;
-      const r = await fetch(`${WORKER_URL}/github/repos/${GITHUB_REPO}/contents/${path}`, {
-        method: 'PUT',
-        headers: {
-          Accept: 'application/vnd.github.v3+json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body)
-      });
-      if (r.status === 409) throw new Error('conflict');
-      if (!r.ok) throw new Error(`GitHub API ${r.status}`);
+    // ── Data helpers ──────────────────────────────────────────────────────────
+    async function readDataFile(name, fallback) {
+      const r = await fetch(DATA_BASE + name, { cache: 'no-cache' });
+      if (r.status === 404) return fallback;
+      if (!r.ok) throw new Error(`${name}: HTTP ${r.status}`);
       return r.json();
     }
 
     // ── Init ──────────────────────────────────────────────────────────────────
     async function init() {
+      // bills.json, user-bills.json, and notes.json are read independently, each with its own
+      // catch: a single shared Promise.all would let one file's failure (e.g. a notes.json 500)
+      // reject the whole batch and silently fall back to FALLBACK_DATA for bills too, which has
+      // no lastAction/lastActionDate and would make every bill look stalled.
+      let bills = null;
       try {
-        const [billsResp, userBillsResp, notesResp] = await Promise.all([
-          readGitHubFile('data/bills.json'),
-          readGitHubFile('data/user-bills.json'),
-          readGitHubFile('data/notes.json')
-        ]);
-        legislationData = billsResp.content || FALLBACK_DATA;
-        const userBills = userBillsResp.content || [];
-        notesData = notesResp.content || {};
-        if (userBills.length > 0) {
-          legislationData = [...legislationData, ...userBills];
-        }
+        bills = await readDataFile('bills.json', null);
       } catch (e) {
-        console.warn('GitHub API unavailable, using fallback:', e);
-        legislationData = FALLBACK_DATA;
+        console.warn('bills.json:', e);
+        bills = null;
+      }
+      usingFallback = !bills;
+      legislationData = bills || FALLBACK_DATA;
+
+      let userBills = [];
+      try {
+        userBills = await readDataFile('user-bills.json', []);
+      } catch (e) {
+        console.warn('user-bills.json:', e);
+        userBills = [];
+      }
+      legislationData = [...legislationData, ...(userBills || [])];
+
+      try {
+        notesData = (await readDataFile('notes.json', {})) || {};
+      } catch (e) {
+        console.warn('notes.json:', e);
         notesData = {};
       }
 
-      updateHighlights();
+      // Comms content is optional: the tracker must render without it.
+      [campaignDefs, sessionData] = await Promise.all([
+        readDataFile('campaigns.json', []).catch(e => { console.warn('campaigns.json:', e); return []; }),
+        readDataFile('session.json', null).catch(e => { console.warn('session.json:', e); return null; }),
+      ]);
+      rebuildCampaigns();
+
+      renderComms();
       populateStageFilter();
       populateCategoryFilter();
       renderCards();
       setupEventListeners();
-      updateLastFetched();
-    }
-
-    function updateLastFetched() {
-      const date = legislationData[0]?.ilgaFetchedAt;
-      if (!date) return;
-      const d = new Date(date);
-      const headerEl = document.getElementById('header-last-refreshed');
-      if (headerEl) {
-        headerEl.textContent = 'Last refreshed ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-          + ' at ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-      }
-    }
-
-    function updateHighlights() {
-      const programBills = legislationData.filter(b => (b.programArea ?? "Housing") === currentProgramArea);
-
-      // -- Left panel: Sponsored bills --
-      const sponsored = programBills
-        .filter(b => b.type === "Sponsored")
-        .sort((a, b) => {
-          const ai = STAGE_ORDER.indexOf(a.stage), bi = STAGE_ORDER.indexOf(b.stage);
-          return bi - ai; // furthest along first
-        });
-
-      const sponsoredList = document.getElementById('highlights-sponsored-list');
-      if (sponsored.length === 0) {
-        sponsoredList.innerHTML = '<div class="highlights-empty">No sponsored bills</div>';
-      } else {
-        sponsoredList.innerHTML = sponsored.map(bill => {
-          const sc = stageConfig[bill.stage] || { bg: '#f5f5f5', text: '#666', border: '#ddd' };
-          return '<div class="highlights-sponsored-row">'
-            + '<a class="highlights-bill-link" href="' + bill.url + '" target="_blank" rel="noopener noreferrer">' + bill.billNumber + '</a>'
-            + (bill.title ? '<span class="highlights-bill-title">' + bill.title + '</span>' : '')
-            + '<span class="highlights-stage-badge" style="background:' + sc.bg + ';color:' + sc.text + ';border:1px solid ' + sc.border + ';">' + bill.stage + '</span>'
-            + '</div>';
-        }).join('');
-      }
-
-      // -- Right panel: Recent endorsed activity --
-      const thirtyDaysAgo = new Date();
-      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-
-      const recentEndorsed = programBills
-        .filter(b => b.type === "Endorsed" && b.stageChangedAt && new Date(b.stageChangedAt) >= thirtyDaysAgo)
-        .sort((a, b) => new Date(b.stageChangedAt) - new Date(a.stageChangedAt));
-
-      const activityList = document.getElementById('highlights-activity-list');
-      if (recentEndorsed.length === 0) {
-        activityList.innerHTML = '<div class="highlights-empty">No recent activity</div>';
-      } else {
-        const visible = recentEndorsed.slice(0, 3);
-        const extra = recentEndorsed.length - 3;
-
-        activityList.innerHTML = visible.map(bill => {
-          return '<div class="highlights-activity-row">'
-            + '<a class="highlights-bill-link" href="' + bill.url + '" target="_blank" rel="noopener noreferrer">' + bill.billNumber + '</a>'
-            + (bill.title ? ' <span class="highlights-bill-title">' + bill.title + '</span>' : '')
-            + ' <span class="arrow">&rarr; ' + bill.stage + '</span>'
-            + '</div>';
-        }).join('');
-
-        if (extra > 0) {
-          activityList.innerHTML += '<button class="highlights-show-more" onclick="openHighlightsPopup(event)">Show ' + extra + ' more change' + (extra === 1 ? '' : 's') + ' &darr;</button>';
-        }
-      }
-
-      // -- Pre-render popup list --
-      const popupList = document.getElementById('highlights-popup-list');
-      popupList.innerHTML = recentEndorsed.map(bill => {
-        return '<div class="highlights-popup-row">'
-          + '<a class="highlights-bill-link" href="' + bill.url + '" target="_blank" rel="noopener noreferrer" style="min-width:54px;">' + bill.billNumber + '</a>'
-          + (bill.title ? ' <span class="highlights-bill-title">' + bill.title + '</span>' : '')
-          + ' <span class="arrow">&rarr; ' + bill.stage + '</span>'
-          + '</div>';
-      }).join('');
+      openFromHash(location.hash);
+      window.addEventListener('hashchange', () => openFromHash(location.hash));
     }
 
     function positionPopupNear(popupEl, anchorEl) {
@@ -1746,18 +1466,8 @@
       });
     }
 
-    function openHighlightsPopup(ev) {
-      const anchor = ev && ev.currentTarget ? ev.currentTarget : document.querySelector('.highlights-show-more');
-      positionPopupNear(document.querySelector('#highlights-popup-overlay .highlights-popup'), anchor);
-      document.getElementById('highlights-popup-overlay').classList.add('visible');
-    }
-
-    function closeHighlightsPopup() {
-      document.getElementById('highlights-popup-overlay').classList.remove('visible');
-    }
-
     function getFilteredData() {
-      const today = new Date().toISOString().split('T')[0];
+      const today = todayIso();
       return legislationData.filter(bill => {
         if ((bill.programArea ?? "Housing") !== currentProgramArea) return false;
         if (currentFilters.stage    !== "All" && (bill.stage || bill.status) !== currentFilters.stage) return false;
@@ -1802,7 +1512,7 @@
         return ai - bi;
       });
       statusFilter.innerHTML = '<option value="All">All Stages</option>'
-        + stages.map(s => `<option value="${s}">${s}</option>`).join('');
+        + stages.map(s => `<option value="${Comms.esc(s)}">${Comms.esc(s)}</option>`).join('');
     }
 
     function updateCategoryBtnLabel() {
@@ -1830,7 +1540,7 @@
 
     function renderCards() {
       const filtered = getFilteredData();
-      const today = new Date().toISOString().split('T')[0];
+      const today = todayIso();
 
       filtered.sort((a, b) => {
         const aNext = toIsoDate(a.nextActionDate);
@@ -1863,6 +1573,7 @@
       }
 
       const programAreaTotal = legislationData.filter(b => (b.programArea ?? "Housing") === currentProgramArea).length;
+      document.getElementById('all-bills-count').textContent = programAreaTotal;
       filterCount.textContent = `Showing ${filtered.length} of ${programAreaTotal} bills`;
 
       const isFiltered = currentFilters.stage    !== "All"
@@ -1877,49 +1588,51 @@
     function createCard(bill) {
       const card = document.createElement('article');
       card.className = 'bill-card';
-      card.onclick = () => openModal(bill, card);
+      const campaign = campaignForBill(bill);
+      card.onclick = () => (campaign ? openCampaign(campaign, card) : openModal(bill, card));
 
       const stage = bill.stage || bill.status;
       const stageStyle = stageConfig[stage] || stageConfig[bill.status] || { bg: '#f5f5f5', text: '#666', border: '#ddd' };
-      const typeClass = (bill.type || 'endorsed').toLowerCase();
+      const typeClass = Comms.esc((bill.type || 'endorsed').toLowerCase());
       const hasNote = !!(notesData[bill.billNumber]?.text);
 
       card.innerHTML = `
         <div class="card-header-bar ${typeClass}"></div>
         <div class="card-body">
           <div class="card-tags">
-            <span class="tag ${typeClass}">${bill.type}</span>
+            <span class="tag ${typeClass}">${Comms.esc(bill.type)}</span>
             ${(Array.isArray(bill.category) ? bill.category : []).map(c => `<span class="tag category">${escapeHtml(c)}</span>`).join('')}
             ${/* bill.isShellBill ? '<span class="tag shell-bill">Shell Bill</span>' : '' */''}
           </div>
           <div class="bill-number">
-            ${bill.billNumber}
+            ${Comms.esc(bill.billNumber)}
             ${hasNote ? '<span class="note-dot" title="Has IFE note"></span>' : ''}
           </div>
-          ${bill.primarySponsor ? `<p class="card-sponsor">${bill.primarySponsor}</p>` : ''}
-          <h4 class="bill-title">${bill.title}</h4>
-          <p class="bill-description">${bill.description || ''}</p>
+          ${bill.primarySponsor ? `<p class="card-sponsor">${Comms.esc(bill.primarySponsor)}</p>` : ''}
+          <h4 class="bill-title">${Comms.esc(bill.title)}</h4>
+          <p class="bill-description">${Comms.esc(bill.description || '')}</p>
           ${bill.lastAmendmentName != null ? `
-          <p class="card-amendment-disclaimer">⚠️ This bill has been amended. The description may not reflect the latest content. <a href="${bill.url}" target="_blank" rel="noopener noreferrer">View latest</a></p>` : ''}
+          <p class="card-amendment-disclaimer">⚠️ This bill has been amended. The description may not reflect the latest content. <a href="${Comms.esc(Comms.safeUrl(bill.url))}" target="_blank" rel="noopener noreferrer">View latest</a></p>` : ''}
           ${bill.lastActionDate ? `
           <p class="card-last-action">
-            <span class="card-last-action-date">${bill.lastActionDate}</span>
-            ${bill.lastAction ? ` — ${bill.lastAction}` : ''}
+            <span class="card-last-action-date">${Comms.esc(bill.lastActionDate)}</span>
+            ${bill.lastAction ? ` — ${Comms.esc(bill.lastAction)}` : ''}
           </p>` : ''}
-          ${bill.nextActionDate && toIsoDate(bill.nextActionDate) >= new Date().toISOString().split('T')[0] ? `
+          ${bill.nextActionDate && toIsoDate(bill.nextActionDate) >= todayIso() ? `
           <p class="card-next-action">
             <span class="card-next-action-label">Next:</span>
-            <span class="card-next-action-date">${bill.nextActionDate}</span>
-            ${bill.nextActionType ? ` — ${bill.nextActionType}` : ''}
+            <span class="card-next-action-date">${Comms.esc(bill.nextActionDate)}</span>
+            ${bill.nextActionType ? ` — ${Comms.esc(bill.nextActionType)}` : ''}
           </p>` : ''}
           ${bill.lastAmendmentName ? `
           <p class="card-last-amendment">
             <span class="card-last-amendment-label">Amdt:</span>
-            ${bill.lastAmendmentDate ? `<span class="card-last-amendment-date"> ${bill.lastAmendmentDate}</span> —` : ''}
-            ${bill.lastAmendmentName}
+            ${bill.lastAmendmentDate ? `<span class="card-last-amendment-date"> ${Comms.esc(bill.lastAmendmentDate)}</span> —` : ''}
+            ${Comms.esc(bill.lastAmendmentName)}
           </p>` : ''}
           <div class="card-footer">
-            <span class="status-badge" style="background-color:${stageStyle.bg};color:${stageStyle.text};border:1px solid ${stageStyle.border};">${stage}</span>
+            <span class="status-badge" style="background-color:${stageStyle.bg};color:${stageStyle.text};border:1px solid ${stageStyle.border};">${Comms.esc(stage)}</span>
+            ${usingFallback ? '' : (() => { const o = Comms.billOutcome(bill, sessionData, todayIso()); return `<span class="card-outcome">${outcomePill(o, Comms.outcomeLabel(o, currentStatus(), Comms.paNumber(bill)))}</span>`; })()}
           </div>
         </div>
       `;
@@ -1927,16 +1640,16 @@
       return card;
     }
 
-    function openModal(bill, anchorEl) {
+    function openModal(bill, anchorEl, fromLink = false) {
+      closeCampaign();
       currentBill = bill;
-      positionPopupNear(document.querySelector('#bill-modal-overlay .bill-modal'), anchorEl);
-      const typeClass  = (bill.type || 'endorsed').toLowerCase();
+      const typeClass  = Comms.esc((bill.type || 'endorsed').toLowerCase());
       const stage      = bill.stage || bill.status;
       const stageStyle = stageConfig[stage] || stageConfig[bill.status] || { bg: '#f5f5f5', text: '#666', border: '#ddd' };
 
       document.getElementById('bill-modal-header').className = `bill-modal-header ${typeClass}`;
       document.getElementById('bill-modal-tags').innerHTML = `
-        <span class="bill-modal-tag">${bill.type}</span>
+        <span class="bill-modal-tag">${Comms.esc(bill.type)}</span>
         ${(Array.isArray(bill.category) ? bill.category : []).map(c => `<span class="bill-modal-tag">${escapeHtml(c)}</span>`).join('')}
         ${bill.isShellBill ? '<span class="bill-modal-tag" style="background:rgba(230,81,0,0.25);">Shell Bill</span>' : ''}
       `;
@@ -1953,9 +1666,9 @@
       // Next action box
       const nextActionBox = document.getElementById('bill-modal-next-action-box');
       const nextIso = toIsoDate(bill.nextActionDate);
-      if (nextIso && nextIso >= new Date().toISOString().split('T')[0]) {
+      if (nextIso && nextIso >= todayIso()) {
         nextActionBox.style.display = 'block';
-        const naText = bill.nextActionDate + (bill.nextActionType ? ` — ${bill.nextActionType}` : '');
+        const naText = bill.nextActionDate + (bill.nextActionType ? ' — ' + bill.nextActionType : '');
         document.getElementById('bill-modal-next-action').textContent = naText;
       } else {
         nextActionBox.style.display = 'none';
@@ -1986,413 +1699,252 @@
 
       const disclaimerEl = document.getElementById('bill-modal-amendment-disclaimer');
       if (bill.lastAmendmentName != null) {
-        disclaimerEl.innerHTML = `⚠️ This bill has been amended. The description may not reflect the latest content. <a href="${bill.url}" target="_blank" rel="noopener noreferrer">View latest</a>`;
+        disclaimerEl.innerHTML = `⚠️ This bill has been amended. The description may not reflect the latest content. <a href="${Comms.esc(Comms.safeUrl(bill.url))}" target="_blank" rel="noopener noreferrer">View latest</a>`;
         disclaimerEl.style.display = 'block';
       } else {
         disclaimerEl.style.display = 'none';
       }
 
-      document.getElementById('bill-modal-link').href           = bill.url;
+      document.getElementById('bill-modal-link').href           = Comms.safeUrl(bill.url);
 
-      document.getElementById('bill-modal-refresh-btn').style.display =
-        bill.userAdded ? 'inline-block' : 'none';
-      document.getElementById('bill-modal-delete-btn').style.display =
-        bill.userAdded ? 'inline-block' : 'none';
-
-      modalOverlay.classList.add('visible');
-      document.body.style.overflow = 'hidden';
+      document.getElementById('bill-copy-status').textContent = '';
+      showOverlay(modalOverlay, anchorEl, fromLink);
+      setLinkHash(Comms.hashFor(currentGa(), bill.billNumber));
     }
 
     function closeModal() {
+      if (!modalOverlay.classList.contains('visible')) return;
       modalOverlay.classList.remove('visible');
       document.body.style.overflow = '';
       currentBill = null;
+      setLinkHash('');
     }
 
-    function confirmDeleteBill() {
-      if (!currentBill) return;
-      const ok = confirm(`Delete ${currentBill.billNumber} — "${currentBill.title}"?\n\nThis cannot be undone.`);
-      if (ok) deleteBill(currentBill);
+    // ── Comms layer ───────────────────────────────────────────────────────────
+    function todayIso()      { return Comms.localIso(new Date()); }
+    function currentStatus() { return Comms.sessionStatus(sessionData, todayIso()); }
+    function currentGa()     { return sessionData?.ga || CURRENT_GA; }
+
+    function rebuildCampaigns() {
+      // On fallback data (bills.json unreachable) there's no real lastAction/lastActionDate to
+      // derive an outcome from, so don't build campaigns at all: no campaign window, no agenda
+      // groups, no summary counts — the page must make no outcome claims in that state.
+      if (usingFallback) { campaigns = []; return; }
+      const res = Comms.buildCampaigns(legislationData, campaignDefs, sessionData, todayIso());
+      campaigns = res.campaigns;
+      res.warnings.forEach(w => console.warn('[campaigns]', w));
+    }
+    function areaCampaigns() { return campaigns.filter(c => c.programArea === currentProgramArea); }
+    function campaignForBill(bill) {
+      const k = Comms.normBill(bill.billNumber);
+      return campaigns.find(c => c.bills.some(x => Comms.normBill(x.bill.billNumber) === k));
+    }
+    function outcomePill(outcome, label) {
+      return `<span class="outcome-pill outcome-${outcome}">${Comms.esc(label)}</span>`;
+    }
+    function fmtDay(iso) {
+      const [y, m, d] = iso.split('-').map(Number);
+      return new Date(y, m - 1, d).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
     }
 
-    async function deleteBill(bill) {
-      const deleteBtn = document.getElementById('bill-modal-delete-btn');
-      deleteBtn.disabled = true;
-      deleteBtn.textContent = 'Deleting…';
+    function renderSummary() {
+      const st = currentStatus();
+      const counts = Comms.outcomeCounts(areaCampaigns());
+      const facts = [
+        ['law', 'became law'], ['governor', "on the governor's desk"], ['vetoed', 'vetoed'],
+        ['moving', 'moving'], ['stalled', st.springEnded ? "didn't advance" : 'stalled'], ['died', 'did not pass'],
+      ].filter(([k]) => counts[k])
+       .map(([k, t]) => `<div class="summary-fact"><strong>${counts[k]}</strong>${Comms.esc(t)}</div>`).join('');
+      const upd = Comms.staffUpdate(sessionData, currentProgramArea, st);
+      const fetched = Comms.latestFetch(legislationData);
+      const stale = Comms.isStale(legislationData, new Date());
+      const el = document.getElementById('session-summary');
+      el.innerHTML =
+        (st.headline ? `<p class="summary-headline">${Comms.esc(st.headline)}</p>` : '')
+        + (facts ? `<div class="summary-facts" aria-label="IFE's bills this General Assembly">${facts}</div>` : '')
+        + (upd ? `<blockquote class="summary-update"><span class="summary-update-label">${Comms.esc(upd.label)}</span>${Comms.esc(upd.text)}</blockquote>` : '')
+        + (stale ? `<p class="summary-stale">Status data last updated ${Comms.esc(new Date(fetched).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }))}.</p>` : '');
+      el.style.display = el.innerHTML ? '' : 'none';
+    }
+
+    function renderComingUp() {
+      const list = areaCampaigns();
+      const rows = Comms.comingUp(list, todayIso());
+      const floor = Comms.floorVotes(list);
+      const el = document.getElementById('coming-up');
+      let html = '<h3 class="comms-label">Coming up</h3>';
+      if (!rows.length && !floor.length) {
+        html += `<p class="comms-empty">${Comms.esc(Comms.comingUpEmptyText(currentStatus()))}</p>`;
+      }
+      html += rows.map(r => `
+        <button type="button" class="coming-row" data-campaign="${Comms.esc(r.campaign.id)}">
+          <span class="coming-date">${Comms.esc(fmtDay(r.date))}</span>
+          <span class="coming-name">${Comms.esc(r.campaign.name)}<small>${Comms.esc(Comms.normBill(r.bill.billNumber))}</small></span>
+          <span class="coming-action">${Comms.esc(r.action)}</span>
+        </button>`).join('');
+      if (floor.length) {
+        html += '<h4 class="comms-sublabel">Awaiting a floor vote</h4>' + floor.map(c => `
+          <button type="button" class="coming-row" data-campaign="${Comms.esc(c.id)}">
+            <span class="coming-name">${Comms.esc(c.name)}</span>
+          </button>`).join('');
+      }
+      el.innerHTML = html;
+      el.classList.toggle('is-empty', !rows.length && !floor.length);
+    }
+
+    function renderAgenda() {
+      const st = currentStatus();
+      const groups = Comms.groupCampaigns(areaCampaigns());
+      document.getElementById('agenda').style.display = groups.length ? '' : 'none';
+      document.getElementById('agenda-groups').innerHTML = groups.map(g => `
+        <div class="agenda-group">
+          <h3 class="comms-label">${Comms.esc(Comms.groupHeading(g.outcome, st))} (${g.items.length})</h3>
+          ${g.items.map(c => `
+            <button type="button" class="agenda-row" data-campaign="${Comms.esc(c.id)}">
+              <span class="agenda-main">
+                <span class="agenda-name">${Comms.esc(c.name)}</span>
+                <small class="agenda-bills">${c.bills.map(x => Comms.esc(Comms.normBill(x.bill.billNumber))).join(' · ')}</small>
+                ${c.why ? `<span class="agenda-why">${Comms.esc(c.why)}</span>` : ''}
+              </span>
+              ${outcomePill(c.outcome, Comms.outcomeLabel(c.outcome, st, c.pa))}
+            </button>`).join('')}
+        </div>`).join('');
+    }
+
+    function renderComms() { renderSummary(); renderComingUp(); renderAgenda(); }
+
+    // The iframe has no scrollbar of its own (the parent page scrolls it),
+    // so scrolling inside the embed has to be done by the parent.
+    function requestParentScroll(el) {
+      const top = el.getBoundingClientRect().top + window.scrollY;
+      if (embedded) window.parent.postMessage({ type: 'bill-tracker-scroll', top }, '*');
+      else window.scrollTo({ top: Math.max(0, top - 20), behavior: 'smooth' });
+    }
+
+    function switchProgramArea(area) {
+      if (area === currentProgramArea) return;
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        const on = b.dataset.area === area;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-pressed', String(on));
+      });
+      currentProgramArea = area;
+      currentFilters.stage    = "All";
+      currentFilters.category = new Set();
+      statusFilter.value   = "All";
+      categoryFilter.classList.remove('open');
+      categoryDropdownBtn.setAttribute('aria-expanded', 'false');
+      populateStageFilter();
+      populateCategoryFilter();
+      updateCategoryBtnLabel();
+      renderComms();
+      renderCards();
+    }
+
+    // ── Campaign window + links ───────────────────────────────────────────────
+    const campaignOverlay = document.getElementById('campaign-modal-overlay');
+    let currentCampaign = null;
+
+    function setLinkHash(hash) {
+      history.replaceState(null, '', location.pathname + location.search + hash);
+      if (embedded) window.parent.postMessage({ type: 'bill-tracker-hash', hash }, '*');
+    }
+
+    function shareUrl(hash) {
+      return (parentUrl || location.origin + location.pathname) + hash;
+    }
+
+    async function copyText(text, statusEl) {
       try {
-        const { content, sha } = await readGitHubFile('data/user-bills.json');
-        const updated = (content || []).filter(b => b.billNumber !== bill.billNumber);
-        await writeGitHubFile('data/user-bills.json', updated, sha, `Delete bill: ${bill.billNumber}`);
-        legislationData = legislationData.filter(b => b.billNumber !== bill.billNumber);
-        closeModal();
-        updateHighlights();
-        renderCards();
-      } catch (e) {
-        alert(`Delete failed: ${e.message}`);
-        deleteBtn.disabled = false;
-        deleteBtn.textContent = 'Delete Bill';
+        await navigator.clipboard.writeText(text);
+        statusEl.textContent = 'Copied';
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand('copy');
+        ta.remove();
+        statusEl.textContent = ok ? 'Copied' : `Copy failed. Select and copy: ${text}`;
       }
     }
 
-    async function refreshBillILGA() {
-      if (!currentBill) return;
-      const refreshBtn = document.getElementById('bill-modal-refresh-btn');
-      refreshBtn.disabled = true;
-      refreshBtn.textContent = 'Refreshing…';
-      try {
-        const data = await fetchBillFromILGA(currentBill.billNumber);
-        const updates = {
-          primarySponsor:    data.primarySponsor,
-          stage:             data.stage,
-          lastAction:        data.lastAction,
-          lastActionDate:    data.lastActionDate,
-          nextActionDate:    data.nextActionDate,
-          nextActionType:    data.nextActionType,
-          lastAmendmentName: data.lastAmendmentName,
-          lastAmendmentDate: data.lastAmendmentDate,
-          isShellBill:       data.isShellBill,
-          ilgaFetchedAt:     new Date().toISOString(),
-        };
-        const { content, sha } = await readGitHubFile('data/user-bills.json');
-        const userBills = (content || []).map(b =>
-          b.billNumber === currentBill.billNumber ? { ...b, ...updates } : b
-        );
-        await writeGitHubFile('data/user-bills.json', userBills, sha, `Refresh bill: ${currentBill.billNumber}`);
-        Object.assign(currentBill, updates);
-        legislationData = legislationData.map(b =>
-          b.billNumber === currentBill.billNumber ? { ...b, ...updates } : b
-        );
-        renderCards();
-        openModal(currentBill);
-      } catch (e) {
-        alert(`Refresh failed: ${e.message}`);
-        refreshBtn.disabled = false;
-        refreshBtn.textContent = 'Refresh from ILGA';
-      }
-    }
-
-    async function refreshAllFromILGA() {
-      const overlay      = document.getElementById('refresh-overlay');
-      const titleEl      = document.getElementById('refresh-overlay-title');
-      const progressText = document.getElementById('refresh-progress-text');
-      const progressBar  = document.getElementById('refresh-progress-bar');
-      const statusText   = document.getElementById('refresh-status-text');
-      const closeBtn     = document.getElementById('refresh-close-btn');
-
-      // Reset overlay
-      titleEl.textContent      = 'Refreshing from ILGA.gov…';
-      progressText.textContent = 'Starting…';
-      progressBar.style.width  = '0%';
-      statusText.textContent   = '';
-      closeBtn.style.display   = 'none';
+    function showOverlay(overlay, anchorEl, fromLink) {
+      const box = overlay.querySelector('.bill-modal');
+      positionPopupNear(box, fromLink ? document.getElementById('comms') : anchorEl);
       overlay.classList.add('visible');
-
-      const baseBills = legislationData.filter(b => !b.userAdded);
-      const userBills = legislationData.filter(b =>  b.userAdded);
-      const allBills  = [...baseBills, ...userBills];
-      const total     = allBills.length;
-
-      const ilgaFields = [
-        'stage', 'primarySponsor', 'lastAction', 'lastActionDate',
-        'nextActionDate', 'nextActionType', 'lastAmendmentName',
-        'lastAmendmentDate', 'isShellBill'
-      ];
-
-      const updatedBase = [...baseBills];
-      const updatedUser = [...userBills];
-
-      for (let i = 0; i < allBills.length; i++) {
-        const bill = allBills[i];
-        progressText.textContent = `${i + 1} / ${total} — ${bill.billNumber}`;
-        progressBar.style.width  = `${Math.round(((i + 1) / total) * 100)}%`;
-
-        try {
-          const data = await fetchBillFromILGA(bill.billNumber);
-          const fetchedAt = new Date().toISOString();
-          const stageChanged = data.stage !== bill.stage;
-          const updates = {};
-          for (const f of ilgaFields) updates[f] = data[f];
-          updates.ilgaFetchedAt  = fetchedAt;
-          updates.stageChangedAt = stageChanged ? fetchedAt : (bill.stageChangedAt || fetchedAt);
-
-          if (bill.userAdded) {
-            const idx = updatedUser.findIndex(b => b.billNumber === bill.billNumber);
-            if (idx !== -1) updatedUser[idx] = { ...updatedUser[idx], ...updates };
-          } else {
-            const idx = updatedBase.findIndex(b => b.billNumber === bill.billNumber);
-            if (idx !== -1) updatedBase[idx] = { ...updatedBase[idx], ...updates };
-          }
-        } catch (e) {
-          statusText.textContent = `Warning: ${bill.billNumber} failed — ${e.message}`;
-        }
-      }
-
-      // Update in-memory data
-      legislationData = [...updatedBase, ...updatedUser];
-      updateHighlights();
-      renderCards();
-      updateLastFetched();
-
-      // Write to GitHub
-      try {
-        progressText.textContent = 'Writing bills.json to GitHub…';
-        const { sha: baseSha } = await readGitHubFile('data/bills.json');
-        await writeGitHubFile('data/bills.json', updatedBase, baseSha, 'Refresh all: update bills.json from ILGA');
-
-        if (updatedUser.length > 0) {
-          progressText.textContent = 'Writing user-bills.json to GitHub…';
-          const { sha: userSha } = await readGitHubFile('data/user-bills.json');
-          await writeGitHubFile('data/user-bills.json', updatedUser, userSha, 'Refresh all: update user-bills.json from ILGA');
-        }
-
-        titleEl.textContent      = 'Refresh complete';
-        progressText.textContent = `Updated ${total} bills`;
-        progressBar.style.width  = '100%';
-        statusText.textContent   = 'Data saved to GitHub ✓';
-      } catch (e) {
-        titleEl.textContent    = 'Refresh complete (write error)';
-        statusText.textContent = `In-memory data updated, but GitHub write failed: ${e.message}`;
-      }
-
-      closeBtn.style.display = 'inline-block';
+      document.body.style.overflow = 'hidden';
+      // positionPopupNear sets `top` in a rAF; scroll after it lands.
+      if (fromLink) requestAnimationFrame(() => requestAnimationFrame(() => requestParentScroll(box)));
     }
 
-    // ── ILGA fetch (browser-side, for refresh) ───────────────────────────────
-    async function fetchWithProxy(xmlUrl) {
-      const workerUrl = xmlUrl.replace('https://www.ilga.gov', `${WORKER_URL}/ilga`);
-      const ctrl = new AbortController();
-      setTimeout(() => ctrl.abort(), 10000);
-      const resp = await fetch(workerUrl, { signal: ctrl.signal });
-      if (resp.ok) return await resp.text();
-      throw new Error('Could not reach ILGA.gov. Check your connection or try again later.');
+    function openCampaign(c, anchorEl, fromLink = false) {
+      if (!c) return;
+      closeModal();
+      currentCampaign = c;
+      const st = currentStatus();
+      const today = todayIso();
+      document.getElementById('campaign-modal-header').className = `bill-modal-header ${c.type.toLowerCase()}`;
+      document.getElementById('campaign-modal-tags').innerHTML =
+        `<span class="bill-modal-tag">IFE ${Comms.esc(c.type)}</span>`
+        + c.categories.map(x => `<span class="bill-modal-tag">${Comms.esc(x)}</span>`).join('');
+      document.getElementById('campaign-modal-name').textContent = c.name;
+      document.getElementById('campaign-modal-ga').textContent = c.ga ? `${Comms.ordinal(c.ga)} General Assembly` : '';
+      document.getElementById('campaign-modal-outcome').innerHTML = outcomePill(c.outcome, Comms.outcomeLabel(c.outcome, st, c.pa));
+      const why = document.getElementById('campaign-modal-why');
+      why.innerHTML = c.why ? `<strong>Why it matters:</strong> ${Comms.esc(c.why)}` : '';
+      why.style.display = c.why ? '' : 'none';
+      const note = document.getElementById('campaign-modal-note');
+      note.textContent = c.winNote || c.overrideNote || '';
+      note.style.display = note.textContent ? '' : 'none';
+      document.getElementById('campaign-modal-bills').innerHTML = c.bills.map(({ bill, outcome }) => {
+        const next = Comms.mdyToIso(bill.nextActionDate);
+        return `
+        <div class="campaign-bill">
+          <div class="campaign-bill-head">
+            <strong>${Comms.esc(Comms.normBill(bill.billNumber))}</strong>
+            ${bill.primarySponsor ? `<span>${Comms.esc(bill.primarySponsor)}</span>` : ''}
+            ${outcomePill(outcome, Comms.outcomeLabel(outcome, st, Comms.paNumber(bill)))}
+          </div>
+          ${bill.lastAction ? `<p class="campaign-bill-action">${Comms.esc(bill.lastActionDate || '')} · ${Comms.esc(bill.lastAction)}</p>` : ''}
+          ${next && next >= today ? `<p class="campaign-bill-next">Next: ${Comms.esc(bill.nextActionDate)}${bill.nextActionType ? ' — ' + Comms.esc(bill.nextActionType) : ''}</p>` : ''}
+          <a href="${Comms.esc(Comms.safeUrl(bill.url))}" target="_blank" rel="noopener noreferrer">View on ILGA.gov &rarr;</a>
+        </div>`;
+      }).join('');
+      document.getElementById('campaign-modal-details').innerHTML = c.bills.map(({ bill }) => `
+        <p class="campaign-detail-bill"><strong>${Comms.esc(Comms.normBill(bill.billNumber))}: ${Comms.esc(bill.title)}</strong></p>
+        ${bill.lastAmendmentName != null ? `<p class="card-amendment-disclaimer">⚠️ This bill has been amended. The description may not reflect the latest content. <a href="${Comms.esc(Comms.safeUrl(bill.url))}" target="_blank" rel="noopener noreferrer">View latest</a></p>` : ''}
+        <p class="bill-modal-summary">${Comms.esc(bill.description || '')}</p>`).join('');
+      document.getElementById('campaign-copy-status').textContent = '';
+      document.querySelector('#campaign-modal-overlay details').open = false;
+      showOverlay(campaignOverlay, anchorEl, fromLink);
+      setLinkHash(Comms.hashFor(c.ga || currentGa(), (c.outcome === 'law' ? c.best : c.lead).billNumber));
     }
 
-    async function fetchBillFromILGA(rawBillNumber) {
-      const m = rawBillNumber.trim().toUpperCase().match(/^([A-Z]+)(\d+)$/);
-      if (!m) throw new Error('Invalid format — use e.g. HB1234 or SB567.');
-      const docType = m[1], docNum = m[2].padStart(4, '0');
-      const xmlUrl  = `https://www.ilga.gov/ftp/legislation/104/BillStatus/XML/10400${docType}${docNum}.xml`;
-
-      const text = await fetchWithProxy(xmlUrl);
-
-      const xml = new DOMParser().parseFromString(text, 'text/xml');
-      if (xml.querySelector('parsererror')) throw new Error('Bill not found or XML parse error.');
-
-      // Primary sponsor
-      const sponsorsEl = xml.querySelector('sponsor > sponsors');
-      const primarySponsor = sponsorsEl?.textContent?.trim().split(/[-,]|\s+and\s+/)[0]?.trim() || '';
-
-      // Last action (with freshness fallback from <actions> history)
-      const lastActionEl   = xml.querySelector('lastaction > action');
-      const lastDateEl     = xml.querySelector('lastaction > statusdate');
-      const lastChamberEl  = xml.querySelector('lastaction > chamber');
-      let lastAction       = lastActionEl?.textContent?.trim() || '';
-      let lastActionDate   = lastDateEl?.textContent?.trim()   || '';
-      let lastActionChamber= (lastChamberEl?.textContent?.trim() || '').toLowerCase();
-
-      // Classify an action into a stage, or return null if not stage-relevant
-      function classifyAction(actionText, chamber, docType) {
-        const la = actionText.toLowerCase();
-        const ch = (chamber || '').toLowerCase();
-        if (la.includes('approved by governor') || la.includes('public act')) return 'Signed into Law';
-        if (la.includes('sent to the governor') || la.includes('to the governor')) return 'Awaiting Governor Signature';
-        if (la.includes('passed both') || la.includes('enrolled')) return 'Enrolled';
-        if (la.includes('passed senate')) return 'Passed Senate';
-        if (la.includes('passed house')) return 'Passed House';
-        if (/passed\s+\d{3}-\d{3}-\d{3}/.test(la)) {
-          if (ch === 'house') return 'Passed House';
-          if (ch === 'senate') return 'Passed Senate';
-        }
-        if (la.includes('vetoed') || la.includes('failed') || la.includes('did not pass') || la.includes('tabled') || la.includes('withdrawn')) return 'Failed';
-        if (['placed on calendar order of 2nd reading', 'placed on calendar order of 3rd reading',
-             'placed on calendar 2nd reading', 'placed on calendar 3rd reading',
-             'second reading', 'third reading',
-             'do pass', 'approved for consideration',
-             'recalled from committee'].some(s => la.includes(s))) {
-          if (ch === 'house') return 'Passed House Committee';
-          if (ch === 'senate') return 'Passed Senate Committee';
-        }
-        if (ch === 'senate' && docType === 'HB') return 'In Senate Committee';
-        if (ch === 'house' && docType === 'SB') return 'In House Committee';
-        if (la.includes('arrive in senate')) return 'In Senate Committee';
-        if (la.includes('arrive in house')) return 'In House Committee';
-        return null;
-      }
-
-      // Walk <actions> to find the most recent substantive action; substitute if newer
-      const actionHistory = [];
-      {
-        const SKIP = [
-          'added as ', 'removed as ', 'alternate',
-          'added co-sponsor', 'removed co-sponsor',
-          'added chief co-sponsor', 'removed chief co-sponsor',
-          'added alternate', 'removed alternate',
-          'rule 19(a)',
-          'fiscal note', 'home rule note', 'state mandates note',
-          'pension note', 'balanced budget note', 'judicial note',
-        ];
-        function _parseActDate(s) {
-          if (!s) return null;
-          const p = s.split('/');
-          if (p.length !== 3) return null;
-          return [parseInt(p[2]), parseInt(p[0]), parseInt(p[1])]; // [y,m,d]
-        }
-        function _cmpDate(a, b) {
-          if (!a || !b) return 0;
-          for (let i = 0; i < 3; i++) { if (a[i] !== b[i]) return a[i] - b[i]; }
-          return 0;
-        }
-        const actionsEl = xml.querySelector('actions');
-        if (actionsEl) {
-          let curDate = '', curChamber = '', bestAction = '', bestDate = '', bestChamber = '', bestParsed = null;
-          for (const child of actionsEl.children) {
-            if (child.tagName === 'statusdate') { curDate = child.textContent.trim(); }
-            else if (child.tagName === 'chamber') { curChamber = child.textContent.trim(); }
-            else if (child.tagName === 'action') {
-              const t = child.textContent.trim();
-              // Collect all actions with chambers for history fallback
-              if (t) actionHistory.push({ text: t, chamber: curChamber.toLowerCase() });
-              if (!t || SKIP.some(p => t.toLowerCase().startsWith(p))) continue;
-              const parsed = _parseActDate(curDate);
-              if (parsed && (bestParsed === null || _cmpDate(parsed, bestParsed) >= 0)) {
-                bestAction = t; bestDate = curDate; bestChamber = curChamber; bestParsed = parsed;
-              }
-            }
-          }
-          if (bestDate && _cmpDate(_parseActDate(bestDate), _parseActDate(lastActionDate)) > 0) {
-            // Only substitute if the history action maps to a real stage
-            if (classifyAction(bestAction, bestChamber, docType) !== null) {
-              lastAction        = bestAction;
-              lastActionDate    = bestDate;
-              lastActionChamber = bestChamber.toLowerCase();
-            }
-          }
-        }
-      }
-
-      // Next scheduled action — may be in <nextaction> or <committeehearing>
-      const nextActionEl_  = xml.querySelector('nextaction > action');
-      const nextDateEl_    = xml.querySelector('nextaction > statusdate');
-      let nextActionDate   = nextDateEl_?.textContent?.trim()  || null;
-      let nextActionType   = nextActionEl_?.textContent?.trim()|| null;
-      if (!nextActionDate) {
-        const chEl = xml.querySelector('committeehearing');
-        if (chEl) {
-          const raw = chEl.textContent.trim();
-          const dm  = raw.match(/\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{1,2})\s+(\d{4})\b/);
-          if (dm) {
-            const mo = {Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12};
-            nextActionDate = `${mo[dm[1]]}/${parseInt(dm[2])}/${dm[3]}`;
-            nextActionType = raw.slice(0, dm.index).trim() || null;
-          }
-        }
-      }
-
-      // Amendments
-      const synopsisEl = xml.querySelector('synopsis');
-      let lastAmendmentName = null, isShellBill = false;
-      if (synopsisEl) {
-        let currentTitle = null;
-        for (const child of synopsisEl.children) {
-          if (child.tagName === 'synopsistitle') {
-            const t = child.textContent.trim();
-            if (t) currentTitle = t;
-          } else if (child.tagName === 'SynopsisText' && currentTitle) {
-            lastAmendmentName = currentTitle;
-            if (child.textContent.trim().startsWith('Replaces everything after the enacting clause'))
-              isShellBill = true;
-            currentTitle = null;
-          }
-        }
-      }
-      let lastAmendmentDate = null;
-      if (lastAmendmentName) {
-        const actionsEl = xml.querySelector('actions');
-        if (actionsEl) {
-          let cur = null;
-          for (const child of actionsEl.children) {
-            if (child.tagName === 'statusdate') cur = child.textContent.trim();
-            else if (child.tagName === 'action' && child.textContent.includes(lastAmendmentName.trim())) {
-              lastAmendmentDate = cur; break;
-            }
-          }
-        }
-      }
-
-      // Stage (mirrors Python map_stage logic)
-      let stage = classifyAction(lastAction, lastActionChamber, docType);
-      if (!stage) {
-        // Walk action history in reverse to find most recent stage-relevant action
-        for (let i = actionHistory.length - 1; i >= 0; i--) {
-          stage = classifyAction(actionHistory[i].text, actionHistory[i].chamber, docType);
-          if (stage) break;
-        }
-      }
-      if (!stage) {
-        stage = docType === 'HB' ? 'In House Committee' : 'In Senate Committee';
-      }
-
-      const ilgaUrl = `https://www.ilga.gov/Legislation/BillStatus?DocNum=${m[2]}&GAID=18&DocTypeID=${docType}&SessionID=114`;
-      return {
-        billNumber: rawBillNumber.trim().toUpperCase(),
-        primarySponsor, stage, lastAction, lastActionDate,
-        nextActionDate, nextActionType, ilgaUrl,
-        lastAmendmentName, lastAmendmentDate, isShellBill
-      };
+    function closeCampaign() {
+      if (!campaignOverlay.classList.contains('visible')) return;
+      campaignOverlay.classList.remove('visible');
+      document.body.style.overflow = '';
+      currentCampaign = null;
+      setLinkHash('');
     }
 
-
-    async function lookupBillILGA() {
-      const rawNum   = document.getElementById('add-bill-number-input').value.trim();
-      const statusEl = document.getElementById('lookup-status');
-      const previewEl= document.getElementById('ilga-preview');
-
-      if (!rawNum) {
-        statusEl.textContent = 'Please enter a bill number first.';
-        statusEl.className   = 'lookup-status error';
-        return;
-      }
-
-      statusEl.textContent = 'Looking up…';
-      statusEl.className   = 'lookup-status loading';
-      previewEl.style.display = 'none';
-      document.getElementById('preview-next-action-row').style.display = 'none';
-      addBillIlgaData = null;
-
-      try {
-        const data = await fetchBillFromILGA(rawNum);
-        addBillIlgaData = data;
-        document.getElementById('preview-sponsor').textContent    = data.primarySponsor || '(not found)';
-        document.getElementById('preview-stage').textContent      = data.stage;
-        document.getElementById('preview-last-action').textContent= data.lastAction
-          + (data.lastActionDate ? ` (${data.lastActionDate})` : '');
-        const nextActionRowEl = document.getElementById('preview-next-action-row');
-        if (data.nextActionDate) {
-          document.getElementById('preview-next-action').textContent =
-            data.nextActionDate + (data.nextActionType ? ` — ${data.nextActionType}` : '');
-          nextActionRowEl.style.display = 'flex';
-        } else {
-          nextActionRowEl.style.display = 'none';
-        }
-        previewEl.style.display  = 'block';
-        statusEl.textContent     = 'Found on ILGA ✓';
-        statusEl.className       = 'lookup-status success';
-        document.getElementById('add-bill-number-input').value = data.billNumber;
-      } catch (e) {
-        statusEl.textContent = e.message;
-        statusEl.className   = 'lookup-status error';
-      }
+    function openFromHash(hash) {
+      const link = Comms.parseHash(hash, currentGa());
+      if (!link || link.ga !== currentGa()) return false;
+      const bill = legislationData.find(b => Comms.normBill(b.billNumber) === link.billNumber);
+      if (!bill) return false;
+      const c = campaignForBill(bill);
+      switchProgramArea(c ? c.programArea : (bill.programArea || 'Housing'));
+      if (c) openCampaign(c, null, true);
+      else openModal(bill, null, true);
+      return true;
     }
 
-    async function addBill(billData) {
-      const { content, sha } = await readGitHubFile('data/user-bills.json');
-      const userBills = content || [];
-      userBills.push(billData);
-      await writeGitHubFile('data/user-bills.json', userBills, sha, `Add bill: ${billData.billNumber}`);
-      legislationData.push(billData);
-      updateHighlights();
-      renderCards();
-    }
+    window.addEventListener('message', (e) => {
+      if (e.source !== window.parent || !e.data || e.data.type !== 'bill-tracker-parent') return;
+      if (typeof e.data.url === 'string' && /^https?:\/\//.test(e.data.url)) parentUrl = e.data.url;
+    });
 
     // ── Event listeners ───────────────────────────────────────────────────────
     function setupEventListeners() {
@@ -2440,23 +1992,7 @@
       });
 
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
-          btn.classList.add('active');
-          btn.setAttribute('aria-pressed', 'true');
-          currentProgramArea = btn.dataset.area;
-          currentFilters.stage    = "All";
-          currentFilters.category = new Set();
-          statusFilter.value   = "All";
-          categoryFilter.classList.remove('open');
-          categoryDropdownBtn.setAttribute('aria-expanded', 'false');
-          populateStageFilter();
-          populateCategoryFilter();
-          updateCategoryBtnLabel();
-          closeHighlightsPopup();
-          updateHighlights();
-          renderCards();
-        });
+        btn.addEventListener('click', () => switchProgramArea(btn.dataset.area));
       });
 
       infoBtn.addEventListener('click', (e) => {
@@ -2476,21 +2012,52 @@
       document.getElementById('bill-modal-close').addEventListener('click', closeModal);
       document.getElementById('bill-modal-close-btn').addEventListener('click', closeModal);
       modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+      document.getElementById('campaign-modal-close').addEventListener('click', closeCampaign);
+      document.getElementById('campaign-modal-close-btn').addEventListener('click', closeCampaign);
+      campaignOverlay.addEventListener('click', (e) => { if (e.target === campaignOverlay) closeCampaign(); });
+      document.getElementById('campaign-copy-link').addEventListener('click', () => {
+        const c = currentCampaign;
+        copyText(shareUrl(Comms.hashFor(c.ga || currentGa(), (c.outcome === 'law' ? c.best : c.lead).billNumber)),
+                 document.getElementById('campaign-copy-status'));
+      });
+      document.getElementById('campaign-copy-blurb').addEventListener('click', () => {
+        const c = currentCampaign;
+        const url = shareUrl(Comms.hashFor(c.ga || currentGa(), (c.outcome === 'law' ? c.best : c.lead).billNumber));
+        copyText(Comms.blurb(c, currentStatus(), url), document.getElementById('campaign-copy-status'));
+      });
+      document.getElementById('bill-modal-copy-link').addEventListener('click', () => {
+        copyText(shareUrl(Comms.hashFor(currentGa(), currentBill.billNumber)), document.getElementById('bill-copy-status'));
+      });
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-          closeModal();
-          closeHighlightsPopup();
+          closeModal(); closeCampaign();
           infoBtn.setAttribute('aria-expanded', 'false');
           infoPopover.classList.remove('visible');
         }
       });
 
-      // Highlights popup close handlers
-      document.getElementById('highlights-popup-close').addEventListener('click', closeHighlightsPopup);
-      document.getElementById('highlights-popup-overlay').addEventListener('click', (e) => {
-        if (e.target === document.getElementById('highlights-popup-overlay')) closeHighlightsPopup();
+      document.getElementById('comms').addEventListener('click', (e) => {
+        const row = e.target.closest('[data-campaign]');
+        if (row) openCampaign(campaigns.find(c => c.id === row.dataset.campaign), row);
+      });
+      document.getElementById('jump-all-bills').addEventListener('click', () =>
+        requestParentScroll(document.getElementById('all-bills')));
+      document.getElementById('print-agenda').addEventListener('click', () => {
+        fillPrintDate();
+        window.print();
       });
     }
+
+    // Fills #print-date so a print always carries a date and source URL — both via the "Print
+    // agenda" button (above) and via Ctrl+P / the browser's own print command, which bypasses
+    // that button entirely and only fires window's 'beforeprint' event.
+    function fillPrintDate() {
+      const area = currentProgramArea === 'CLS' ? 'Criminal Legal System' : 'Housing';
+      document.getElementById('print-date').textContent =
+        `${area} · Printed ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} · `
+        + (parentUrl || location.origin + location.pathname);
+    }
+    window.addEventListener('beforeprint', fillPrintDate);
 
     document.addEventListener('DOMContentLoaded', init);
   </script>
