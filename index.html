@@ -1450,7 +1450,7 @@
     }
 
     function getFilteredData() {
-      const today = new Date().toISOString().split('T')[0];
+      const today = todayIso();
       return legislationData.filter(bill => {
         if ((bill.programArea ?? "Housing") !== currentProgramArea) return false;
         if (currentFilters.stage    !== "All" && (bill.stage || bill.status) !== currentFilters.stage) return false;
@@ -1523,7 +1523,7 @@
 
     function renderCards() {
       const filtered = getFilteredData();
-      const today = new Date().toISOString().split('T')[0];
+      const today = todayIso();
 
       filtered.sort((a, b) => {
         const aNext = toIsoDate(a.nextActionDate);
@@ -1601,7 +1601,7 @@
             <span class="card-last-action-date">${Comms.esc(bill.lastActionDate)}</span>
             ${bill.lastAction ? ` — ${Comms.esc(bill.lastAction)}` : ''}
           </p>` : ''}
-          ${bill.nextActionDate && toIsoDate(bill.nextActionDate) >= new Date().toISOString().split('T')[0] ? `
+          ${bill.nextActionDate && toIsoDate(bill.nextActionDate) >= todayIso() ? `
           <p class="card-next-action">
             <span class="card-next-action-label">Next:</span>
             <span class="card-next-action-date">${Comms.esc(bill.nextActionDate)}</span>
@@ -1649,7 +1649,7 @@
       // Next action box
       const nextActionBox = document.getElementById('bill-modal-next-action-box');
       const nextIso = toIsoDate(bill.nextActionDate);
-      if (nextIso && nextIso >= new Date().toISOString().split('T')[0]) {
+      if (nextIso && nextIso >= todayIso()) {
         nextActionBox.style.display = 'block';
         const naText = bill.nextActionDate + (bill.nextActionType ? ' — ' + bill.nextActionType : '');
         document.getElementById('bill-modal-next-action').textContent = naText;
