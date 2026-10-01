@@ -17,8 +17,12 @@
     var frame = document.getElementById('ife-bill-tracker');
     var base = frame.getAttribute('src').split('#')[0];
     var origin = new URL(base, location.href).origin;
-    // Incoming link: pass #104-HB5234 through to the tracker.
-    if (/^#(\d+-)?[A-Za-z]+\d+$/.test(location.hash)) frame.src = base + location.hash;
+    // Incoming link: pass #104-HB5234 through to the tracker. loading="lazy" can delay an iframe
+    // far below the fold, so force eager loading when a link should open a bill immediately.
+    if (/^#(\d+-)?[A-Za-z]+\d+$/.test(location.hash)) {
+      frame.loading = 'eager';
+      frame.src = base + location.hash;
+    }
     frame.addEventListener('load', function () {
       frame.contentWindow.postMessage(
         { type: 'bill-tracker-parent', url: location.origin + location.pathname + location.search }, origin);
