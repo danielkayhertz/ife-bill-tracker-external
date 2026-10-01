@@ -29,6 +29,31 @@ test('comms layer is wired in', () => {
   assert.ok(html.includes('@media print'));
 });
 
+test('ILGA/staff bill fields are escaped before HTML interpolation', () => {
+  // A direct `${bill.xxx}` template interpolation (no Comms.esc/escapeHtml wrapper) would inject
+  // unescaped ILGA/staff text straight into the DOM. After the fix every such field is wrapped.
+  const unescaped = html.match(/\$\{bill\.[A-Za-z]+(?:\.[A-Za-z]+)*\}/g) || [];
+  assert.deepEqual(unescaped, [], 'bill.* field interpolated without Comms.esc/escapeHtml: ' + unescaped.join(', '));
+});
+
+test('bill.url only reaches an href/.href sink through Comms.safeUrl', () => {
+  const sinks = html.match(/(?:href\s*=\s*"[^"]*bill\.url[^"]*"|\.href\s*=\s*[^;]*bill\.url[^;]*;)/g) || [];
+  assert.ok(sinks.length > 0, 'expected to find at least one bill.url sink to check');
+  for (const sink of sinks) {
+    assert.ok(/safeUrl/.test(sink), `bill.url sink missing Comms.safeUrl: ${sink}`);
+  }
+});
+
+test('"today" is computed via Comms.localIso, never toISOString', () => {
+  assert.ok(!/new Date\(\)\.toISOString\(\)\.split\('T'\)\[0\]/.test(html),
+    'toISOString() used for "today" instead of todayIso()/Comms.localIso()');
+});
+
+test('bills, user-bills, and notes reads fail independently (no shared Promise.all)', () => {
+  assert.ok(!/Promise\.all\(\[\s*readDataFile\('bills\.json'/.test(html),
+    'bills.json read must not share a Promise.all with user-bills.json/notes.json reads');
+});
+
 test('campaign window and link handling exist', () => {
   for (const id of ['campaign-modal-overlay', 'campaign-copy-link', 'campaign-copy-blurb', 'bill-modal-copy-link']) {
     assert.ok(html.includes(`id="${id}"`), `missing #${id}`);

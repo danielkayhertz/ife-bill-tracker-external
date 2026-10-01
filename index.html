@@ -1495,7 +1495,7 @@
         return ai - bi;
       });
       statusFilter.innerHTML = '<option value="All">All Stages</option>'
-        + stages.map(s => `<option value="${s}">${s}</option>`).join('');
+        + stages.map(s => `<option value="${Comms.esc(s)}">${Comms.esc(s)}</option>`).join('');
     }
 
     function updateCategoryBtnLabel() {
@@ -1576,45 +1576,45 @@
 
       const stage = bill.stage || bill.status;
       const stageStyle = stageConfig[stage] || stageConfig[bill.status] || { bg: '#f5f5f5', text: '#666', border: '#ddd' };
-      const typeClass = (bill.type || 'endorsed').toLowerCase();
+      const typeClass = Comms.esc((bill.type || 'endorsed').toLowerCase());
       const hasNote = !!(notesData[bill.billNumber]?.text);
 
       card.innerHTML = `
         <div class="card-header-bar ${typeClass}"></div>
         <div class="card-body">
           <div class="card-tags">
-            <span class="tag ${typeClass}">${bill.type}</span>
+            <span class="tag ${typeClass}">${Comms.esc(bill.type)}</span>
             ${(Array.isArray(bill.category) ? bill.category : []).map(c => `<span class="tag category">${escapeHtml(c)}</span>`).join('')}
             ${/* bill.isShellBill ? '<span class="tag shell-bill">Shell Bill</span>' : '' */''}
           </div>
           <div class="bill-number">
-            ${bill.billNumber}
+            ${Comms.esc(bill.billNumber)}
             ${hasNote ? '<span class="note-dot" title="Has IFE note"></span>' : ''}
           </div>
-          ${bill.primarySponsor ? `<p class="card-sponsor">${bill.primarySponsor}</p>` : ''}
-          <h4 class="bill-title">${bill.title}</h4>
-          <p class="bill-description">${bill.description || ''}</p>
+          ${bill.primarySponsor ? `<p class="card-sponsor">${Comms.esc(bill.primarySponsor)}</p>` : ''}
+          <h4 class="bill-title">${Comms.esc(bill.title)}</h4>
+          <p class="bill-description">${Comms.esc(bill.description || '')}</p>
           ${bill.lastAmendmentName != null ? `
-          <p class="card-amendment-disclaimer">⚠️ This bill has been amended. The description may not reflect the latest content. <a href="${bill.url}" target="_blank" rel="noopener noreferrer">View latest</a></p>` : ''}
+          <p class="card-amendment-disclaimer">⚠️ This bill has been amended. The description may not reflect the latest content. <a href="${Comms.esc(Comms.safeUrl(bill.url))}" target="_blank" rel="noopener noreferrer">View latest</a></p>` : ''}
           ${bill.lastActionDate ? `
           <p class="card-last-action">
-            <span class="card-last-action-date">${bill.lastActionDate}</span>
-            ${bill.lastAction ? ` — ${bill.lastAction}` : ''}
+            <span class="card-last-action-date">${Comms.esc(bill.lastActionDate)}</span>
+            ${bill.lastAction ? ` — ${Comms.esc(bill.lastAction)}` : ''}
           </p>` : ''}
           ${bill.nextActionDate && toIsoDate(bill.nextActionDate) >= new Date().toISOString().split('T')[0] ? `
           <p class="card-next-action">
             <span class="card-next-action-label">Next:</span>
-            <span class="card-next-action-date">${bill.nextActionDate}</span>
-            ${bill.nextActionType ? ` — ${bill.nextActionType}` : ''}
+            <span class="card-next-action-date">${Comms.esc(bill.nextActionDate)}</span>
+            ${bill.nextActionType ? ` — ${Comms.esc(bill.nextActionType)}` : ''}
           </p>` : ''}
           ${bill.lastAmendmentName ? `
           <p class="card-last-amendment">
             <span class="card-last-amendment-label">Amdt:</span>
-            ${bill.lastAmendmentDate ? `<span class="card-last-amendment-date"> ${bill.lastAmendmentDate}</span> —` : ''}
-            ${bill.lastAmendmentName}
+            ${bill.lastAmendmentDate ? `<span class="card-last-amendment-date"> ${Comms.esc(bill.lastAmendmentDate)}</span> —` : ''}
+            ${Comms.esc(bill.lastAmendmentName)}
           </p>` : ''}
           <div class="card-footer">
-            <span class="status-badge" style="background-color:${stageStyle.bg};color:${stageStyle.text};border:1px solid ${stageStyle.border};">${stage}</span>
+            <span class="status-badge" style="background-color:${stageStyle.bg};color:${stageStyle.text};border:1px solid ${stageStyle.border};">${Comms.esc(stage)}</span>
             ${(() => { const o = Comms.billOutcome(bill, sessionData, todayIso()); return `<span class="card-outcome">${outcomePill(o, Comms.outcomeLabel(o, currentStatus(), Comms.paNumber(bill)))}</span>`; })()}
           </div>
         </div>
@@ -1626,13 +1626,13 @@
     function openModal(bill, anchorEl, fromLink = false) {
       closeCampaign();
       currentBill = bill;
-      const typeClass  = (bill.type || 'endorsed').toLowerCase();
+      const typeClass  = Comms.esc((bill.type || 'endorsed').toLowerCase());
       const stage      = bill.stage || bill.status;
       const stageStyle = stageConfig[stage] || stageConfig[bill.status] || { bg: '#f5f5f5', text: '#666', border: '#ddd' };
 
       document.getElementById('bill-modal-header').className = `bill-modal-header ${typeClass}`;
       document.getElementById('bill-modal-tags').innerHTML = `
-        <span class="bill-modal-tag">${bill.type}</span>
+        <span class="bill-modal-tag">${Comms.esc(bill.type)}</span>
         ${(Array.isArray(bill.category) ? bill.category : []).map(c => `<span class="bill-modal-tag">${escapeHtml(c)}</span>`).join('')}
         ${bill.isShellBill ? '<span class="bill-modal-tag" style="background:rgba(230,81,0,0.25);">Shell Bill</span>' : ''}
       `;
@@ -1651,7 +1651,7 @@
       const nextIso = toIsoDate(bill.nextActionDate);
       if (nextIso && nextIso >= new Date().toISOString().split('T')[0]) {
         nextActionBox.style.display = 'block';
-        const naText = bill.nextActionDate + (bill.nextActionType ? ` — ${bill.nextActionType}` : '');
+        const naText = bill.nextActionDate + (bill.nextActionType ? ' — ' + bill.nextActionType : '');
         document.getElementById('bill-modal-next-action').textContent = naText;
       } else {
         nextActionBox.style.display = 'none';
@@ -1682,13 +1682,13 @@
 
       const disclaimerEl = document.getElementById('bill-modal-amendment-disclaimer');
       if (bill.lastAmendmentName != null) {
-        disclaimerEl.innerHTML = `⚠️ This bill has been amended. The description may not reflect the latest content. <a href="${bill.url}" target="_blank" rel="noopener noreferrer">View latest</a>`;
+        disclaimerEl.innerHTML = `⚠️ This bill has been amended. The description may not reflect the latest content. <a href="${Comms.esc(Comms.safeUrl(bill.url))}" target="_blank" rel="noopener noreferrer">View latest</a>`;
         disclaimerEl.style.display = 'block';
       } else {
         disclaimerEl.style.display = 'none';
       }
 
-      document.getElementById('bill-modal-link').href           = bill.url;
+      document.getElementById('bill-modal-link').href           = Comms.safeUrl(bill.url);
 
       document.getElementById('bill-copy-status').textContent = '';
       showOverlay(modalOverlay, anchorEl, fromLink);
@@ -1887,12 +1887,12 @@
           </div>
           ${bill.lastAction ? `<p class="campaign-bill-action">${Comms.esc(bill.lastActionDate || '')} · ${Comms.esc(bill.lastAction)}</p>` : ''}
           ${next && next >= today ? `<p class="campaign-bill-next">Next: ${Comms.esc(bill.nextActionDate)}${bill.nextActionType ? ' — ' + Comms.esc(bill.nextActionType) : ''}</p>` : ''}
-          <a href="${Comms.esc(bill.url)}" target="_blank" rel="noopener noreferrer">View on ILGA.gov &rarr;</a>
+          <a href="${Comms.esc(Comms.safeUrl(bill.url))}" target="_blank" rel="noopener noreferrer">View on ILGA.gov &rarr;</a>
         </div>`;
       }).join('');
       document.getElementById('campaign-modal-details').innerHTML = c.bills.map(({ bill }) => `
         <p class="campaign-detail-bill"><strong>${Comms.esc(Comms.normBill(bill.billNumber))}: ${Comms.esc(bill.title)}</strong></p>
-        ${bill.lastAmendmentName != null ? `<p class="card-amendment-disclaimer">⚠️ This bill has been amended. The description may not reflect the latest content. <a href="${Comms.esc(bill.url)}" target="_blank" rel="noopener noreferrer">View latest</a></p>` : ''}
+        ${bill.lastAmendmentName != null ? `<p class="card-amendment-disclaimer">⚠️ This bill has been amended. The description may not reflect the latest content. <a href="${Comms.esc(Comms.safeUrl(bill.url))}" target="_blank" rel="noopener noreferrer">View latest</a></p>` : ''}
         <p class="bill-modal-summary">${Comms.esc(bill.description || '')}</p>`).join('');
       document.getElementById('campaign-copy-status').textContent = '';
       document.querySelector('#campaign-modal-overlay details').open = false;

@@ -13,6 +13,15 @@
       .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
+  // Comms.esc() escapes HTML metacharacters but doesn't vet URL schemes, so an ILGA/staff
+  // bill.url of 'javascript:...' would still execute when used as an href. Only http(s) links
+  // are allowed through; anything else (javascript:, data:, vbscript:, protocol-relative, etc.)
+  // becomes '#'.
+  function safeUrl(u) {
+    const s = String(u ?? '').trim();
+    return /^https?:\/\//i.test(s) ? s : '#';
+  }
+
   // 'SB0062' | ' sb 62 ' -> 'SB62'; null if not a bill number
   function normBill(s) {
     const m = String(s || '').toUpperCase().replace(/\s+/g, '').match(/^([A-Z]+)0*(\d+)$/);
@@ -288,7 +297,7 @@
   }
 
   const api = {
-    OUTCOME_RANK, MONTHS, FULL_MONTHS, esc, normBill, parseHash, hashFor, mdyToIso, localIso, addDaysIso,
+    OUTCOME_RANK, MONTHS, FULL_MONTHS, esc, safeUrl, normBill, parseHash, hashFor, mdyToIso, localIso, addDaysIso,
     springEnd, hasUpcoming, billOutcome, paNumber, awaitingFloorVote, ordinal, outcomeLabel, groupHeading,
     buildCampaigns, groupCampaigns, outcomeCounts, comingUp, floorVotes, sessionStatus, formatRange,
     formatRanges, comingUpEmptyText, staffUpdate, blurb, latestFetch, isStale,

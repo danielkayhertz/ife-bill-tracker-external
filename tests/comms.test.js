@@ -16,6 +16,20 @@ test('esc escapes all five HTML-significant characters', () => {
   assert.equal(C.esc(null), '');
 });
 
+test('safeUrl allows only http(s) URLs, else #', () => {
+  assert.equal(C.safeUrl('https://www.ilga.gov/Legislation/BillStatus?DocNum=5234'),
+    'https://www.ilga.gov/Legislation/BillStatus?DocNum=5234');
+  assert.equal(C.safeUrl('http://example.com/x'), 'http://example.com/x');
+  assert.equal(C.safeUrl('javascript:alert(1)'), '#');
+  assert.equal(C.safeUrl('  javascript:alert(1)'), '#');
+  assert.equal(C.safeUrl('JAVASCRIPT:alert(1)'), '#');
+  assert.equal(C.safeUrl('data:text/html,<script>1</script>'), '#');
+  assert.equal(C.safeUrl('//evil.example.com'), '#');
+  assert.equal(C.safeUrl(''), '#');
+  assert.equal(C.safeUrl(null), '#');
+  assert.equal(C.safeUrl(undefined), '#');
+});
+
 test('normBill strips padding, spaces, case', () => {
   assert.equal(C.normBill('SB0062'), 'SB62');
   assert.equal(C.normBill(' sb 62 '), 'SB62');
@@ -90,6 +104,15 @@ test('billOutcome: after spring, activity or a future hearing keeps it moving', 
 test('billOutcome: anything not law dies after the GA ends', () => {
   assert.equal(C.billOutcome(bill('Referred to Assignments'), SESSION, '2027-01-13'), 'died');
   assert.equal(C.billOutcome(bill('Public Act . . . 104-0514'), SESSION, '2027-01-13'), 'law');
+});
+
+test('billOutcome: missing lastActionDate after spring end is moving, not stalled', () => {
+  // FALLBACK_DATA bills have no lastAction/lastActionDate. A failed bills.json read must not make
+  // every bill look stalled.
+  const noDate = { billNumber: 'HB1', lastAction: '', lastActionDate: '' };
+  assert.equal(C.billOutcome(noDate, SESSION, '2026-09-30'), 'moving');
+  const undef = { billNumber: 'HB1' };
+  assert.equal(C.billOutcome(undef, SESSION, '2026-09-30'), 'moving');
 });
 
 test('billOutcome: no session data still works (no date-based rules)', () => {
