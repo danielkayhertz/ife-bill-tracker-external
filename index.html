@@ -1507,20 +1507,18 @@
 
     function positionPopupNear(popupEl, anchorEl) {
       if (!popupEl) return;
-      // anchorEl is in the iframe doc; its getBoundingClientRect().top is relative to iframe viewport.
-      // Iframe has no internal scroll (parent scrolls it), so viewport coords == document coords.
+      // The overlay is position: fixed, so `top` is measured from the top of this window's
+      // viewport. Embedded and sized to fit (the WordPress script grows the iframe), the
+      // viewport is the whole page; opened directly, or in an iframe that isn't being
+      // sized, the page scrolls inside it, so the popup has to stay within what's visible.
       let anchorTop = 80; // fallback
-      if (anchorEl && anchorEl.getBoundingClientRect) {
-        const r = anchorEl.getBoundingClientRect();
-        anchorTop = r.top + (window.scrollY || 0);
-      }
+      if (anchorEl && anchorEl.getBoundingClientRect) anchorTop = anchorEl.getBoundingClientRect().top;
       // Make it visible briefly to measure height, then place
       popupEl.style.top = '0px';
       requestAnimationFrame(() => {
         const h = popupEl.offsetHeight || 400;
-        const docH = document.documentElement.scrollHeight;
         let top = anchorTop - 20;
-        const maxTop = Math.max(20, docH - h - 20);
+        const maxTop = Math.max(20, window.innerHeight - h - 20);
         if (top > maxTop) top = maxTop;
         if (top < 20) top = 20;
         popupEl.style.top = top + 'px';

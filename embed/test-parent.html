@@ -17,25 +17,32 @@
     var frame = document.getElementById('ife-bill-tracker');
     var base = frame.getAttribute('src').split('#')[0];
     var origin = new URL(base, location.href).origin;
-    // Incoming link: pass #104-HB5234 through to the tracker. loading="lazy" can delay an iframe
-    // far below the fold, so force eager loading when a link should open a bill immediately.
+    var here = location.origin + location.pathname;
     if (/^#(\d+-)?[A-Za-z]+\d+$/.test(location.hash)) {
       frame.loading = 'eager';
       frame.src = base + location.hash;
     }
     frame.addEventListener('load', function () {
-      frame.contentWindow.postMessage(
-        { type: 'bill-tracker-parent', url: location.origin + location.pathname + location.search }, origin);
+      frame.contentWindow.postMessage({
+        type: 'bill-tracker-parent',
+        url: here + location.search
+      }, origin);
     });
     window.addEventListener('message', function (e) {
-      if (e.origin !== origin || e.source !== frame.contentWindow || !e.data) return;
+      if (e.origin !== origin) return;
+      if (e.source !== frame.contentWindow || !e.data) return;
       var d = e.data;
       if (d.type === 'bill-tracker-resize' && d.height > 0) {
         frame.style.height = d.height + 'px';
-      } else if (d.type === 'bill-tracker-hash' && typeof d.hash === 'string' && /^(#[\w-]*)?$/.test(d.hash)) {
-        history.replaceState(null, '', location.pathname + location.search + d.hash);
-      } else if (d.type === 'bill-tracker-scroll' && typeof d.top === 'number') {
-        var y = frame.getBoundingClientRect().top + window.pageYOffset + d.top - 20;
+      } else if (d.type === 'bill-tracker-hash'
+          && typeof d.hash === 'string'
+          && /^(#[\w-]*)?$/.test(d.hash)) {
+        var url = location.pathname + location.search + d.hash;
+        history.replaceState(null, '', url);
+      } else if (d.type === 'bill-tracker-scroll'
+          && typeof d.top === 'number') {
+        var r = frame.getBoundingClientRect();
+        var y = r.top + window.pageYOffset + d.top - 20;
         window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
       }
     });
