@@ -59,6 +59,17 @@ USER_AGENT = "IFE-BillTracker/1.0"
 # renewal, get the new intermediate from the new leaf certificate's Authority
 # Information Access "CA Issuers" URL, verify it the same way, and replace
 # this file.
+#
+# Note on Python 3.13+: ssl.create_default_context() there defaults
+# VERIFY_X509_PARTIAL_CHAIN on, which lets a chain validate by trusting a
+# pinned intermediate directly (treating it as a trust anchor) instead of
+# requiring it to chain all the way to a root CA already in the trust store.
+# That makes this pin function more like "trust this CA" than "fill the gap
+# in what ILGA sends" on those versions. The workflow pins Python 3.11 (see
+# .github/workflows/update-bills.yml), where VERIFY_X509_PARTIAL_CHAIN is
+# off by default and the intermediate is validated up to a real root as
+# documented above; if that pin is ever changed to 3.13+, re-check this
+# assumption.
 INTERMEDIATE_PEM = Path(__file__).parent / "certs" / "sectigo-public-server-authentication-ca-ov-r40.pem"
 
 
