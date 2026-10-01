@@ -2043,13 +2043,21 @@
       document.getElementById('jump-all-bills').addEventListener('click', () =>
         requestParentScroll(document.getElementById('all-bills')));
       document.getElementById('print-agenda').addEventListener('click', () => {
-        const area = currentProgramArea === 'CLS' ? 'Criminal Legal System' : 'Housing';
-        document.getElementById('print-date').textContent =
-          `${area} · Printed ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} · `
-          + (parentUrl || location.origin + location.pathname);
+        fillPrintDate();
         window.print();
       });
     }
+
+    // Fills #print-date so a print always carries a date and source URL — both via the "Print
+    // agenda" button (above) and via Ctrl+P / the browser's own print command, which bypasses
+    // that button entirely and only fires window's 'beforeprint' event.
+    function fillPrintDate() {
+      const area = currentProgramArea === 'CLS' ? 'Criminal Legal System' : 'Housing';
+      document.getElementById('print-date').textContent =
+        `${area} · Printed ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} · `
+        + (parentUrl || location.origin + location.pathname);
+    }
+    window.addEventListener('beforeprint', fillPrintDate);
 
     document.addEventListener('DOMContentLoaded', init);
   </script>

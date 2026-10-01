@@ -54,6 +54,10 @@ test('bills, user-bills, and notes reads fail independently (no shared Promise.a
     'bills.json read must not share a Promise.all with user-bills.json/notes.json reads');
 });
 
+test('print date is filled on beforeprint, not only the Print agenda button', () => {
+  assert.ok(html.includes("addEventListener('beforeprint'"), 'missing a beforeprint listener to fill #print-date for Ctrl+P');
+});
+
 test('campaign window and link handling exist', () => {
   for (const id of ['campaign-modal-overlay', 'campaign-copy-link', 'campaign-copy-blurb', 'bill-modal-copy-link']) {
     assert.ok(html.includes(`id="${id}"`), `missing #${id}`);
