@@ -6,7 +6,7 @@ Single-file SPA for tracking Illinois housing + CLS legislation externally (publ
 ## Architecture
 - **`index.html`** — entire frontend (HTML + CSS + JS). No build step.
 - **`data/bills.json`** — 145-bill master list; source of truth; written by update scripts
-- **`data/user-bills.json`** — bills added via the UI (Add Bill modal); cleared on each CSV migration
+- **`data/user-bills.json`** — bills added outside the CSV pipeline (e.g. HB624); hand-edited (there is no "Add Bill" UI anymore — that write path was removed); still read and merged into the bill list by `index.html` at init; cleared by `update_bills_from_csv.py` on each CSV migration
 - **`data/notes.json`** — shared IFE notes, keyed by bill number
 - **`update_bills_from_csv.py`** — CSV migration script; rebuilds bills.json + user-bills.json + FALLBACK_DATA from the two authoritative CSVs
 - **`js/comms.js`** — pure logic for the comms layer (links, dates, bill outcomes, campaigns, session status, coming up, blurbs). No DOM access, so it's tested directly: `node --test tests/comms.test.js`
