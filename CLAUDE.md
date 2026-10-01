@@ -112,6 +112,6 @@ The internal tracker (`ife-bill-tracker-internal`) tracks Housing bills only (11
 ## HB4782 Collision
 HB4782 appears in both CSVs. CLS CSV takes priority: it is filed under CLS / Traffic Stops and does not appear on the Housing tab.
 
-HB624 lives in `user-bills.json`, and `update_bills_from_csv.py` clears that file. Re-add HB624 (Endorsed, Home for Good) after any CSV migration.
+HB624 lives in `user-bills.json`, and `update_bills_from_csv.py` clears that file. Re-add HB624 (Endorsed, Home for Good) and SB3354 (Sponsored, CLS, Senate companion to HB5287 in the Credit for Change campaign) after any CSV migration.
 
 Last updated: 2026-09-30 — comms layer (campaigns, session summary, links)

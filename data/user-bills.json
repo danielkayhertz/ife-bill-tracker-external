@@ -34,5 +34,39 @@
       "senateCommittee": null,
       "senate": null
     }
+  },
+  {
+    "id": 147,
+    "billNumber": "SB3354",
+    "title": "Credit for Change",
+    "description": "Senate companion to HB5287. Credit for Change resets Illinois sentencing laws by motivating rehabilitation from the first day of a person's prison sentence, offering day-for-day credit for good behavior and access to sentence credits for all incarcerated people who are not serving a natural life sentence.",
+    "type": "Sponsored",
+    "category": [
+      "Sentencing Reform"
+    ],
+    "primarySponsor": "Sen. Robert Peters",
+    "programArea": "CLS",
+    "year": [
+      2026
+    ],
+    "status": "Not passed into law",
+    "url": "https://www.ilga.gov/Legislation/BillStatus?DocNum=3354&GAID=18&DocTypeID=SB&SessionID=114",
+    "stage": "In Senate Committee",
+    "lastAction": "Referred to Assignments",
+    "lastActionDate": "2/4/2026",
+    "ilgaFetchedAt": "2026-10-01T18:00:53Z",
+    "stageChangedAt": "2026-10-01T18:00:53Z",
+    "nextActionDate": null,
+    "nextActionType": null,
+    "lastAmendmentName": null,
+    "lastAmendmentDate": null,
+    "isShellBill": false,
+    "steps": {
+      "houseCommittee": null,
+      "house": null,
+      "senateCommittee": null,
+      "senate": null
+    },
+    "userAdded": true
   }
 ]
